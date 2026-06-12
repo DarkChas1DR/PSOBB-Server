@@ -1178,7 +1178,7 @@
   // (no client patch required) and does not affect item legality, so it does not need to be consistent across players.
   // Note: regardless of this setting, all shops are still hard-capped at the 20-item 6xB6 packet limit, and the shop
   // generation crash/overflow guards are always active.
-  "BBShopItemLimits": true,
+  "BBShopItemLimits": false,
 
   // Whether to enable rare drop notifications by default. Players can toggle this behavior for themselves with the
   // $itemnotifs command.
