@@ -1201,9 +1201,9 @@ void ItemCreator::generate_armor_shop_units(std::vector<ItemData>& shop, size_t 
   }
 }
 
-std::vector<ItemData> ItemCreator::generate_tool_shop_contents(size_t player_level) {
+std::vector<ItemData> ItemCreator::generate_tool_shop_contents(size_t player_level, bool curated) {
   std::vector<ItemData> shop;
-  this->generate_common_tool_shop_recovery_items(shop, player_level);
+  this->generate_common_tool_shop_recovery_items(shop, player_level, curated);
   this->generate_rare_tool_shop_recovery_items(shop, player_level);
   this->generate_tool_shop_tech_disks(shop, player_level);
   sort(shop.begin(), shop.end(), ItemData::compare_for_sort);
@@ -1224,7 +1224,7 @@ size_t ItemCreator::get_table_index_for_tool_shop(size_t player_level) {
   }
 }
 
-void ItemCreator::generate_common_tool_shop_recovery_items(std::vector<ItemData>& shop, size_t player_level) {
+void ItemCreator::generate_common_tool_shop_recovery_items(std::vector<ItemData>& shop, size_t player_level, bool curated) {
   size_t table_index;
   if (player_level < 11) {
     table_index = 0;
@@ -1240,7 +1240,11 @@ void ItemCreator::generate_common_tool_shop_recovery_items(std::vector<ItemData>
     table_index = 5;
   }
 
-  for (const auto& entry : this->tool_random_set->common_recovery_table.at(table_index)) {
+  const auto& table = curated
+      ? this->tool_random_set->common_recovery_table.at(table_index)
+      : this->tool_random_set->vanilla_common_recovery_table.at(table_index);
+
+  for (const auto& entry : table) {
     if (entry == 0x0F) {
       continue;
     }
@@ -1470,7 +1474,11 @@ void ItemCreator::generate_weapon_shop_item_special(ItemData& item, size_t playe
 
   // Note: The original code shuffles pt and then pops a single value from it. For simplicity, we just sample a single
   // value instead.
-  switch (pt.sample(this->rand_crypt)) {
+  uint32_t special_mode = 0;
+  if (pt.count > 0) {
+    special_mode = pt.sample(this->rand_crypt);
+  }
+  switch (special_mode) {
     case 0:
       item.data1[4] = 0;
       break;
@@ -1512,7 +1520,12 @@ void ItemCreator::generate_weapon_shop_item_bonus1(ItemData& item, size_t player
 
   // Note: The original code shuffles pt and then pops a single value from it. For simplicity, we just sample a single
   // value instead.
-  item.data1[6] = pt.sample(this->rand_crypt);
+  if (pt.count == 0) {
+    item.data1[6] = 0;
+  } else {
+    item.data1[6] = pt.sample(this->rand_crypt);
+  }
+
   if (item.data1[6] == 0) {
     item.data1[7] = 0;
   } else {
@@ -1546,9 +1559,13 @@ void ItemCreator::generate_weapon_shop_item_bonus2(ItemData& item, size_t player
   ProbabilityTable<uint32_t, 100> pt{this->weapon_random_set->bonus_type_table2.at(table_index)};
   pt.shuffle(this->rand_crypt);
 
-  do {
+  item.data1[8] = 0;
+  while (pt.count > 0) {
     item.data1[8] = pt.pop();
-  } while ((item.data1[8] != 0) && (item.data1[8] == item.data1[6]) && (pt.count > 0));
+    if ((item.data1[8] == 0) || (item.data1[8] != item.data1[6])) {
+      break;
+    }
+  }
 
   if (item.data1[8] == 0) {
     item.data1[9] = 0;

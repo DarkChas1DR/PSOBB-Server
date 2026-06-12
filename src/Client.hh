@@ -228,6 +228,9 @@ public:
   inline Language language() const {
     return this->channel->language;
   }
+  inline bool show_weapons_enabled() const {
+    return this->login && this->login->account && this->login->account->check_user_flag(Account::UserFlag::SHOW_WEAPONS_ENABLED);
+  }
 
   [[nodiscard]] static inline bool check_flag(uint64_t enabled_flags, Flag flag) {
     return !!(enabled_flags & static_cast<uint64_t>(flag));

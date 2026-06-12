@@ -748,6 +748,14 @@ void send_complete_player_bb(std::shared_ptr<Client> c) {
 
   SC_SyncSaveFiles_BB_E7 cmd;
   cmd.char_file = *p;
+  if (c->show_weapons_enabled()) {
+    for (size_t z = 0; z < cmd.char_file.inventory.num_items; z++) {
+      auto& item = cmd.char_file.inventory.items[z];
+      if (item.data.data1[0] == 0x00) {
+        item.data.data1[4] &= ~0x80;
+      }
+    }
+  }
   cmd.system_file = *sys;
   if (team) {
     cmd.team_membership = team->full_membership_for_member(c->login->account->account_id);
@@ -2489,6 +2497,9 @@ void send_execute_item_trade(std::shared_ptr<Client> c, const std::vector<ItemDa
   auto item_parameter_table = s->item_parameter_table_for_encode(c->version());
   for (size_t x = 0; x < items.size(); x++) {
     cmd.item_datas[x] = items[x];
+    if (c->show_weapons_enabled() && cmd.item_datas[x].data1[0] == 0x00) {
+      cmd.item_datas[x].data1[4] &= ~0x80;
+    }
     cmd.item_datas[x].encode_for_version(c->version(), item_parameter_table);
   }
   send_command_t(c, 0xD3, 0x00, cmd);
@@ -2767,6 +2778,9 @@ void send_game_item_state(std::shared_ptr<Client> c) {
       fi.room_id = 0;
       fi.drop_number = (floor == 0) ? 0xFFFF : (decompressed_header.next_drop_number_per_floor.at(floor - 1)++);
       fi.item = item->data;
+      if (c->show_weapons_enabled() && fi.item.data1[0] == 0x00) {
+        fi.item.data1[4] &= ~0x80;
+      }
       fi.item.encode_for_version(c->version(), s->item_parameter_table_for_encode(c->version()));
       floor_items_w.put(fi);
 
@@ -2792,6 +2806,9 @@ void send_game_item_state(std::shared_ptr<Client> c) {
       }
       uint8_t subcommand = get_pre_v1_subcommand(c->version(), 0x4F, 0x56, 0x5D);
       G_DropStackedItem_PC_V3_BB_6x5D cmd = {{{subcommand, 0x0A, 0x0000}, floor, 0, item->pos, item->data}, 0};
+      if (c->show_weapons_enabled() && cmd.item_data.data1[0] == 0x00) {
+        cmd.item_data.data1[4] &= ~0x80;
+      }
       cmd.item_data.encode_for_version(c->version(), s->item_parameter_table_for_encode(c->version()));
       w.put(cmd);
     }
@@ -3073,13 +3090,17 @@ void send_drop_item_to_channel(
     uint8_t source_type,
     uint8_t floor,
     const VectorXZF& pos,
-    uint16_t entity_index) {
+    uint16_t entity_index,
+    std::shared_ptr<Client> c) {
   if (entity_index == 0xFFFF) {
-    send_drop_stacked_item_to_channel(s, ch, item, floor, pos);
+    send_drop_stacked_item_to_channel(s, ch, item, floor, pos, c);
   } else {
     uint8_t subcommand = get_pre_v1_subcommand(ch->version, 0x51, 0x58, 0x5F);
     G_DropItem_PC_V3_BB_6x5F cmd = {
         {{subcommand, 0x0B, 0x0000}, {floor, source_type, entity_index, pos, 0, 0, item}}, 0};
+    if (c && c->show_weapons_enabled() && cmd.item.item.data1[0] == 0x00) {
+      cmd.item.item.data1[4] &= ~0x80;
+    }
     cmd.item.item.encode_for_version(ch->version, s->item_parameter_table_for_encode(ch->version));
     ch->send(0x60, 0x00, &cmd, sizeof(cmd));
   }
@@ -3090,9 +3111,13 @@ void send_drop_stacked_item_to_channel(
     std::shared_ptr<Channel> ch,
     const ItemData& item,
     uint8_t floor,
-    const VectorXZF& pos) {
+    const VectorXZF& pos,
+    std::shared_ptr<Client> c) {
   uint8_t subcommand = get_pre_v1_subcommand(ch->version, 0x4F, 0x56, 0x5D);
   G_DropStackedItem_PC_V3_BB_6x5D cmd = {{{subcommand, 0x0A, 0x0000}, floor, 0, pos, item}, 0};
+  if (c && c->show_weapons_enabled() && cmd.item_data.data1[0] == 0x00) {
+    cmd.item_data.data1[4] &= ~0x80;
+  }
   cmd.item_data.encode_for_version(ch->version, s->item_parameter_table_for_encode(ch->version));
   ch->send(0x60, 0x00, &cmd, sizeof(cmd));
 }
@@ -3103,7 +3128,7 @@ void send_drop_stacked_item_to_lobby(std::shared_ptr<Lobby> l, const ItemData& i
     if (!c) {
       continue;
     }
-    send_drop_stacked_item_to_channel(s, c->channel, item, floor, pos);
+    send_drop_stacked_item_to_channel(s, c->channel, item, floor, pos, c);
   }
 }
 
@@ -3116,6 +3141,9 @@ void send_pick_up_item_to_client(std::shared_ptr<Client> c, uint8_t client_id, u
 void send_create_inventory_item_to_client(std::shared_ptr<Client> c, uint8_t client_id, const ItemData& item) {
   if (c->version() == Version::BB_V4) {
     G_CreateInventoryItem_BB_6xBE cmd = {{0xBE, 0x07, client_id}, item, 0};
+    if (c->show_weapons_enabled() && cmd.item_data.data1[0] == 0x00) {
+      cmd.item_data.data1[4] &= ~0x80;
+    }
     send_command_t(c, 0x60, 0x00, cmd);
   } else {
     G_CreateInventoryItem_PC_V3_BB_6x2B cmd;
@@ -3123,6 +3151,9 @@ void send_create_inventory_item_to_client(std::shared_ptr<Client> c, uint8_t cli
     cmd.header.size = sizeof(cmd) >> 2;
     cmd.header.client_id = client_id;
     cmd.item_data = item;
+    if (c->show_weapons_enabled() && cmd.item_data.data1[0] == 0x00) {
+      cmd.item_data.data1[4] &= ~0x80;
+    }
     cmd.unused1 = 0;
     cmd.equip_item = 0;
     cmd.unused2.clear(0);
@@ -3182,12 +3213,61 @@ void send_bank(std::shared_ptr<Client> c) {
   auto bank = c->bank_file();
   bank->sort();
 
-  G_BankContentsHeader_BB_6xBC cmd = {
-      {{0xBC, 0, 0}, sizeof(G_BankContentsHeader_BB_6xBC) + bank->items.size() * sizeof(PlayerBankItem)},
-      bank->bb_checksum(), bank->items.size(), bank->meseta};
+  auto items = bank->items;
+  if (c->show_weapons_enabled()) {
+    for (auto& item : items) {
+      if (item.data.data1[0] == 0x00) {
+        item.data.data1[4] &= ~0x80;
+      }
+    }
+  }
 
-  send_command_t_vt(c, 0x6C, 0x00, cmd, bank->items);
+  le_uint32_t num_items = items.size();
+  le_uint32_t meseta = bank->meseta;
+  uint32_t checksum = phosg::crc32(&num_items, sizeof(num_items));
+  checksum = phosg::crc32(&meseta, sizeof(meseta), checksum);
+  for (const auto& item : items) {
+    checksum = phosg::crc32(&item, sizeof(item), checksum);
+  }
+
+  G_BankContentsHeader_BB_6xBC cmd = {
+      {{0xBC, 0, 0}, sizeof(G_BankContentsHeader_BB_6xBC) + items.size() * sizeof(PlayerBankItem)},
+      checksum, items.size(), bank->meseta};
+
+  send_command_t_vt(c, 0x6C, 0x00, cmd, items);
 }
+
+std::pair<G_ShopContents_BB_6xB6, size_t> build_shop_contents_packet(
+    uint8_t shop_type, const std::vector<ItemData>& contents) {
+  G_ShopContents_BB_6xB6 cmd;
+
+  // The 6xB6 packet has a fixed-size item array; never write or report more
+  // than it can hold. Clamping here makes the send safe regardless of how the
+  // caller populated bb_shop_contents (a larger list is silently truncated
+  // rather than overflowing the buffer / underflowing the length calculation).
+  // The client will also ignore the packet (softlocking the player) if we exceed:
+  // - 18 items for tool shop (type 0)
+  // - 16 items for weapon shop (type 1)
+  // - 20 items for armor shop (type 2)
+  size_t capacity = cmd.item_datas.size();
+  if (shop_type == 0) {
+    capacity = std::min<size_t>(capacity, 18);
+  } else if (shop_type == 1) {
+    capacity = std::min<size_t>(capacity, 16);
+  }
+  size_t count = std::min<size_t>(contents.size(), capacity);
+
+  cmd.header = {0xB6, static_cast<uint8_t>(2 + (sizeof(ItemData) >> 2) * count), 0x0000};
+  cmd.shop_type = shop_type;
+  cmd.num_items = static_cast<uint8_t>(count);
+  cmd.unused = 0;
+  for (size_t x = 0; x < count; x++) {
+    cmd.item_datas[x] = contents[x];
+  }
+
+  return {cmd, sizeof(cmd) - sizeof(cmd.item_datas[0]) * (decltype(cmd.item_datas)::size() - count)};
+}
+
 
 void send_shop(std::shared_ptr<Client> c, uint8_t shop_type) {
   if (c->version() != Version::BB_V4) {
@@ -3195,19 +3275,18 @@ void send_shop(std::shared_ptr<Client> c, uint8_t shop_type) {
   }
 
   const auto& contents = c->bb_shop_contents.at(shop_type);
-
-  G_ShopContents_BB_6xB6 cmd = {
-      {0xB6, static_cast<uint8_t>(2 + (sizeof(ItemData) >> 2) * contents.size()), 0x0000},
-      shop_type,
-      static_cast<uint8_t>(contents.size()),
-      0,
-      {},
-  };
-  for (size_t x = 0; x < contents.size(); x++) {
-    cmd.item_datas[x] = contents[x];
+  size_t capacity = decltype(G_ShopContents_BB_6xB6::item_datas)::size();
+  if (shop_type == 0) {
+    capacity = 18;
+  } else if (shop_type == 1) {
+    capacity = 16;
+  }
+  if (contents.size() > capacity) {
+    c->log.warning_f("Shop type {} has {} items, which exceeds client packet capacity ({}); truncating", shop_type, contents.size(), capacity);
   }
 
-  send_command(c, 0x60, 0x00, &cmd, sizeof(cmd) - sizeof(cmd.item_datas[0]) * (20 - contents.size()));
+  auto packet = build_shop_contents_packet(shop_type, contents);
+  send_command(c, 0x60, 0x00, &packet.first, packet.second);
 }
 
 void send_level_up(std::shared_ptr<Client> c) {

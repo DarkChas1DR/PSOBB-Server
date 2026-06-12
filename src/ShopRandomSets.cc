@@ -348,6 +348,7 @@ ToolShopRandomSet::ToolShopRandomSet(const std::string& data, bool big_endian)
 
 ToolShopRandomSet::ToolShopRandomSet(const phosg::JSON& json) {
   this->common_recovery_table = table_for_json_t<uint8_t>(json.at("CommonRecoveryTable"));
+  this->vanilla_common_recovery_table = table_for_json_t<uint8_t>(json.at("VanillaCommonRecoveryTable"));
   this->rare_recovery_table = table_for_json_t<IntPairT<uint8_t>>(json.at("RareRecoveryTable"));
   this->tech_disk_table = table_for_json_t<IntPairT<uint8_t>>(json.at("TechDiskTable"));
   this->tech_disk_level_table = table_for_json_t<TechDiskLevelEntry>(json.at("TechDiskLevelTable"));
@@ -378,6 +379,7 @@ void ToolShopRandomSet::parse_t(const void* data, size_t size) {
 
   this->common_recovery_table = parse_table_t<uint8_t>(
       r, common_recovery_table_spec.offset, common_recovery_table_spec.row_size, start_offsets);
+  this->vanilla_common_recovery_table = this->common_recovery_table;
   this->rare_recovery_table = parse_table_t<IntPairT<uint8_t>>(
       r, subroot.rare_recovery_table.offset, subroot.rare_recovery_table.row_size, start_offsets);
   this->tech_disk_table = parse_table_t<IntPairT<uint8_t>>(
@@ -421,6 +423,7 @@ std::string ToolShopRandomSet::serialize_binary(bool big_endian) const {
 phosg::JSON ToolShopRandomSet::json() const {
   return phosg::JSON::dict({
       {"CommonRecoveryTable", json_for_table_t(this->common_recovery_table)},
+      {"VanillaCommonRecoveryTable", json_for_table_t(this->vanilla_common_recovery_table)},
       {"RareRecoveryTable", json_for_table_t(this->rare_recovery_table)},
       {"TechDiskTable", json_for_table_t(this->tech_disk_table)},
       {"TechDiskLevelTable", json_for_table_t(this->tech_disk_level_table)},

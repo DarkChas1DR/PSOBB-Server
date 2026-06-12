@@ -927,7 +927,7 @@ static asio::awaitable<HandlerResult> SC_6x60_6xA2(std::shared_ptr<Client> c, Ch
     bool is_obj = (cmd.rt_index == 0x30);
     c->proxy_session->next_drop_item.id = 0x06010000 | cmd.entity_index | (is_obj ? 0x4000 : 0x1000);
     send_drop_item_to_channel(
-        s, c->channel, c->proxy_session->next_drop_item, is_obj ? 2 : 1, cmd.floor, cmd.pos, cmd.entity_index);
+        s, c->channel, c->proxy_session->next_drop_item, is_obj ? 2 : 1, cmd.floor, cmd.pos, cmd.entity_index, c);
     send_drop_item_to_channel(
         s, c->proxy_session->server_channel, c->proxy_session->next_drop_item, is_obj ? 2 : 1, cmd.floor, cmd.pos, cmd.entity_index);
     c->proxy_session->next_drop_item.clear();
@@ -985,7 +985,7 @@ static asio::awaitable<HandlerResult> SC_6x60_6xA2(std::shared_ptr<Client> c, Ch
     res.item.id = c->proxy_session->next_item_id++;
     c->log.info_f("Creating item {:08X} at {:02X}:{:g},{:g} for all clients",
         res.item.id, cmd.floor, cmd.pos.x, cmd.pos.z);
-    send_drop_item_to_channel(s, c->channel, res.item, rec.obj_st ? 2 : 1, cmd.floor, cmd.pos, cmd.entity_index);
+    send_drop_item_to_channel(s, c->channel, res.item, rec.obj_st ? 2 : 1, cmd.floor, cmd.pos, cmd.entity_index, c);
     send_drop_item_to_channel(s, c->proxy_session->server_channel, res.item, rec.obj_st ? 2 : 1, cmd.floor, cmd.pos, cmd.entity_index);
     send_item_notification_if_needed(c, res.item, res.is_from_rare_table);
   }

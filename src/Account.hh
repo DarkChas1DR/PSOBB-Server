@@ -79,6 +79,7 @@ struct Account {
   enum class UserFlag : uint32_t {
     DISABLE_DROP_NOTIFICATION_BROADCAST = 0x00000001,
     DISABLE_DAILY_FORECAST_LUCK         = 0x00000002,
+    SHOW_WEAPONS_ENABLED                = 0x00000004,
   };
 
   // account_id is also the account's guild card number

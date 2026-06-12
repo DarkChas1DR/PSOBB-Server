@@ -1004,6 +1004,7 @@
     // You will probably want to uncomment the following line if you want to use items that were unreleased on the
     // original Sega servers.
     // "ClearUnreleasedItemList",
+    "ServerEXPDisplay"
   ],
   // Client functions listed here are automatically sent to all clients. If a client connects using a client version
   // that isn't compatible with some of these patches, the incompatible patches are skipped and the client is allowed
@@ -1170,6 +1171,14 @@
   // Default switch assist behavior. Players can always toggle switch assist with the $swa command; this only controls
   // whether it's enabled by default for all players or not.
   "EnableSwitchAssistByDefault": false,
+
+  // If enabled, BB tool shops are curated rather than sent verbatim: tools and tech disks are split, tools are
+  // priority-sorted (Telepipe, Moon/Sol Atomizers, Tri/Di mates, etc. are kept first), and the shop is capped at 13
+  // tools + 5 tech disks. When disabled (the default), shops match vanilla newserv contents. This is server-side only
+  // (no client patch required) and does not affect item legality, so it does not need to be consistent across players.
+  // Note: regardless of this setting, all shops are still hard-capped at the 20-item 6xB6 packet limit, and the shop
+  // generation crash/overflow guards are always active.
+  "BBShopItemLimits": false,
 
   // Whether to enable rare drop notifications by default. Players can toggle this behavior for themselves with the
   // $itemnotifs command.

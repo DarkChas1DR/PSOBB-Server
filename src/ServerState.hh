@@ -187,6 +187,7 @@ struct ServerState : public std::enable_shared_from_this<ServerState> {
   RunShellBehavior run_shell_behavior = RunShellBehavior::DEFAULT;
   BehaviorSwitch cheat_mode_behavior = BehaviorSwitch::OFF_BY_DEFAULT;
   bool default_switch_assist_enabled = false;
+  bool bb_shop_item_limits_enabled = false;
   bool use_game_creator_section_id = false;
   bool use_psov2_rand_crypt = false; // Used in some tests
   bool use_legacy_item_random_behavior = false; // Used in some tests

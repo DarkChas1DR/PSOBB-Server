@@ -2200,7 +2200,7 @@ static void on_box_or_enemy_item_drop_t(std::shared_ptr<Client> c, SubcommandMes
       } else if (obj_st) {
         entity_index = l->map_state->index_for_object_state(lc->version(), obj_st);
       }
-      send_drop_item_to_channel(s, lc->channel, item, cmd.item.source_type, cmd.item.floor, cmd.item.pos, entity_index);
+      send_drop_item_to_channel(s, lc->channel, item, cmd.item.source_type, cmd.item.floor, cmd.item.pos, entity_index, lc);
     }
     send_item_notification_if_needed(lc, item, true);
   }
@@ -2513,9 +2513,23 @@ static void on_open_shop_bb_or_ep3_battle_subs(std::shared_ptr<Client> c, Subcom
     const auto& cmd = msg.check_size_t<G_ShopContentsRequest_BB_6xB5>();
     auto s = c->require_server_state();
     size_t level = c->character_file()->disp.stats.level + 1;
+
+    // Gameplay constraints for BB shop layouts, applied only when BBShopItemLimits
+    // is enabled (see config.json). These limits are lower than or equal to the
+    // network buffer capacity (G_ShopContents_BB_6xB6::item_datas); the buffer
+    // itself is always enforced separately in send_shop, regardless of this flag.
+    static constexpr size_t MAX_TOOL_SHOP_TOOLS = 13;
+    static constexpr size_t MAX_TOOL_SHOP_DISKS = 5;
+    static constexpr size_t MAX_WEAPON_SHOP_ITEMS = 16;
+    static constexpr size_t MAX_ARMOR_SHOP_ITEMS = decltype(G_ShopContents_BB_6xB6::item_datas)::size();
+
     switch (cmd.shop_type) {
       case 0: {
-        auto raw_contents = l->item_creator->generate_tool_shop_contents(level);
+        auto raw_contents = l->item_creator->generate_tool_shop_contents(level, s->bb_shop_item_limits_enabled);
+        if (!s->bb_shop_item_limits_enabled) {
+          c->bb_shop_contents[0] = std::move(raw_contents);
+          break;
+        }
         std::vector<ItemData> tools;
         std::vector<ItemData> disks;
         for (const auto& item : raw_contents) {
@@ -2549,11 +2563,11 @@ static void on_open_shop_bb_or_ep3_battle_subs(std::shared_ptr<Client> c, Subcom
           return tool_priority(a) < tool_priority(b);
         });
 
-        if (tools.size() > 13) {
-          tools.resize(13);
+        if (tools.size() > MAX_TOOL_SHOP_TOOLS) {
+          tools.resize(MAX_TOOL_SHOP_TOOLS);
         }
-        if (disks.size() > 5) {
-          disks.resize(5);
+        if (disks.size() > MAX_TOOL_SHOP_DISKS) {
+          disks.resize(MAX_TOOL_SHOP_DISKS);
         }
 
         auto& shop_contents = c->bb_shop_contents[0];
@@ -2565,15 +2579,19 @@ static void on_open_shop_bb_or_ep3_battle_subs(std::shared_ptr<Client> c, Subcom
       }
       case 1:
         c->bb_shop_contents[1] = l->item_creator->generate_weapon_shop_contents(level);
-        if (c->bb_shop_contents[1].size() > 16) {
-          c->bb_shop_contents[1].resize(16);
+        // Note: Under normal configuration, generate_weapon_shop_contents generates at most
+        // MAX_WEAPON_SHOP_ITEMS (16) items, so this resize is a redundant safety measure.
+        if (s->bb_shop_item_limits_enabled && c->bb_shop_contents[1].size() > MAX_WEAPON_SHOP_ITEMS) {
+          c->bb_shop_contents[1].resize(MAX_WEAPON_SHOP_ITEMS);
         }
         break;
       case 2: {
         Episode episode = episode_for_area(l->area_for_floor(c->version(), 0));
         c->bb_shop_contents[2] = l->item_creator->generate_armor_shop_contents(episode, level);
-        if (c->bb_shop_contents[2].size() > 20) {
-          c->bb_shop_contents[2].resize(20);
+        // Note: Under normal configuration, generate_armor_shop_contents generates at most
+        // MAX_ARMOR_SHOP_ITEMS (20) items, so this resize is a redundant safety measure.
+        if (s->bb_shop_item_limits_enabled && c->bb_shop_contents[2].size() > MAX_ARMOR_SHOP_ITEMS) {
+          c->bb_shop_contents[2].resize(MAX_ARMOR_SHOP_ITEMS);
         }
         break;
       }
@@ -3073,7 +3091,7 @@ static void on_entity_drop_item_request(std::shared_ptr<Client> c, SubcommandMes
                     res.item.id, cmd.floor, cmd.pos.x, cmd.pos.z, lc->channel->name);
                 l->add_item(cmd.floor, res.item, cmd.pos, rec.obj_st, rec.ref_ene_st, 0x1000 | (1 << lc->lobby_client_id));
                 send_drop_item_to_channel(
-                    s, lc->channel, res.item, rec.obj_st ? 2 : 1, cmd.floor, cmd.pos, get_entity_index(lc->version()));
+                    s, lc->channel, res.item, rec.obj_st ? 2 : 1, cmd.floor, cmd.pos, get_entity_index(lc->version()), lc);
                 send_item_notification_if_needed(lc, res.item, res.is_from_rare_table);
               }
             }
@@ -3086,7 +3104,7 @@ static void on_entity_drop_item_request(std::shared_ptr<Client> c, SubcommandMes
             for (auto lc : l->clients) {
               if (lc) {
                 send_drop_item_to_channel(
-                    s, lc->channel, res.item, rec.obj_st ? 2 : 1, cmd.floor, cmd.pos, get_entity_index(lc->version()));
+                    s, lc->channel, res.item, rec.obj_st ? 2 : 1, cmd.floor, cmd.pos, get_entity_index(lc->version()), lc);
                 send_item_notification_if_needed(lc, res.item, res.is_from_rare_table);
               }
             }
@@ -3108,7 +3126,7 @@ static void on_entity_drop_item_request(std::shared_ptr<Client> c, SubcommandMes
                   res.item.id, cmd.floor, cmd.pos.x, cmd.pos.z, lc->channel->name);
               l->add_item(cmd.floor, res.item, cmd.pos, rec.obj_st, rec.ref_ene_st, 0x1000 | (1 << lc->lobby_client_id));
               send_drop_item_to_channel(
-                  s, lc->channel, res.item, rec.obj_st ? 2 : 1, cmd.floor, cmd.pos, get_entity_index(lc->version()));
+                  s, lc->channel, res.item, rec.obj_st ? 2 : 1, cmd.floor, cmd.pos, get_entity_index(lc->version()), lc);
               send_item_notification_if_needed(lc, res.item, res.is_from_rare_table);
             }
           }
@@ -5438,7 +5456,7 @@ static void on_quest_F960_result_bb(std::shared_ptr<Client> c, SubcommandMessage
   if (added_to_inventory) {
     send_create_inventory_item_to_lobby(c, c->lobby_client_id, item);
   } else {
-    send_drop_item_to_channel(s, c->channel, item, 0, cmd.floor, cmd.pos, 0xFFFF);
+    send_drop_item_to_channel(s, c->channel, item, 0, cmd.floor, cmd.pos, 0xFFFF, c);
   }
 }
 

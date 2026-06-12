@@ -3240,7 +3240,7 @@ ChatCommandDefinition cc_luck(
 
       bool opted_out = a.c->login && a.c->login->account && a.c->login->account->check_user_flag(Account::UserFlag::DISABLE_DAILY_FORECAST_LUCK);
 
-      send_text_message_fmt(a.c, "$C7Your Traits: {}, {}, {}\n$C7Matches: {}\n$C7RDR Boost: +{}%{}",
+      send_text_message_fmt(a.c, "$C7Your Traits: {}, {}, {}\n$C7Matches: {}\n$C7RDR Boost: +{}%%{}",
           prof_str, race_str, gender_str, matches,
           opted_out ? 0 : boost_percent, opted_out ? " (Disabled)" : "");
       co_return;
@@ -3260,6 +3260,132 @@ ChatCommandDefinition cc_noluck(
       a.c->login->account->save();
       bool disabled = a.c->login->account->check_user_flag(Account::UserFlag::DISABLE_DAILY_FORECAST_LUCK);
       send_text_message_fmt(a.c, "$C7Daily Forecast boost {}", disabled ? "disabled" : "enabled");
+      co_return;
+    });
+
+ChatCommandDefinition cc_partyinfo(
+    {"$partyinfo"},
+    +[](const Args& a) -> asio::awaitable<void> {
+      a.check_is_proxy(false);
+      auto l = a.c->require_lobby();
+      if (!l->is_game()) {
+        throw precondition_failed("$C6This command is only available in games");
+      }
+      auto s = a.c->require_server_state();
+
+      bool is_challenge = (l->mode == GameMode::SOLO) ? false : (l->mode == GameMode::CHALLENGE);
+      double lobby_mult = is_challenge ? l->challenge_exp_multiplier : l->base_exp_multiplier;
+      Episode episode = l->episode;
+      double episode_mult = (episode == Episode::EP2) ? 1.3 : 1.0;
+      double exp_rate = lobby_mult * episode_mult * 100.0;
+
+      bool apply_dar_boost = (s->current_event() == ServerState::RotatingEvent::DAR_BOOST);
+      double dar_rate = apply_dar_boost ? 125.0 : 100.0;
+
+      std::string drop_style;
+      switch (l->drop_mode) {
+        case ServerDropMode::DISABLED: drop_style = "Disabled"; break;
+        case ServerDropMode::CLIENT: drop_style = "Client"; break;
+        case ServerDropMode::SERVER_SHARED: drop_style = "Server Shared"; break;
+        case ServerDropMode::SERVER_PRIVATE: drop_style = "Server Private"; break;
+        case ServerDropMode::SERVER_DUPLICATE: drop_style = "Server Duplicate"; break;
+        default: drop_style = "Unknown"; break;
+      }
+
+      uint8_t effective_section_id = l->effective_section_id();
+      std::string sec_id_name = name_for_section_id(effective_section_id);
+
+      bool apply_rdr_boost = (s->current_event() == ServerState::RotatingEvent::RDR_BOOST);
+      double base_rdr = s->server_global_drop_rate_multiplier * (apply_rdr_boost ? 1.25 : 1.0);
+
+      std::string msg = std::format("$C7EXP Rate: $C6{:g}%%$C7\n$C7DAR Rate: $C6{:g}%%$C7\n$C7Drop Style: $C6{}$C7\n$C7Section ID: $C6{}$C7\n$C7Rare Drop Rate:\n",
+          exp_rate, dar_rate, drop_style, sec_id_name);
+
+      for (size_t client_id = 0; client_id < 4; client_id++) {
+        auto lc = l->clients[client_id];
+        if (!lc) {
+          continue;
+        }
+        double player_rdr = base_rdr;
+        unsigned int boost_percent = 0;
+        if (is_v4(lc->version()) && lc->login && lc->login->account && !lc->login->account->check_user_flag(Account::UserFlag::DISABLE_DAILY_FORECAST_LUCK)) {
+          auto player = lc->character_file(false, false);
+          if (player) {
+            uint8_t cls = player->disp.visual.sh.char_class;
+            size_t matches = s->current_daily_forecast.count_matches(cls);
+            if (matches >= 1) {
+              boost_percent = 1;
+              if (l->mode == GameMode::SOLO) {
+                if (matches == 2) boost_percent = 2;
+                else if (matches == 3) boost_percent = 3;
+              } else {
+                if (matches == 2) boost_percent = 3;
+                else if (matches == 3) boost_percent = 5;
+              }
+              player_rdr = base_rdr * (1.0 + (boost_percent / 100.0));
+            }
+          }
+        }
+        std::string player_name = "Unknown";
+        auto player = lc->character_file(false, false);
+        if (player) {
+          player_name = player->disp.visual.name.decode(lc->language());
+        }
+        msg += std::format("  $C6{}$C7: $C6{:g}%%$C7", player_name, player_rdr * 100.0);
+        if (boost_percent > 0) {
+          msg += std::format(" (+{}%% Forecast)", boost_percent);
+        }
+        msg += "\n";
+      }
+      if (!msg.empty() && msg.back() == '\n') {
+        msg.pop_back();
+      }
+
+      send_text_message(a.c, msg);
+      co_return;
+    });
+
+ChatCommandDefinition cc_showwep(
+    {"$showwep"},
+    +[](const Args& a) -> asio::awaitable<void> {
+      a.check_is_proxy(false);
+      if (!is_v4(a.c->version())) {
+        throw precondition_failed("$C6This command is only available on Blue Burst");
+      }
+      if (!a.c->login || !a.c->login->account) {
+        throw precondition_failed("$C6Not logged in");
+      }
+
+      a.c->login->account->toggle_user_flag(Account::UserFlag::SHOW_WEAPONS_ENABLED);
+      a.c->login->account->save();
+      bool enabled = a.c->login->account->check_user_flag(Account::UserFlag::SHOW_WEAPONS_ENABLED);
+      send_text_message_fmt(a.c, "$C7Show untekked weapons: {}", enabled ? "enabled" : "disabled");
+
+      auto p = a.c->character_file(false, false);
+      if (p) {
+        auto l = a.c->lobby.lock();
+        if (l && l->is_game()) {
+          for (size_t z = 0; z < p->inventory.num_items; z++) {
+            auto& item = p->inventory.items[z];
+            if (item.data.data1[0] == 0x00) { // Weapon
+              bool was_equipped = item.is_equipped();
+              if (was_equipped) {
+                G_UnequipItem_6x26 unequip_cmd = {{0x26, 0x03, a.c->lobby_client_id}, item.data.id, 0};
+                send_command(l, 0x60, 0x00, &unequip_cmd, sizeof(unequip_cmd));
+              }
+
+              send_destroy_item_to_lobby(a.c, item.data.id, 1, false);
+
+              send_create_inventory_item_to_lobby(a.c, a.c->lobby_client_id, item.data, false);
+
+              if (was_equipped) {
+                G_EquipItem_6x25 equip_cmd = {{0x25, 0x03, a.c->lobby_client_id}, item.data.id, static_cast<uint32_t>(EquipSlot::WEAPON)};
+                send_command(l, 0x60, 0x00, &equip_cmd, sizeof(equip_cmd));
+              }
+            }
+          }
+        }
+      }
       co_return;
     });
 

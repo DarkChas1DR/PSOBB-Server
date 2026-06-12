@@ -47,6 +47,7 @@
     "Warp",
   ],
   "EnableSwitchAssistByDefault": false,
+  "BBShopItemLimits": false,
   "RareNotificationsEnabledByDefault": false,
   "NotifyGameForItemPrimaryIdentifiersV1V2": [],
   "NotifyGameForItemPrimaryIdentifiersV3": [],
@@ -622,7 +623,9 @@
   "BBGlobalEXPMultiplier": 1,
   "BBEXPShareMultiplier": 0.5,
   "ServerGlobalDropRateMultiplier": 1.0,
-  "BBRequiredPatches": [],
+  "BBRequiredPatches": [
+    "ServerEXPDisplay"
+  ],
   "UseGameCreatorSectionID": false,
 
   "TeamRewards": [

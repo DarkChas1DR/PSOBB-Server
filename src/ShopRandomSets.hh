@@ -91,6 +91,7 @@ struct ToolShopRandomSet : ShopRandomSetBase {
   static const std::array<uint8_t, 0x13> tech_num_map;
 
   std::vector<std::vector<uint8_t>> common_recovery_table;
+  std::vector<std::vector<uint8_t>> vanilla_common_recovery_table;
   std::vector<std::vector<IntPairT<uint8_t>>> rare_recovery_table;
   std::vector<std::vector<IntPairT<uint8_t>>> tech_disk_table;
   std::vector<std::vector<TechDiskLevelEntry>> tech_disk_level_table;
