@@ -3225,6 +3225,38 @@ ChatCommandDefinition cc_luck(
       std::string race_str = char_class_is_human(cls) ? "Human" : (char_class_is_newman(cls) ? "Newman" : "Droid");
       std::string prof_str = char_class_is_hunter(cls) ? "Hunter" : (char_class_is_ranger(cls) ? "Ranger" : "Force");
 
+      std::vector<std::string> matched_traits;
+      if (df.profession != DailyForecast::Profession::NONE) {
+        bool prof_match = false;
+        if (df.profession == DailyForecast::Profession::HUNTER && char_class_is_hunter(cls)) prof_match = true;
+        else if (df.profession == DailyForecast::Profession::RANGER && char_class_is_ranger(cls)) prof_match = true;
+        else if (df.profession == DailyForecast::Profession::FORCE && char_class_is_force(cls)) prof_match = true;
+        if (prof_match) matched_traits.push_back(df.profession_name());
+      }
+      if (df.race != DailyForecast::Race::NONE) {
+        bool race_match = false;
+        if (df.race == DailyForecast::Race::HUMAN && char_class_is_human(cls)) race_match = true;
+        else if (df.race == DailyForecast::Race::NEWMAN && char_class_is_newman(cls)) race_match = true;
+        else if (df.race == DailyForecast::Race::CAST && char_class_is_android(cls)) race_match = true;
+        if (race_match) matched_traits.push_back(df.race_name());
+      }
+      if (df.gender != DailyForecast::Gender::NONE) {
+        bool gender_match = false;
+        if (df.gender == DailyForecast::Gender::MALE && char_class_is_male(cls)) gender_match = true;
+        else if (df.gender == DailyForecast::Gender::FEMALE && !char_class_is_male(cls)) gender_match = true;
+        if (gender_match) matched_traits.push_back(df.gender_name());
+      }
+
+      std::string matched_str;
+      if (matched_traits.empty()) {
+        matched_str = "None";
+      } else {
+        for (size_t x = 0; x < matched_traits.size(); x++) {
+          if (x > 0) matched_str += ", ";
+          matched_str += matched_traits[x];
+        }
+      }
+
       auto l = a.c->require_lobby();
       unsigned int boost_percent = 0;
       if (matches >= 1) {
@@ -3240,8 +3272,8 @@ ChatCommandDefinition cc_luck(
 
       bool opted_out = a.c->login && a.c->login->account && a.c->login->account->check_user_flag(Account::UserFlag::DISABLE_DAILY_FORECAST_LUCK);
 
-      send_text_message_fmt(a.c, "$C7Your Traits: {}, {}, {}\n$C7Matches: {}\n$C7RDR Boost: +{}%%{}",
-          prof_str, race_str, gender_str, matches,
+      send_text_message_fmt(a.c, "$C7Today's Forecast: {}\n$C7Your Traits: {}, {}, {}\n$C7Matches: {}/3 (Matched: {})\n$C7RDR Boost: +{}%%{}",
+          df.to_string(), prof_str, race_str, gender_str, matches, matched_str,
           opted_out ? 0 : boost_percent, opted_out ? " (Disabled)" : "");
       co_return;
     });
