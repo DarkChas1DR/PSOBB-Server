@@ -3288,8 +3288,8 @@ ChatCommandDefinition cc_partyinfo(
       bool apply_rdr_boost = (s->current_event() == ServerState::RotatingEvent::RDR_BOOST);
       double base_rdr = s->server_global_drop_rate_multiplier * (apply_rdr_boost ? 1.25 : 1.0);
 
-      std::string msg = std::format("$C7EXP: $C6{:g}%%$C7 | $C7DAR: $C6{:g}%%$C7 | $C7SecID: $C6{}$C7\n$C7RDR: ",
-          exp_rate, dar_rate, sec_id_name);
+      std::string msg = std::format("$C7EXP: $C6{:g}%%$C7 | $C7DAR: $C6{:g}%%$C7\n$C7RDR: ",
+          exp_rate, dar_rate);
 
       for (size_t client_id = 0; client_id < 4; client_id++) {
         auto lc = l->clients[client_id];
@@ -3331,6 +3331,7 @@ ChatCommandDefinition cc_partyinfo(
         msg.pop_back();
         msg.pop_back();
       }
+      msg += std::format("\n$C7SecID: $C6{}$C7", sec_id_name);
 
       send_text_message(a.c, msg);
       co_return;
