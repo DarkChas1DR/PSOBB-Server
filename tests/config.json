@@ -47,7 +47,7 @@
     "Warp",
   ],
   "EnableSwitchAssistByDefault": false,
-  "BBShopItemLimits": false,
+  "BBShopItemLimits": true,
   "RareNotificationsEnabledByDefault": false,
   "NotifyGameForItemPrimaryIdentifiersV1V2": [],
   "NotifyGameForItemPrimaryIdentifiersV3": [],
