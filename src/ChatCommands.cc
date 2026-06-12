@@ -3298,7 +3298,7 @@ ChatCommandDefinition cc_partyinfo(
       bool apply_rdr_boost = (s->current_event() == ServerState::RotatingEvent::RDR_BOOST);
       double base_rdr = s->server_global_drop_rate_multiplier * (apply_rdr_boost ? 1.25 : 1.0);
 
-      std::string msg = std::format("$C7EXP Rate: $C6{:g}%%$C7\n$C7DAR Rate: $C6{:g}%%$C7\n$C7Drop Style: $C6{}$C7\n$C7Section ID: $C6{}$C7\n$C7Rare Drop Rate:\n",
+      std::string msg = std::format("$C7EXP: $C6{:g}%%$C7 | $C7DAR: $C6{:g}%%$C7\n$C7Style: $C6{}$C7 | $C7SecID: $C6{}$C7\n$C7RDR: ",
           exp_rate, dar_rate, drop_style, sec_id_name);
 
       for (size_t client_id = 0; client_id < 4; client_id++) {
@@ -3331,13 +3331,14 @@ ChatCommandDefinition cc_partyinfo(
         if (player) {
           player_name = player->disp.visual.name.decode(lc->language());
         }
-        msg += std::format("  $C6{}$C7: $C6{:g}%%$C7", player_name, player_rdr * 100.0);
+        msg += std::format("$C6{}$C7: $C6{:g}%%$C7", player_name, player_rdr * 100.0);
         if (boost_percent > 0) {
           msg += std::format(" (+{}%% Forecast)", boost_percent);
         }
-        msg += "\n";
+        msg += ", ";
       }
-      if (!msg.empty() && msg.back() == '\n') {
+      if (msg.ends_with(", ")) {
+        msg.pop_back();
         msg.pop_back();
       }
 
