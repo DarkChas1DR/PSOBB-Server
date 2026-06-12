@@ -3305,7 +3305,7 @@ Action a_check_supermaps(
                 abbreviation_for_mode(mode),
                 abbreviation_for_difficulty(difficulty),
                 floor, layout, entities);
-            auto f = phosg::fopen_unique(filename, "wt");
+            auto f = phosg::fopen_unique(filename, "w");
             supermap->print(f.get());
             filename_token = " => " + filename;
           }
@@ -3345,7 +3345,7 @@ Action a_check_supermaps(
         std::string filename_token;
         if (save_disassembly) {
           std::string filename = std::format("supermap_quest_{}_{:08X}.txt", it.first, random_seed);
-          auto f = phosg::fopen_unique(filename, "wt");
+          auto f = phosg::fopen_unique(filename, "w");
           phosg::fwrite_fmt(f.get(), "QUEST {} ({})\n", it.first, it.second->meta.name);
           supermap->print(f.get());
           filename_token = " => " + filename;
@@ -3356,7 +3356,7 @@ Action a_check_supermaps(
             counts_for_version[static_cast<size_t>(v)] = supermap->count_enemy_sets_for_version(v);
           }
           std::string filename = std::format("supermap_quest_{}_{:08X}_enemy_counts.txt", it.first, random_seed);
-          auto f = phosg::fopen_unique(filename, "wt");
+          auto f = phosg::fopen_unique(filename, "w");
           phosg::fwrite_fmt(f.get(), "QUEST {} ({})\n", it.first, it.second->meta.name);
           phosg::fwrite_fmt(f.get(), "ENEMY---------------  DCNTE  11/2K  DC-V1  DC-V2  PCNTE  PC-V2  GCNTE  GC-V3  XB-V3  BB-V4\n");
           for (auto type : phosg::EnumRange<EnemyType>()) {
@@ -4208,7 +4208,7 @@ Action a_run_server_replay_log(
           try {
             for (const auto& log_filename : replay_log_filenames) {
               phosg::log_info_f("[Replay] {} ...", log_filename);
-              auto log_f = phosg::fopen_shared(log_filename, "rt");
+              auto log_f = phosg::fopen_shared(log_filename, "r");
               last_running_replay = std::make_shared<ReplaySession>(state, log_f.get());
               co_await last_running_replay->run();
               if (last_running_replay->failed()) {

@@ -73,6 +73,7 @@ ServerState::QuestF960Result::QuestF960Result(
 ServerState::ServerState(const std::string& config_filename, bool is_replay)
     : creation_time(phosg::now()),
       io_context(std::make_shared<asio::io_context>(1)),
+      daily_forecast_timer(*io_context),
       config_filename(config_filename),
       is_replay(is_replay),
       thread_pool(std::make_unique<asio::thread_pool>()) {}
@@ -2351,6 +2352,11 @@ void ServerState::load_all(bool enable_thread_pool) {
   this->load_teams();
   this->load_quest_index();
   this->generate_bb_stream_file();
+
+  if (!this->is_replay) {
+    this->update_daily_forecast(false);
+    this->schedule_daily_forecast_timer();
+  }
 }
 
 void ServerState::reset_between_replays() {
@@ -2419,4 +2425,43 @@ ServerState::RotatingEvent ServerState::current_event() const {
 
 float ServerState::event_exp_multiplier() const {
   return (this->current_event() == RotatingEvent::EXP_BOOST) ? 1.5f : 1.0f;
+}
+
+void ServerState::update_daily_forecast(bool broadcast_changes) {
+  time_t t = time(nullptr);
+  struct tm utc_tm;
+#ifdef _WIN32
+  gmtime_s(&utc_tm, &t);
+#else
+  gmtime_r(&t, &utc_tm);
+#endif
+  uint32_t today_date = (utc_tm.tm_year + 1900) * 10000 + (utc_tm.tm_mon + 1) * 100 + utc_tm.tm_mday;
+
+  if (this->current_forecast_date != today_date) {
+    this->current_daily_forecast = DailyForecast::calculate(t);
+    this->current_forecast_date = today_date;
+    phosg::log_info_f("Daily forecast updated: {}", this->current_daily_forecast.to_string());
+
+    if (broadcast_changes) {
+      for (const auto& c : this->game_server->all_clients()) {
+        if (c->login && is_v4(c->version())) {
+          send_text_or_scrolling_message(c, "You have had a change of fortune.", "You have had a change of fortune.");
+        }
+      }
+    }
+  }
+}
+
+void ServerState::schedule_daily_forecast_timer() {
+  this->daily_forecast_timer.expires_after(std::chrono::seconds(30));
+  this->daily_forecast_timer.async_wait([this](std::error_code ec) {
+    if (!ec) {
+      try {
+        this->update_daily_forecast(true);
+      } catch (const std::exception& e) {
+        phosg::log_error_f("Failed to update daily forecast: {}", e.what());
+      }
+      this->schedule_daily_forecast_timer();
+    }
+  });
 }

@@ -5,6 +5,8 @@
 #include <memory>
 #include <phosg/JSON.hh>
 #include <set>
+#include <asio.hpp>
+#include "DailyForecast.hh"
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -108,6 +110,12 @@ struct ServerState : public std::enable_shared_from_this<ServerState> {
 
   uint64_t creation_time;
   std::shared_ptr<asio::io_context> io_context;
+  asio::steady_timer daily_forecast_timer;
+  uint32_t current_forecast_date = 0; // YYYYMMDD
+  DailyForecast current_daily_forecast;
+
+  void schedule_daily_forecast_timer();
+  void update_daily_forecast(bool broadcast_changes);
 
   std::string config_filename;
   std::shared_ptr<const phosg::JSON> config_json;

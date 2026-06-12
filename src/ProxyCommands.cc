@@ -616,7 +616,7 @@ static asio::awaitable<HandlerResult> S_B2(std::shared_ptr<Client> c, Channel::M
 
         output_filename = std::format("code.{}.txt", filename_timestamp);
         {
-          auto f = phosg::fopen_unique(output_filename, "wt");
+          auto f = phosg::fopen_unique(output_filename, "w");
           phosg::fwrite_fmt(f.get(), "// code_size = 0x{:X}\n", cmd.code_size);
           phosg::fwrite_fmt(f.get(), "// checksum_addr = 0x{:X}\n", cmd.checksum_start);
           phosg::fwrite_fmt(f.get(), "// checksum_size = 0x{:X}\n", cmd.checksum_size);

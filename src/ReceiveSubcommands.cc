@@ -3002,22 +3002,42 @@ static void on_entity_drop_item_request(std::shared_ptr<Client> c, SubcommandMes
   if (rec.should_drop) {
     auto generate_item_for_client = [&](std::shared_ptr<Client> c) -> ItemCreator::DropResult {
       bool force_rare = c->check_flag(Client::Flag::ALL_RARES_ENABLED);
+      double rdr_multiplier = 1.0;
+      if (is_v4(c->version()) && c->login && c->login->account && !c->login->account->check_user_flag(Account::UserFlag::DISABLE_DAILY_FORECAST_LUCK)) {
+        auto player = c->character_file(false, false);
+        if (player) {
+          uint8_t cls = player->disp.visual.sh.char_class;
+          size_t matches = s->current_daily_forecast.count_matches(cls);
+          if (matches >= 1) {
+            unsigned int boost_percent = 1;
+            if (l->mode == GameMode::SOLO) {
+              if (matches == 2) boost_percent = 2;
+              else if (matches == 3) boost_percent = 3;
+            } else {
+              if (matches == 2) boost_percent = 3;
+              else if (matches == 3) boost_percent = 5;
+            }
+            rdr_multiplier = 1.0 + (boost_percent / 100.0);
+          }
+        }
+      }
+
       if (rec.obj_st) {
         if (rec.ignore_def) {
           l->log.info_f("Creating item from box {:04X} => K-{:03X} (area {:02X})",
               cmd.entity_index, rec.obj_st->k_id, cmd.effective_area);
-          return l->item_creator->on_box_item_drop(cmd.effective_area, force_rare);
+          return l->item_creator->on_box_item_drop(cmd.effective_area, force_rare, rdr_multiplier);
         } else {
           l->log.info_f(
               "Creating item from box {:04X} => K-{:03X} (area {:02X}; specialized with {:g} {:08X} {:08X} {:08X})",
               cmd.entity_index, rec.obj_st->k_id, cmd.effective_area, cmd.param3, cmd.param4, cmd.param5, cmd.param6);
           return l->item_creator->on_specialized_box_item_drop(
-              cmd.effective_area, cmd.param3, cmd.param4, cmd.param5, cmd.param6);
+              cmd.effective_area, cmd.param3, cmd.param4, cmd.param5, cmd.param6, rdr_multiplier);
         }
       } else if (rec.target_ene_st) {
         l->log.info_f("Creating item from enemy {:04X} => E-{:03X} (area {:02X})",
             cmd.entity_index, rec.target_ene_st->e_id, cmd.effective_area);
-        return l->item_creator->on_monster_item_drop(rec.effective_enemy_type, cmd.effective_area, force_rare);
+        return l->item_creator->on_monster_item_drop(rec.effective_enemy_type, cmd.effective_area, force_rare, rdr_multiplier);
       } else {
         throw std::runtime_error("neither object nor enemy were present");
       }

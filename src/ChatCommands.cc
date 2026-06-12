@@ -20,6 +20,8 @@
 #include "Revision.hh"
 #include "SendCommands.hh"
 #include "Server.hh"
+#include "ServerState.hh"
+#include "DailyForecast.hh"
 #include "StaticGameData.hh"
 #include "Text.hh"
 
@@ -3186,6 +3188,78 @@ ChatCommandDefinition cc_nativecall(
       } catch (const std::out_of_range&) {
         throw precondition_failed("Invalid patch name");
       }
+      co_return;
+    });
+
+ChatCommandDefinition cc_forecast(
+    {"$forecast"},
+    +[](const Args& a) -> asio::awaitable<void> {
+      a.check_is_proxy(false);
+      if (!is_v4(a.c->version())) {
+        throw precondition_failed("$C6This command is only available on Blue Burst");
+      }
+      auto s = a.c->require_server_state();
+      const auto& df = s->current_daily_forecast;
+      send_text_message_fmt(a.c, "$C7Daily Forecast:\n$C6Profession: {}\n$C6Race: {}\n$C6Gender: {}",
+          df.profession_name(), df.race_name(), df.gender_name());
+      co_return;
+    });
+
+ChatCommandDefinition cc_luck(
+    {"$luck"},
+    +[](const Args& a) -> asio::awaitable<void> {
+      a.check_is_proxy(false);
+      if (!is_v4(a.c->version())) {
+        throw precondition_failed("$C6This command is only available on Blue Burst");
+      }
+      auto s = a.c->require_server_state();
+      auto player = a.c->character_file(false, false);
+      if (!player) {
+        throw precondition_failed("$C6Character data not loaded");
+      }
+      uint8_t cls = player->disp.visual.sh.char_class;
+      const auto& df = s->current_daily_forecast;
+      size_t matches = df.count_matches(cls);
+
+      std::string gender_str = char_class_is_male(cls) ? "Male" : "Female";
+      std::string race_str = char_class_is_human(cls) ? "Human" : (char_class_is_newman(cls) ? "Newman" : "Droid");
+      std::string prof_str = char_class_is_hunter(cls) ? "Hunter" : (char_class_is_ranger(cls) ? "Ranger" : "Force");
+
+      auto l = a.c->require_lobby();
+      unsigned int boost_percent = 0;
+      if (matches >= 1) {
+        boost_percent = 1;
+        if (l->mode == GameMode::SOLO) {
+          if (matches == 2) boost_percent = 2;
+          else if (matches == 3) boost_percent = 3;
+        } else {
+          if (matches == 2) boost_percent = 3;
+          else if (matches == 3) boost_percent = 5;
+        }
+      }
+
+      bool opted_out = a.c->login && a.c->login->account && a.c->login->account->check_user_flag(Account::UserFlag::DISABLE_DAILY_FORECAST_LUCK);
+
+      send_text_message_fmt(a.c, "$C7Your Traits: {}, {}, {}\n$C7Matches: {}\n$C7RDR Boost: +{}%{}",
+          prof_str, race_str, gender_str, matches,
+          opted_out ? 0 : boost_percent, opted_out ? " (Disabled)" : "");
+      co_return;
+    });
+
+ChatCommandDefinition cc_noluck(
+    {"$noluck"},
+    +[](const Args& a) -> asio::awaitable<void> {
+      a.check_is_proxy(false);
+      if (!is_v4(a.c->version())) {
+        throw precondition_failed("$C6This command is only available on Blue Burst");
+      }
+      if (!a.c->login || !a.c->login->account) {
+        throw precondition_failed("$C6Not logged in");
+      }
+      a.c->login->account->toggle_user_flag(Account::UserFlag::DISABLE_DAILY_FORECAST_LUCK);
+      a.c->login->account->save();
+      bool disabled = a.c->login->account->check_user_flag(Account::UserFlag::DISABLE_DAILY_FORECAST_LUCK);
+      send_text_message_fmt(a.c, "$C7Daily Forecast boost {}", disabled ? "disabled" : "enabled");
       co_return;
     });
 

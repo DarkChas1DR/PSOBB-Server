@@ -185,13 +185,13 @@ uint8_t ItemCreator::table_index_for_area(uint8_t area) const {
   return data[area];
 }
 
-ItemCreator::DropResult ItemCreator::on_box_item_drop(uint8_t area, bool force_rare) {
+ItemCreator::DropResult ItemCreator::on_box_item_drop(uint8_t area, bool force_rare, double rdr_multiplier) {
   try {
     uint8_t table_index = this->table_index_for_area(area);
     this->log.info_f("Box drop checks for area {:02X} (table index {:02X})", area, table_index);
 
     DropResult res;
-    res.item = this->check_rare_specs_and_create_rare_box_item(area, force_rare);
+    res.item = this->check_rare_specs_and_create_rare_box_item(area, force_rare, rdr_multiplier);
     if (!res.item.empty()) {
       res.is_from_rare_table = true;
     } else {
@@ -237,7 +237,7 @@ ItemCreator::DropResult ItemCreator::on_box_item_drop(uint8_t area, bool force_r
   }
 }
 
-ItemCreator::DropResult ItemCreator::on_monster_item_drop(EnemyType enemy_type, uint8_t area, bool force_rare) {
+ItemCreator::DropResult ItemCreator::on_monster_item_drop(EnemyType enemy_type, uint8_t area, bool force_rare, double rdr_multiplier) {
   try {
     // Note: The original implementation has a bounds check for enemy_type here, because it uses rt_index instead
     // if (enemy_type >= NUM_RT_INDEXES_V4) {
@@ -268,7 +268,7 @@ ItemCreator::DropResult ItemCreator::on_monster_item_drop(EnemyType enemy_type, 
     }
 
     DropResult res;
-    res.item = this->check_rare_spec_and_create_rare_enemy_item(enemy_type, area, force_rare);
+    res.item = this->check_rare_spec_and_create_rare_enemy_item(enemy_type, area, force_rare, rdr_multiplier);
     if (!res.item.empty()) {
       res.is_from_rare_table = true;
     } else {
@@ -339,7 +339,7 @@ ItemCreator::DropResult ItemCreator::on_monster_item_drop(EnemyType enemy_type, 
 }
 
 ItemData ItemCreator::check_rare_specs_and_create_rare_item(
-    const std::vector<RareItemSet::ExpandedDrop>& specs, uint8_t area, bool force_rare) {
+    const std::vector<RareItemSet::ExpandedDrop>& specs, uint8_t area, bool force_rare, double rdr_multiplier) {
   if (specs.empty()) {
     return ItemData();
   }
@@ -364,6 +364,9 @@ ItemData ItemCreator::check_rare_specs_and_create_rare_item(
     if (this->apply_rdr_boost) {
       spec_probability = std::min<uint64_t>(0x100000000ULL, spec_probability + (spec_probability / 4));
     }
+    if (rdr_multiplier != 1.0) {
+      spec_probability = std::min<uint64_t>(0x100000000ULL, spec_probability * rdr_multiplier);
+    }
     if (this->log.should_log(phosg::LogLevel::L_INFO)) {
       this->log.info_f("Checking spec {:08X} => {} with det={:08X}", spec_probability, spec.data.hex(), det);
     }
@@ -375,7 +378,7 @@ ItemData ItemCreator::check_rare_specs_and_create_rare_item(
   return ItemData();
 }
 
-ItemData ItemCreator::check_rare_specs_and_create_rare_box_item(uint8_t area, bool force_rare) {
+ItemData ItemCreator::check_rare_specs_and_create_rare_box_item(uint8_t area, bool force_rare, double rdr_multiplier) {
   if (!this->are_rare_drops_allowed()) {
     return ItemData();
   }
@@ -383,7 +386,7 @@ ItemData ItemCreator::check_rare_specs_and_create_rare_box_item(uint8_t area, bo
   uint8_t table_index = this->table_index_for_area(area);
   Episode episode = episode_for_area(area);
   auto specs = this->rare_item_set->get_box_specs(this->mode, episode, this->difficulty, this->section_id, table_index);
-  return this->check_rare_specs_and_create_rare_item(specs, area, force_rare);
+  return this->check_rare_specs_and_create_rare_item(specs, area, force_rare, rdr_multiplier);
 }
 
 uint32_t ItemCreator::rand_int(uint64_t max) {
@@ -414,7 +417,7 @@ bool ItemCreator::should_allow_meseta_drops() const {
   return (this->mode != GameMode::CHALLENGE);
 }
 
-ItemData ItemCreator::check_rare_spec_and_create_rare_enemy_item(EnemyType enemy_type, uint8_t area, bool force_rare) {
+ItemData ItemCreator::check_rare_spec_and_create_rare_enemy_item(EnemyType enemy_type, uint8_t area, bool force_rare, double rdr_multiplier) {
   // Note: The original implementation has a bounds check for enemy_type here, since it uses rt_index instead.
   // if ((enemy_type <= 0) || (enemy_type >= NUM_RT_INDEXES_V4)) return ItemData{};
   if (!this->are_rare_drops_allowed()) {
@@ -427,7 +430,7 @@ ItemData ItemCreator::check_rare_spec_and_create_rare_enemy_item(EnemyType enemy
   Episode episode = episode_for_area(area);
   auto specs = this->rare_item_set->get_enemy_specs(
       this->mode, episode, this->difficulty, this->section_id, enemy_type);
-  return this->check_rare_specs_and_create_rare_item(specs, area, force_rare);
+  return this->check_rare_specs_and_create_rare_item(specs, area, force_rare, rdr_multiplier);
 }
 
 ItemData ItemCreator::create_rare_item(const ItemData& drop_item, uint8_t area) {
@@ -1556,7 +1559,8 @@ void ItemCreator::generate_weapon_shop_item_bonus2(ItemData& item, size_t player
 }
 
 ItemCreator::DropResult ItemCreator::on_specialized_box_item_drop(
-    uint8_t area, float param3, uint32_t param4, uint32_t param5, uint32_t param6) {
+    uint8_t area, float param3, uint32_t param4, uint32_t param5, uint32_t param6, double rdr_multiplier) {
+  (void)rdr_multiplier;
   DropResult res;
   res.item = this->base_item_for_specialized_box(param4, param5, param6);
   if (param3 == 0.0f) {
