@@ -3282,24 +3282,14 @@ ChatCommandDefinition cc_partyinfo(
       bool apply_dar_boost = (s->current_event() == ServerState::RotatingEvent::DAR_BOOST);
       double dar_rate = apply_dar_boost ? 125.0 : 100.0;
 
-      std::string drop_style;
-      switch (l->drop_mode) {
-        case ServerDropMode::DISABLED: drop_style = "Disabled"; break;
-        case ServerDropMode::CLIENT: drop_style = "Client"; break;
-        case ServerDropMode::SERVER_SHARED: drop_style = "Server Shared"; break;
-        case ServerDropMode::SERVER_PRIVATE: drop_style = "Server Private"; break;
-        case ServerDropMode::SERVER_DUPLICATE: drop_style = "Server Duplicate"; break;
-        default: drop_style = "Unknown"; break;
-      }
-
       uint8_t effective_section_id = l->effective_section_id();
       std::string sec_id_name = name_for_section_id(effective_section_id);
 
       bool apply_rdr_boost = (s->current_event() == ServerState::RotatingEvent::RDR_BOOST);
       double base_rdr = s->server_global_drop_rate_multiplier * (apply_rdr_boost ? 1.25 : 1.0);
 
-      std::string msg = std::format("$C7EXP: $C6{:g}%%$C7 | $C7DAR: $C6{:g}%%$C7\n$C7Style: $C6{}$C7 | $C7SecID: $C6{}$C7\n$C7RDR: ",
-          exp_rate, dar_rate, drop_style, sec_id_name);
+      std::string msg = std::format("$C7EXP: $C6{:g}%%$C7 | $C7DAR: $C6{:g}%%$C7 | $C7SecID: $C6{}$C7\n$C7RDR: ",
+          exp_rate, dar_rate, sec_id_name);
 
       for (size_t client_id = 0; client_id < 4; client_id++) {
         auto lc = l->clients[client_id];
