@@ -212,11 +212,17 @@
   // Rotating event changer configuration.
   //   "none"   - Disable rotating events (default).
   //   "rotate" - Dynamically rotate events week-by-week based on the calendar.
-  //   "week1"  - Pin Week 1 event (+50% Experience).
-  //   "week2"  - Pin Week 2 event (+25% Drop Anything Rate / DAR).
-  //   "week3"  - Pin Week 3 event (+25% Rare Drop Rate / RDR).
-  //   "week4"  - Pin Week 4 event (+50% Rare Monster Spawn Rate).
+  //   "week1"  - Pin Week 1 event (Experience boost).
+  //   "week2"  - Pin Week 2 event (Drop Anything Rate / DAR boost).
+  //   "week3"  - Pin Week 3 event (Rare Drop Rate / RDR boost).
+  //   "week4"  - Pin Week 4 event (Rare Monster Spawn Rate boost).
   "EventChangerMode": "none",
+
+  // Weekly rotating event multipliers (EXP, DAR, RDR, and Rare Monster spawn rate boosts).
+  "EXPBoostMultiplier": 1.5,
+  "DARBoostMultiplier": 1.25,
+  "RDRBoostMultiplier": 1.25,
+  "RareMonsterBoostMultiplier": 1.5,
 
   // If this option is disabled, the server only allows users who have accounts on the server to connect. If this is
   // enabled, all users will be allowed to connect even if they don't have accounts. When a user connects with an
@@ -1421,10 +1427,4 @@
     "songcount":      [0x03, 0x07C00000], // Song count
     "wrappingpapers": [0x0B, 0x1FF00000], // Wrapping Papers
   },
-
-  // Weekly rotating event multipliers (EXP, DAR, RDR, and Rare Monster spawn rate boosts).
-  "EXPBoostMultiplier": 1.5,
-  "DARBoostMultiplier": 1.25,
-  "RDRBoostMultiplier": 1.25,
-  "RareMonsterBoostMultiplier": 1.5,
 }
