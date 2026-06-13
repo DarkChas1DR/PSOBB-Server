@@ -80,8 +80,8 @@ ItemCreator::ItemCreator(
     uint8_t section_id,
     std::shared_ptr<RandomGenerator> rand_crypt,
     std::shared_ptr<const BattleRules> restrictions,
-    bool apply_dar_boost,
-    bool apply_rdr_boost)
+    float dar_multiplier,
+    float rdr_boost_multiplier)
     : log(std::format("[ItemCreator:{}/{}/{}/{}] ", phosg::name_for_enum(stack_limits->version), abbreviation_for_mode(mode), abbreviation_for_difficulty(difficulty), section_id), lobby_log.min_level),
       logic_version(stack_limits->version),
       is_legacy_replay(false),
@@ -97,8 +97,8 @@ ItemCreator::ItemCreator(
       item_parameter_table(item_parameter_table),
       common_item_set(common_item_set),
       restrictions(restrictions),
-      apply_dar_boost(apply_dar_boost),
-      apply_rdr_boost(apply_rdr_boost),
+      dar_multiplier(dar_multiplier),
+      rdr_boost_multiplier(rdr_boost_multiplier),
       rand_crypt(rand_crypt) {
   this->generate_unit_stars_tables();
 }
@@ -254,8 +254,8 @@ ItemCreator::DropResult ItemCreator::on_monster_item_drop(EnemyType enemy_type, 
       this->log.info_f("No drop probability is set for this enemy type");
       return DropResult();
     }
-    if (this->apply_dar_boost) {
-      type_drop_prob = std::min<uint32_t>(100, type_drop_prob + (type_drop_prob / 4));
+    if (this->dar_multiplier != 1.0f) {
+      type_drop_prob = std::min<uint32_t>(100, type_drop_prob * this->dar_multiplier);
     }
     if (!force_rare) {
       uint8_t drop_sample = this->rand_int(100);
@@ -361,8 +361,8 @@ ItemData ItemCreator::check_rare_specs_and_create_rare_item(
   this->log.info_f("{} specs to check with det={:08X}", specs.size(), det);
   for (const auto& spec : specs) {
     uint64_t spec_probability = spec.probability;
-    if (this->apply_rdr_boost) {
-      spec_probability = std::min<uint64_t>(0x100000000ULL, spec_probability + (spec_probability / 4));
+    if (this->rdr_boost_multiplier != 1.0f) {
+      spec_probability = std::min<uint64_t>(0x100000000ULL, spec_probability * this->rdr_boost_multiplier);
     }
     if (rdr_multiplier != 1.0) {
       spec_probability = std::min<uint64_t>(0x100000000ULL, spec_probability * rdr_multiplier);

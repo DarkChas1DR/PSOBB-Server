@@ -6108,13 +6108,13 @@ MapState::MapState(
     std::shared_ptr<const RareEnemyRates> bb_rare_rates,
     std::shared_ptr<RandomGenerator> rand_crypt,
     std::vector<std::shared_ptr<const SuperMap>> floor_map_defs,
-    bool apply_rare_monster_boost)
+    float rare_monster_multiplier)
     : log(std::format("[MapState(free):{:08X}] ", lobby_or_session_id), lobby_log.min_level),
       difficulty(difficulty),
       event(event),
       random_seed(random_seed),
       bb_rare_rates(bb_rare_rates),
-      apply_rare_monster_boost(apply_rare_monster_boost) {
+      rare_monster_multiplier(rare_monster_multiplier) {
 
   if (floor_map_defs.empty()) {
     throw std::runtime_error("cannot construct a MapState with no floor maps");
@@ -6165,14 +6165,14 @@ MapState::MapState(
     std::shared_ptr<const RareEnemyRates> bb_rare_rates,
     std::shared_ptr<RandomGenerator> rand_crypt,
     std::shared_ptr<const SuperMap> quest_map_def,
-    bool apply_rare_monster_boost)
+    float rare_monster_multiplier)
     : log(std::format("[MapState(quest):{:08X}] ", lobby_or_session_id), lobby_log.min_level),
       floor_to_area(quest_map_def->floor_to_area),
       difficulty(difficulty),
       event(event),
       random_seed(random_seed),
       bb_rare_rates(bb_rare_rates),
-      apply_rare_monster_boost(apply_rare_monster_boost) {
+      rare_monster_multiplier(rare_monster_multiplier) {
   FloorConfig& fc = this->floor_config_entries.emplace_back();
   fc.super_map = quest_map_def;
   this->index_super_map(fc, rand_crypt);
@@ -6242,8 +6242,8 @@ void MapState::index_super_map(const FloorConfig& fc, std::shared_ptr<RandomGene
     if ((type == EnemyType::MERICARAND) || (rare_type != type)) {
       std::unordered_map<uint32_t, float> det_cache;
       uint32_t bb_rare_rate = this->bb_rare_rates->get(type);
-      if (this->apply_rare_monster_boost) {
-        bb_rare_rate = std::min<uint64_t>(0xFFFFFFFFULL, static_cast<uint64_t>(bb_rare_rate) + (static_cast<uint64_t>(bb_rare_rate) / 2));
+      if (this->rare_monster_multiplier != 1.0f) {
+        bb_rare_rate = std::min<uint64_t>(0xFFFFFFFFULL, static_cast<uint64_t>(bb_rare_rate * this->rare_monster_multiplier));
       }
       for (Version v : ALL_NON_PATCH_VERSIONS) {
         // Skip this version if the enemy doesn't exist there

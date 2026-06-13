@@ -559,6 +559,23 @@ HTTPServer::HTTPServer(std::shared_ptr<ServerState> state)
         lobby_count++;
       }
     }
+    const char* event_name = "NONE";
+    switch (this->state->current_event()) {
+      case ServerState::RotatingEvent::EXP_BOOST:
+        event_name = "EXP_BOOST";
+        break;
+      case ServerState::RotatingEvent::DAR_BOOST:
+        event_name = "DAR_BOOST";
+        break;
+      case ServerState::RotatingEvent::RDR_BOOST:
+        event_name = "RDR_BOOST";
+        break;
+      case ServerState::RotatingEvent::RARE_MONSTER_BOOST:
+        event_name = "RARE_MONSTER_BOOST";
+        break;
+      default:
+        break;
+    }
     uint64_t uptime_usecs = phosg::now() - this->state->creation_time;
     return phosg::JSON::dict({
         {"StartTimeUsecs", this->state->creation_time},
@@ -570,6 +587,22 @@ HTTPServer::HTTPServer(std::shared_ptr<ServerState> state)
         {"ClientCount", this->state->game_server->all_clients().size() - ProxySession::num_proxy_sessions},
         {"ProxySessionCount", ProxySession::num_proxy_sessions},
         {"ServerName", this->state->name},
+        {"CurrentEvent", event_name},
+        {"ActiveEXPShiftMultiplier", this->state->event_exp_multiplier()},
+        {"ActiveDARMultiplier", (this->state->current_event() == ServerState::RotatingEvent::DAR_BOOST) ? this->state->dar_boost_multiplier : 1.0f},
+        {"ActiveRDRMultiplier", (this->state->current_event() == ServerState::RotatingEvent::RDR_BOOST) ? this->state->rdr_boost_multiplier : 1.0f},
+        {"ActiveRareMonsterMultiplier", (this->state->current_event() == ServerState::RotatingEvent::RARE_MONSTER_BOOST) ? this->state->rare_monster_boost_multiplier : 1.0f},
+        {"ConfigEXPBoostMultiplier", this->state->exp_boost_multiplier},
+        {"ConfigDARBoostMultiplier", this->state->dar_boost_multiplier},
+        {"ConfigRDRBoostMultiplier", this->state->rdr_boost_multiplier},
+        {"ConfigRareMonsterBoostMultiplier", this->state->rare_monster_boost_multiplier},
+        {"DailyForecast", phosg::JSON::dict({
+            {"Date", this->state->current_forecast_date},
+            {"Profession", this->state->current_daily_forecast.profession_name()},
+            {"Race", this->state->current_daily_forecast.race_name()},
+            {"Gender", this->state->current_daily_forecast.gender_name()},
+            {"ForecastString", this->state->current_daily_forecast.to_string()},
+        })},
     });
   };
 

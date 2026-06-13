@@ -1113,6 +1113,10 @@ void ServerState::load_config_early() {
   this->bb_global_exp_multiplier = this->config_json->get_float("BBGlobalEXPMultiplier", 1.0f);
   this->exp_share_multiplier = this->config_json->get_float("BBEXPShareMultiplier", 0.5f);
   this->server_global_drop_rate_multiplier = this->config_json->get_float("ServerGlobalDropRateMultiplier", 1.0f);
+  this->exp_boost_multiplier = this->config_json->get_float("EXPBoostMultiplier", 1.5f);
+  this->dar_boost_multiplier = this->config_json->get_float("DARBoostMultiplier", 1.25f);
+  this->rdr_boost_multiplier = this->config_json->get_float("RDRBoostMultiplier", 1.25f);
+  this->rare_monster_boost_multiplier = this->config_json->get_float("RareMonsterBoostMultiplier", 1.5f);
   this->event_changer_mode = phosg::tolower(this->config_json->get_string("EventChangerMode", "none"));
 
   if (this->is_debug) {
@@ -2425,7 +2429,7 @@ ServerState::RotatingEvent ServerState::current_event() const {
 }
 
 float ServerState::event_exp_multiplier() const {
-  return (this->current_event() == RotatingEvent::EXP_BOOST) ? 1.5f : 1.0f;
+  return (this->current_event() == RotatingEvent::EXP_BOOST) ? this->exp_boost_multiplier : 1.0f;
 }
 
 void ServerState::update_daily_forecast(bool broadcast_changes) {

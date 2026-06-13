@@ -955,7 +955,7 @@ public:
   uint8_t event = 0;
   uint32_t random_seed = 0;
   std::shared_ptr<const RareEnemyRates> bb_rare_rates;
-  bool apply_rare_monster_boost = false;
+  float rare_monster_multiplier = 1.0f;
   std::vector<std::shared_ptr<ObjectState>> object_states;
   std::vector<std::shared_ptr<EnemyState>> enemy_states;
   std::vector<std::shared_ptr<EnemyState>> enemy_set_states;
@@ -973,7 +973,7 @@ public:
       std::shared_ptr<const RareEnemyRates> bb_rare_rates,
       std::shared_ptr<RandomGenerator> rand_crypt,
       std::vector<std::shared_ptr<const SuperMap>> floor_map_defs,
-      bool apply_rare_monster_boost = false);
+      float rare_monster_multiplier = 1.0f);
   // Constructor for quests
   MapState(
       uint64_t lobby_or_session_id,
@@ -983,7 +983,7 @@ public:
       std::shared_ptr<const RareEnemyRates> bb_rare_rates,
       std::shared_ptr<RandomGenerator> rand_crypt,
       std::shared_ptr<const SuperMap> quest_map_def,
-      bool apply_rare_monster_boost = false);
+      float rare_monster_multiplier = 1.0f);
   // Constructor for empty maps (used in challenge mode before a quest starts)
   MapState();
 

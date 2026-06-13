@@ -280,6 +280,10 @@ struct ServerState : public std::enable_shared_from_this<ServerState> {
   float bb_global_exp_multiplier = 1.0f;
   float exp_share_multiplier = 0.5f;
   float server_global_drop_rate_multiplier = 1.0f;
+  float exp_boost_multiplier = 1.5f;
+  float dar_boost_multiplier = 1.25f;
+  float rdr_boost_multiplier = 1.25f;
+  float rare_monster_boost_multiplier = 1.5f;
   std::string event_changer_mode = "none";
   RotatingEvent current_event() const;
   float event_exp_multiplier() const;
