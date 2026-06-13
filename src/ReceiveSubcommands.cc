@@ -4241,19 +4241,23 @@ static void on_enemy_exp_request_bb(std::shared_ptr<Client> c, SubcommandMessage
       continue;
     }
 
-    int32_t exp_to_give = 0;
     bool last_hit = ene_st->last_hit_by_client_id(client_id);
     bool ever_hit = ene_st->ever_hit_by_client_id(client_id);
-    if (lc->character_file()->disp.stats.level >= 199) {
-      l->log.info_f("Client in slot {} is level 200 and cannot receive EXP", client_id);
-    } else if ((lc == c) && (last_hit && cmd.is_killer)) {
-      exp_to_give = full_exp;
-      l->log.info_f("Client in slot {} killed this enemy; effective EXP is {}", client_id, exp_to_give);
+    bool is_killer = (lc == c) && (last_hit && cmd.is_killer);
+    if (is_killer) {
       if (lc->login && lc->login->account) {
         std::string monster_name = phosg::name_for_enum(type);
         lc->login->account->monster_kills[monster_name]++;
         lc->login->account->save();
       }
+    }
+
+    int32_t exp_to_give = 0;
+    if (lc->character_file()->disp.stats.level >= 199) {
+      l->log.info_f("Client in slot {} is level 200 and cannot receive EXP", client_id);
+    } else if (is_killer) {
+      exp_to_give = full_exp;
+      l->log.info_f("Client in slot {} killed this enemy; effective EXP is {}", client_id, exp_to_give);
     } else if ((lc == c) && (last_hit && !cmd.is_killer)) {
       // In certain cases we may think that a client deserves full EXP but they claim not to. This can happen if a
       // player tags an enemy, but that enemy is then killed by another enemy (e.g. a Nano Dragon). So, we trust the
