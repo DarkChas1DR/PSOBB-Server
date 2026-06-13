@@ -5490,6 +5490,7 @@ static asio::awaitable<void> on_EA_BB(std::shared_ptr<Client> c, Channel::Messag
       if (team && team->members.at(c->login->account->account_id).check_flag(TeamIndex::Team::Member::Flag::IS_MASTER)) {
         const auto& cmd = check_size_t<C_SetTeamFlag_BB_0FEA>(msg.data);
         s->team_index->set_flag_data(team->team_id, cmd.flag_data);
+        send_command(c, 0x0FEA, 0x00000000);
         send_team_metadata_change_notifications(s, team, 0, TeamMetadataChange::FLAG_DATA);
       }
       break;
