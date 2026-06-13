@@ -218,6 +218,13 @@ Account::Account(const phosg::JSON& json)
   this->bb_team_id = json.get_int("BBTeamID", 0);
 
   try {
+    for (const auto& [k, v] : json.at("MonsterKills").as_dict()) {
+      this->monster_kills.emplace(k, v->as_int());
+    }
+  } catch (const std::out_of_range&) {
+  }
+
+  try {
     for (const auto& it : json.get_list("AutoPatchesEnabled")) {
       this->auto_patches_enabled.emplace(it->as_string());
     }
@@ -256,6 +263,11 @@ phosg::JSON Account::json() const {
     auto_patches_json.emplace_back(it);
   }
 
+  phosg::JSON monster_kills_json = phosg::JSON::dict();
+  for (const auto& it : this->monster_kills) {
+    monster_kills_json.emplace(it.first, it.second);
+  }
+
   return phosg::JSON::dict({
       {"FormatVersion", 1},
       {"AccountID", this->account_id},
@@ -274,6 +286,7 @@ phosg::JSON Account::json() const {
       {"Ep3TotalMesetaEarned", this->ep3_total_meseta_earned},
       {"BBTeamID", this->bb_team_id},
       {"AutoPatchesEnabled", std::move(auto_patches_json)},
+      {"MonsterKills", std::move(monster_kills_json)},
   });
 }
 

@@ -606,6 +606,24 @@ HTTPServer::HTTPServer(std::shared_ptr<ServerState> state)
     });
   };
 
+  this->router.add(HTTPRequest::Method::GET, "/y/kills/global", [this](ArgsT&&) -> RetT {
+    auto global_totals = phosg::JSON::dict();
+    auto& dict = global_totals.as_dict();
+    for (const auto& account : this->state->account_index->all()) {
+      for (const auto& [monster, count] : account->monster_kills) {
+        auto [it, inserted] = dict.emplace(monster, nullptr);
+        if (inserted) {
+          it->second = std::make_unique<phosg::JSON>(count);
+        } else {
+          it->second = std::make_unique<phosg::JSON>(it->second->as_int() + count);
+        }
+      }
+    }
+    co_return std::make_shared<phosg::JSON>(phosg::JSON::dict({
+        {"global_totals", std::move(global_totals)}
+    }));
+  });
+
   this->router.add(HTTPRequest::Method::GET, "/y/server", [generate_server_info_json](ArgsT&&) -> RetT {
     co_return std::make_shared<phosg::JSON>(generate_server_info_json());
   });

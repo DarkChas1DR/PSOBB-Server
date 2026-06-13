@@ -97,6 +97,8 @@ struct Account {
   uint32_t bb_team_id = 0;
   bool is_temporary = false; // If true, isn't saved to disk
 
+  std::unordered_map<std::string, uint64_t> monster_kills;
+
   std::unordered_set<std::string> auto_patches_enabled;
 
   std::unordered_map<std::string, std::shared_ptr<DCNTELicense>> dc_nte_licenses;
