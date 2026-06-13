@@ -1421,4 +1421,10 @@
     "songcount":      [0x03, 0x07C00000], // Song count
     "wrappingpapers": [0x0B, 0x1FF00000], // Wrapping Papers
   },
+
+  // Weekly rotating event multipliers (EXP, DAR, RDR, and Rare Monster spawn rate boosts).
+  "EXPBoostMultiplier": 1.5,
+  "DARBoostMultiplier": 1.25,
+  "RDRBoostMultiplier": 1.25,
+  "RareMonsterBoostMultiplier": 1.5,
 }
