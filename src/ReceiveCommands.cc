@@ -4616,7 +4616,7 @@ std::shared_ptr<Lobby> create_game_generic(
     game->battle_player = battle_player;
     battle_player->set_lobby(game);
   }
-  game->base_exp_multiplier = s->bb_global_exp_multiplier;
+  game->base_exp_multiplier = s->bb_global_exp_multiplier * s->event_exp_multiplier();
   game->exp_share_multiplier = s->exp_share_multiplier;
 
   const std::unordered_map<uint16_t, IntegralExpression>* quest_flag_rewrites;

@@ -31,7 +31,9 @@ public:
       Difficulty difficulty,
       uint8_t section_id,
       std::shared_ptr<RandomGenerator> rand_crypt,
-      std::shared_ptr<const BattleRules> restrictions = nullptr);
+      std::shared_ptr<const BattleRules> restrictions = nullptr,
+      bool apply_dar_boost = false,
+      bool apply_rdr_boost = false);
   ~ItemCreator() = default;
 
   struct DropResult {
@@ -89,6 +91,8 @@ private:
   std::shared_ptr<const ItemParameterTable> item_parameter_table;
   std::shared_ptr<const CommonItemSet> common_item_set;
   std::shared_ptr<const BattleRules> restrictions;
+  bool apply_dar_boost = false;
+  bool apply_rdr_boost = false;
 
   struct UnitResult {
     uint8_t unit;

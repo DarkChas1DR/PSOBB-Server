@@ -1111,6 +1111,7 @@ void ServerState::load_config_early() {
   this->bb_global_exp_multiplier = this->config_json->get_float("BBGlobalEXPMultiplier", 1.0f);
   this->exp_share_multiplier = this->config_json->get_float("BBEXPShareMultiplier", 0.5f);
   this->server_global_drop_rate_multiplier = this->config_json->get_float("ServerGlobalDropRateMultiplier", 1.0f);
+  this->event_changer_mode = phosg::tolower(this->config_json->get_string("EventChangerMode", "none"));
 
   if (this->is_debug) {
     set_all_log_levels(phosg::LogLevel::L_DEBUG);
@@ -2394,4 +2395,28 @@ void ServerState::disconnect_all_banned_clients() {
       }
     }
   }
+}
+
+ServerState::RotatingEvent ServerState::current_event() const {
+  if (this->event_changer_mode == "week1") {
+    return RotatingEvent::EXP_BOOST;
+  }
+  if (this->event_changer_mode == "week2") {
+    return RotatingEvent::DAR_BOOST;
+  }
+  if (this->event_changer_mode == "week3") {
+    return RotatingEvent::RDR_BOOST;
+  }
+  if (this->event_changer_mode == "week4") {
+    return RotatingEvent::RARE_MONSTER_BOOST;
+  }
+  if (this->event_changer_mode == "rotate") {
+    uint64_t week = (time(nullptr) / 604800) % 4;
+    return static_cast<RotatingEvent>(week + 1);
+  }
+  return RotatingEvent::NONE;
+}
+
+float ServerState::event_exp_multiplier() const {
+  return (this->current_event() == RotatingEvent::EXP_BOOST) ? 1.5f : 1.0f;
 }

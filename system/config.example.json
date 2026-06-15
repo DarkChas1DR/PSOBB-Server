@@ -209,6 +209,15 @@
   // command log.
   "CensorCredentials": true,
 
+  // Rotating event changer configuration.
+  //   "none"   - Disable rotating events (default).
+  //   "rotate" - Dynamically rotate events week-by-week based on the calendar.
+  //   "week1"  - Pin Week 1 event (+50% Experience).
+  //   "week2"  - Pin Week 2 event (+25% Drop Anything Rate / DAR).
+  //   "week3"  - Pin Week 3 event (+25% Rare Drop Rate / RDR).
+  //   "week4"  - Pin Week 4 event (+50% Rare Monster Spawn Rate).
+  "EventChangerMode": "none",
+
   // If this option is disabled, the server only allows users who have accounts on the server to connect. If this is
   // enabled, all users will be allowed to connect even if they don't have accounts. When a user connects with an
   // unregistered license (serial number and access key combination, or username and password combination on BB), a new

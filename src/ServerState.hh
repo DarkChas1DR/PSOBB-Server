@@ -91,6 +91,13 @@ struct ServerState : public std::enable_shared_from_this<ServerState> {
     ON_BY_DEFAULT,
     ON,
   };
+  enum class RotatingEvent {
+    NONE = 0,
+    EXP_BOOST = 1,
+    DAR_BOOST = 2,
+    RDR_BOOST = 3,
+    RARE_MONSTER_BOOST = 4,
+  };
 
   static inline bool behavior_enabled(BehaviorSwitch b) {
     return (b == BehaviorSwitch::ON_BY_DEFAULT) || (b == BehaviorSwitch::ON);
@@ -264,6 +271,9 @@ struct ServerState : public std::enable_shared_from_this<ServerState> {
   float bb_global_exp_multiplier = 1.0f;
   float exp_share_multiplier = 0.5f;
   float server_global_drop_rate_multiplier = 1.0f;
+  std::string event_changer_mode = "none";
+  RotatingEvent current_event() const;
+  float event_exp_multiplier() const;
 
   std::shared_ptr<Episode3::TournamentIndex> ep3_tournament_index;
 

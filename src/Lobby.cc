@@ -227,7 +227,9 @@ void Lobby::create_item_creator(Version logic_version) {
       this->difficulty,
       effective_section_id,
       rand_crypt,
-      this->quest ? this->quest->meta.battle_rules : nullptr);
+      this->quest ? this->quest->meta.battle_rules : nullptr,
+      s->current_event() == ServerState::RotatingEvent::DAR_BOOST,
+      s->current_event() == ServerState::RotatingEvent::RDR_BOOST);
   if (s->use_legacy_item_random_behavior) {
     this->item_creator->set_legacy_replay();
   }
@@ -267,19 +269,20 @@ uint8_t Lobby::client_extension_flags() const {
 }
 
 void Lobby::load_maps() {
+  auto s = this->require_server_state();
   auto rare_rates = this->rare_enemy_rates ? this->rare_enemy_rates : MapState::DEFAULT_RARE_ENEMIES;
+  bool apply_rare_monster_boost = (s->current_event() == ServerState::RotatingEvent::RARE_MONSTER_BOOST);
 
   if (this->quest) {
     this->log.info_f("Loading quest supermap");
     auto supermap = this->quest->get_supermap(this->random_seed);
     this->map_state = std::make_shared<MapState>(
-        this->lobby_id, this->difficulty, this->event, this->random_seed, this->rare_enemy_rates, this->rand_crypt, supermap);
+        this->lobby_id, this->difficulty, this->event, this->random_seed, this->rare_enemy_rates, this->rand_crypt, supermap, apply_rare_monster_boost);
   } else {
     this->log.info_f("Loading free play supermaps");
-    auto s = this->require_server_state();
     auto supermaps = s->supermaps_for_variations(this->episode, this->mode, this->difficulty, this->variations);
     this->map_state = std::make_shared<MapState>(
-        this->lobby_id, this->difficulty, this->event, this->random_seed, this->rare_enemy_rates, this->rand_crypt, supermaps);
+        this->lobby_id, this->difficulty, this->event, this->random_seed, this->rare_enemy_rates, this->rand_crypt, supermaps, apply_rare_monster_boost);
   }
 
   if (this->check_flag(Lobby::Flag::DEBUG)) {

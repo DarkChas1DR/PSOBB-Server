@@ -2514,15 +2514,67 @@ static void on_open_shop_bb_or_ep3_battle_subs(std::shared_ptr<Client> c, Subcom
     auto s = c->require_server_state();
     size_t level = c->character_file()->disp.stats.level + 1;
     switch (cmd.shop_type) {
-      case 0:
-        c->bb_shop_contents[0] = l->item_creator->generate_tool_shop_contents(level);
+      case 0: {
+        auto raw_contents = l->item_creator->generate_tool_shop_contents(level);
+        std::vector<ItemData> tools;
+        std::vector<ItemData> disks;
+        for (const auto& item : raw_contents) {
+          if (item.data1[0] == 3 && item.data1[1] == 2) {
+            disks.push_back(item);
+          } else {
+            tools.push_back(item);
+          }
+        }
+
+        auto tool_priority = [](const ItemData& item) -> int {
+          uint8_t subtype = item.data1[1];
+          uint8_t type = item.data1[2];
+          if (subtype == 7) return 1; // Telepipe
+          if (subtype == 4) return 2; // Moon Atomizer
+          if (subtype == 3) return 3; // Sol Atomizer
+          if (subtype == 0 && type == 2) return 4; // Trimate
+          if (subtype == 1 && type == 2) return 5; // Trifluid
+          if (subtype == 0 && type == 1) return 6; // Dimate
+          if (subtype == 1 && type == 1) return 7; // Difluid
+          if (subtype == 5) return 8; // Star Atomizer
+          if (subtype == 6 && type == 0) return 9; // Antidote
+          if (subtype == 6 && type == 1) return 10; // Antiparalysis
+          if (subtype == 0 && type == 0) return 11; // Monomate
+          if (subtype == 1 && type == 0) return 12; // Monofluid
+          if (subtype == 8) return 13; // Trap Vision
+          return 14;
+        };
+
+        std::sort(tools.begin(), tools.end(), [&](const ItemData& a, const ItemData& b) {
+          return tool_priority(a) < tool_priority(b);
+        });
+
+        if (tools.size() > 13) {
+          tools.resize(13);
+        }
+        if (disks.size() > 5) {
+          disks.resize(5);
+        }
+
+        auto& shop_contents = c->bb_shop_contents[0];
+        shop_contents.clear();
+        shop_contents.insert(shop_contents.end(), tools.begin(), tools.end());
+        shop_contents.insert(shop_contents.end(), disks.begin(), disks.end());
+        std::sort(shop_contents.begin(), shop_contents.end(), ItemData::compare_for_sort);
         break;
+      }
       case 1:
         c->bb_shop_contents[1] = l->item_creator->generate_weapon_shop_contents(level);
+        if (c->bb_shop_contents[1].size() > 16) {
+          c->bb_shop_contents[1].resize(16);
+        }
         break;
       case 2: {
         Episode episode = episode_for_area(l->area_for_floor(c->version(), 0));
         c->bb_shop_contents[2] = l->item_creator->generate_armor_shop_contents(episode, level);
+        if (c->bb_shop_contents[2].size() > 20) {
+          c->bb_shop_contents[2].resize(20);
+        }
         break;
       }
       default:
