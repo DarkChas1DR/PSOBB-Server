@@ -82,6 +82,7 @@ public:
     ITEM_DROP_NOTIFICATIONS_1                  = 0x0000000400000000,
     ITEM_DROP_NOTIFICATIONS_2                  = 0x0000000800000000,
     HAS_ENEMY_DAMAGE_SYNC_PATCH                = 0x0000001000000000, // Must be same as in EnemyDamageSync*.s
+    CHALLENGE_SRANK_ENABLED                    = 0x0000200000000000,
 
     // Proxy option flags
     PROXY_SAVE_FILES                           = 0x0000002000000000,

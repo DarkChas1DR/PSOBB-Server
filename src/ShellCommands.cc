@@ -1099,3 +1099,37 @@ ShellCommand c_create_item(
       send_text_message(c->channel, "$C7Item created:\n" + name);
       co_return std::deque<std::string>{};
     });
+
+ShellCommand c_increment_monster_kills(
+    "increment-monster-kills", "increment-monster-kills ACCOUNT-ID MONSTER-NAME [COUNT]\n\
+    Increment the monster kill count for a specific account and monster.",
+    +[](ShellCommand::Args& args) -> asio::awaitable<std::deque<std::string>> {
+      auto tokens = phosg::split(args.args, ' ');
+      if (tokens.size() < 2) {
+        throw std::runtime_error("incorrect argument count");
+      }
+      uint32_t account_id;
+      if (tokens[0].find("0x") == 0 || tokens[0].find("0X") == 0) {
+        account_id = std::stoul(tokens[0], nullptr, 16);
+      } else {
+        account_id = std::stoul(tokens[0], nullptr, 10);
+      }
+      std::string monster_name = tokens[1];
+      uint64_t count = (tokens.size() >= 3) ? std::stoull(tokens[2]) : 1;
+
+      std::shared_ptr<Account> account;
+      try {
+        account = args.s->account_index->from_account_id(account_id);
+      } catch (const std::exception& e) {
+        throw std::runtime_error("account not found");
+      }
+
+      account->monster_kills[monster_name] += count;
+      account->save();
+
+      std::deque<std::string> ret;
+      ret.push_back(std::format("Incremented {} by {} for account {:08X} (new count: {})",
+          monster_name, count, account_id, account->monster_kills[monster_name]));
+      co_return ret;
+    });
+

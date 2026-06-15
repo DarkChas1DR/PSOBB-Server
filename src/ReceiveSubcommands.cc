@@ -363,9 +363,17 @@ void forward_subcommand_with_entity_id_transcode_t(std::shared_ptr<Client> c, Su
   std::shared_ptr<const MapState::EnemyState> ene_st;
   std::shared_ptr<const MapState::ObjectState> obj_st;
   if ((cmd_entity_id >= 0x1000) && (cmd_entity_id < 0x4000)) {
-    ene_st = l->map_state->enemy_state_for_index(c->version(), cmd_entity_id - 0x1000);
+    try {
+      ene_st = l->map_state->enemy_state_for_index(c->version(), c->floor, cmd_entity_id - 0x1000);
+    } catch (const std::exception& e) {
+      c->log.warning_f("Could not find enemy state for entity {:04X} on floor {}: {}", cmd_entity_id.load(), c->floor, e.what());
+    }
   } else if ((cmd_entity_id >= 0x4000) && (cmd_entity_id < 0xFFFF)) {
-    obj_st = l->map_state->object_state_for_index(c->version(), cmd_entity_id - 0x4000);
+    try {
+      obj_st = l->map_state->object_state_for_index(c->version(), c->floor, cmd_entity_id - 0x4000);
+    } catch (const std::exception& e) {
+      c->log.warning_f("Could not find object state for entity {:04X} on floor {}: {}", cmd_entity_id.load(), c->floor, e.what());
+    }
   }
 
   for (auto& lc : l->clients) {
@@ -427,16 +435,24 @@ void forward_subcommand_with_entity_targets_transcode_and_track_hits_t(
   for (size_t z = 0; z < header.target_count; z++) {
     auto& res = resolutions.emplace_back(TargetResolution{nullptr, nullptr, targets[z].entity_id});
     if ((res.entity_id >= 0x1000) && (res.entity_id < 0x4000)) {
-      auto ene_st = l->map_state->enemy_state_for_index(c->version(), res.entity_id - 0x1000);
-      res.ene_st = ene_st;
-      ene_st->set_last_hit_by_client_id(c->lobby_client_id);
-      l->log.info_f("E-{:03X} last hit claimed", ene_st->e_id);
-      if (ene_st->alias_target_ene_st) {
-        ene_st->alias_target_ene_st->set_last_hit_by_client_id(c->lobby_client_id);
-        l->log.info_f("Alias target E-{:03X} last hit claimed", ene_st->alias_target_ene_st->e_id);
+      try {
+        auto ene_st = l->map_state->enemy_state_for_index(c->version(), c->floor, res.entity_id - 0x1000);
+        res.ene_st = ene_st;
+        ene_st->set_last_hit_by_client_id(c->lobby_client_id);
+        l->log.info_f("E-{:03X} last hit claimed", ene_st->e_id);
+        if (ene_st->alias_target_ene_st) {
+          ene_st->alias_target_ene_st->set_last_hit_by_client_id(c->lobby_client_id);
+          l->log.info_f("Alias target E-{:03X} last hit claimed", ene_st->alias_target_ene_st->e_id);
+        }
+      } catch (const std::exception& e) {
+        c->log.warning_f("Could not find enemy state for entity {:04X} on floor {}: {}", res.entity_id, c->floor, e.what());
       }
     } else if ((res.entity_id >= 0x4000) && (res.entity_id < 0xFFFF)) {
-      res.obj_st = l->map_state->object_state_for_index(c->version(), res.entity_id - 0x4000);
+      try {
+        res.obj_st = l->map_state->object_state_for_index(c->version(), c->floor, res.entity_id - 0x4000);
+      } catch (const std::exception& e) {
+        c->log.warning_f("Could not find object state for entity {:04X} on floor {}: {}", res.entity_id, c->floor, e.what());
+      }
     }
   }
 
@@ -2167,11 +2183,21 @@ static void on_box_or_enemy_item_drop_t(std::shared_ptr<Client> c, SubcommandMes
   std::shared_ptr<const MapState::ObjectState> obj_st;
   std::string from_entity_str;
   if (cmd.item.source_type == 1) {
-    ene_st = l->map_state->enemy_state_for_index(c->version(), cmd.item.floor, cmd.item.entity_index);
-    from_entity_str = std::format(" from E-{:03X}", ene_st->e_id);
+    try {
+      ene_st = l->map_state->enemy_state_for_index(c->version(), cmd.item.floor, cmd.item.entity_index);
+      from_entity_str = std::format(" from E-{:03X}", ene_st->e_id);
+    } catch (const std::exception& e) {
+      c->log.warning_f("Could not find enemy state for entity {:04X} on floor {}: {}", cmd.item.entity_index, cmd.item.floor, e.what());
+      from_entity_str = std::format(" from enemy index {:04X}", cmd.item.entity_index);
+    }
   } else {
-    obj_st = l->map_state->object_state_for_index(c->version(), cmd.item.floor, cmd.item.entity_index);
-    from_entity_str = std::format(" from K-{:03X}", obj_st->k_id);
+    try {
+      obj_st = l->map_state->object_state_for_index(c->version(), cmd.item.floor, cmd.item.entity_index);
+      from_entity_str = std::format(" from K-{:03X}", obj_st->k_id);
+    } catch (const std::exception& e) {
+      c->log.warning_f("Could not find object state for entity {:04X} on floor {}: {}", cmd.item.entity_index, cmd.item.floor, e.what());
+      from_entity_str = std::format(" from object index {:04X}", cmd.item.entity_index);
+    }
   }
 
   ItemData item = cmd.item.item;
@@ -2888,73 +2914,84 @@ DropReconcileResult reconcile_drop_request_with_map(
   }
 
   if (is_box) {
-    res.obj_st = map->object_state_for_index(version, cmd.floor, cmd.entity_index);
-    if (!res.obj_st->super_obj) {
-      throw std::runtime_error("referenced object from drop request is a player trap");
-    }
-    const auto* set_entry = res.obj_st->super_obj->version(version).set_entry;
-    if (!set_entry) {
-      throw std::runtime_error("object set entry is missing");
-    }
-    std::string type_name = MapFile::name_for_object_type(set_entry->base_type, version);
-    c->log.info_f("Drop check for K-{:03X} {} {}",
-        res.obj_st->k_id,
-        res.ignore_def ? 'G' : 'S',
-        type_name);
-    if (cmd.floor != res.obj_st->super_obj->floor) {
-      c->log.warning_f("Floor {:02X} from command does not match object\'s expected floor {:02X}",
-          cmd.floor, res.obj_st->super_obj->floor);
-    }
-    if (is_v1_or_v2(version) && (version != Version::GC_NTE)) {
-      // V1/V2 don't have 6xA2, so we can't get ignore_def or the object parameters from the client on those versions
-      cmd.param3 = set_entry->param3;
-      cmd.param4 = set_entry->param4;
-      cmd.param5 = set_entry->param5;
-      cmd.param6 = set_entry->param6;
-    }
-    bool object_ignore_def = (set_entry->param1 > 0.0);
-    if (res.ignore_def != object_ignore_def) {
-      c->log.info_f("ignore_def value {} from command does not match object\'s expected ignore_def {} (from p1={:g})",
-          res.ignore_def ? "true" : "false", object_ignore_def ? "true" : "false", set_entry->param1);
-    }
-    if (c->check_flag(Client::Flag::DEBUG_ENABLED)) {
+    try {
+      res.obj_st = map->object_state_for_index(version, cmd.floor, cmd.entity_index);
+      if (!res.obj_st->super_obj) {
+        throw std::runtime_error("referenced object from drop request is a player trap");
+      }
+      const auto* set_entry = res.obj_st->super_obj->version(version).set_entry;
+      if (!set_entry) {
+        throw std::runtime_error("object set entry is missing");
+      }
       std::string type_name = MapFile::name_for_object_type(set_entry->base_type, version);
-      send_text_message_fmt(c, "$C5K-{:03X} {} {}", res.obj_st->k_id, res.ignore_def ? 'G' : 'S', type_name);
+      c->log.info_f("Drop check for K-{:03X} {} {}",
+          res.obj_st->k_id,
+          res.ignore_def ? 'G' : 'S',
+          type_name);
+      if (cmd.floor != res.obj_st->super_obj->floor) {
+        c->log.warning_f("Floor {:02X} from command does not match object\'s expected floor {:02X}",
+            cmd.floor, res.obj_st->super_obj->floor);
+      }
+      if (is_v1_or_v2(version) && (version != Version::GC_NTE)) {
+        // V1/V2 don't have 6xA2, so we can't get ignore_def or the object parameters from the client on those versions
+        cmd.param3 = set_entry->param3;
+        cmd.param4 = set_entry->param4;
+        cmd.param5 = set_entry->param5;
+        cmd.param6 = set_entry->param6;
+      }
+      bool object_ignore_def = (set_entry->param1 > 0.0);
+      if (res.ignore_def != object_ignore_def) {
+        c->log.info_f("ignore_def value {} from command does not match object\'s expected ignore_def {} (from p1={:g})",
+            res.ignore_def ? "true" : "false", object_ignore_def ? "true" : "false", set_entry->param1);
+      }
+      if (c->check_flag(Client::Flag::DEBUG_ENABLED)) {
+        std::string type_name = MapFile::name_for_object_type(set_entry->base_type, version);
+        send_text_message_fmt(c, "$C5K-{:03X} {} {}", res.obj_st->k_id, res.ignore_def ? 'G' : 'S', type_name);
+      }
+    } catch (const std::exception& e) {
+      c->log.warning_f("Could not find object state for drop check on floor {}: {}", cmd.floor, e.what());
+      res.obj_st = nullptr;
     }
 
   } else {
-    res.ref_ene_st = map->enemy_state_for_index(version, cmd.floor, cmd.entity_index);
-    res.target_ene_st = res.ref_ene_st->alias_target_ene_st ? res.ref_ene_st->alias_target_ene_st : res.ref_ene_st;
-    uint8_t area = map->floor_to_area.at(res.target_ene_st->super_ene->floor);
-    res.effective_enemy_type = res.target_ene_st->type(version, area, difficulty, event);
-    c->log.info_f("Drop check for E-{:03X} (target E-{:03X}, type {})",
-        res.ref_ene_st->e_id, res.target_ene_st->e_id, phosg::name_for_enum(res.effective_enemy_type));
-    uint8_t expected_rt_index = type_definition_for_enemy(res.effective_enemy_type).rt_index;
-    bool mismatched_rt_index = false;
-    if (cmd.rt_index != expected_rt_index) {
-      // Special cases: BULCLAW => BULK and DARK_GUNNER => DEATH_GUNNER
-      if ((cmd.rt_index == 0x27) && (res.effective_enemy_type == EnemyType::BULCLAW)) {
-        c->log.info_f("E-{:03X} killed as BULK instead of BULCLAW", res.target_ene_st->e_id);
-        res.effective_enemy_type = EnemyType::BULK;
-      } else if ((cmd.rt_index == 0x23) && (res.effective_enemy_type == EnemyType::DARK_GUNNER)) {
-        c->log.info_f("E-{:03X} killed as DEATH_GUNNER instead of DARK_GUNNER", res.target_ene_st->e_id);
-        res.effective_enemy_type = EnemyType::DEATH_GUNNER;
-      } else {
-        c->log.warning_f("rt_index {:02X} from command does not match entity\'s expected index {:02X}",
-            cmd.rt_index, expected_rt_index);
-        mismatched_rt_index = true;
+    try {
+      res.ref_ene_st = map->enemy_state_for_index(version, cmd.floor, cmd.entity_index);
+      res.target_ene_st = res.ref_ene_st->alias_target_ene_st ? res.ref_ene_st->alias_target_ene_st : res.ref_ene_st;
+      uint8_t area = map->floor_to_area.at(res.target_ene_st->super_ene->floor);
+      res.effective_enemy_type = res.target_ene_st->type(version, area, difficulty, event);
+      c->log.info_f("Drop check for E-{:03X} (target E-{:03X}, type {})",
+          res.ref_ene_st->e_id, res.target_ene_st->e_id, phosg::name_for_enum(res.effective_enemy_type));
+      uint8_t expected_rt_index = type_definition_for_enemy(res.effective_enemy_type).rt_index;
+      bool mismatched_rt_index = false;
+      if (cmd.rt_index != expected_rt_index) {
+        // Special cases: BULCLAW => BULK and DARK_GUNNER => DEATH_GUNNER
+        if ((cmd.rt_index == 0x27) && (res.effective_enemy_type == EnemyType::BULCLAW)) {
+          c->log.info_f("E-{:03X} killed as BULK instead of BULCLAW", res.target_ene_st->e_id);
+          res.effective_enemy_type = EnemyType::BULK;
+        } else if ((cmd.rt_index == 0x23) && (res.effective_enemy_type == EnemyType::DARK_GUNNER)) {
+          c->log.info_f("E-{:03X} killed as DEATH_GUNNER instead of DARK_GUNNER", res.target_ene_st->e_id);
+          res.effective_enemy_type = EnemyType::DEATH_GUNNER;
+        } else {
+          c->log.warning_f("rt_index {:02X} from command does not match entity\'s expected index {:02X}",
+              cmd.rt_index, expected_rt_index);
+          mismatched_rt_index = true;
+        }
       }
-    }
-    if (cmd.floor != res.target_ene_st->super_ene->floor) {
-      c->log.warning_f("Floor {:02X} from command does not match entity\'s expected floor {:02X}",
-          cmd.floor, res.target_ene_st->super_ene->floor);
-    }
-    if (c->check_flag(Client::Flag::DEBUG_ENABLED)) {
-      std::string rt_index_str = mismatched_rt_index
-          ? std::format(" $C4{:02X}->{:02X}$C5", cmd.rt_index, expected_rt_index)
-          : std::format(" {:02X}", expected_rt_index);
-      send_text_message_fmt(c, "$C5E-{:03X}{} {}",
-          res.target_ene_st->e_id, rt_index_str, phosg::name_for_enum(res.effective_enemy_type));
+      if (cmd.floor != res.target_ene_st->super_ene->floor) {
+        c->log.warning_f("Floor {:02X} from command does not match entity\'s expected floor {:02X}",
+            cmd.floor, res.target_ene_st->super_ene->floor);
+      }
+      if (c->check_flag(Client::Flag::DEBUG_ENABLED)) {
+        std::string rt_index_str = mismatched_rt_index
+            ? std::format(" $C4{:02X}->{:02X}$C5", cmd.rt_index, expected_rt_index)
+            : std::format(" {:02X}", expected_rt_index);
+        send_text_message_fmt(c, "$C5E-{:03X}{} {}",
+            res.target_ene_st->e_id, rt_index_str, phosg::name_for_enum(res.effective_enemy_type));
+      }
+    } catch (const std::exception& e) {
+      c->log.warning_f("Could not find enemy state for drop check on floor {}: {}", cmd.floor, e.what());
+      res.ref_ene_st = nullptr;
+      res.target_ene_st = nullptr;
     }
   }
 
@@ -3052,12 +3089,10 @@ static void on_entity_drop_item_request(std::shared_ptr<Client> c, SubcommandMes
           return l->item_creator->on_specialized_box_item_drop(
               cmd.effective_area, cmd.param3, cmd.param4, cmd.param5, cmd.param6, rdr_multiplier);
         }
-      } else if (rec.target_ene_st) {
-        l->log.info_f("Creating item from enemy {:04X} => E-{:03X} (area {:02X})",
-            cmd.entity_index, rec.target_ene_st->e_id, cmd.effective_area);
-        return l->item_creator->on_monster_item_drop(rec.effective_enemy_type, cmd.effective_area, force_rare, rdr_multiplier);
       } else {
-        throw std::runtime_error("neither object nor enemy were present");
+        l->log.info_f("Creating item from enemy/unknown {:04X} (area {:02X})",
+            cmd.entity_index, cmd.effective_area);
+        return l->item_creator->on_monster_item_drop(rec.effective_enemy_type, cmd.effective_area, force_rare, rdr_multiplier);
       }
     };
 
@@ -3524,49 +3559,67 @@ static void on_update_enemy_state(std::shared_ptr<Client> c, SubcommandMessage& 
   if ((cmd.enemy_index & 0xF000) || (cmd.header.entity_id != (cmd.enemy_index | 0x1000))) {
     throw std::runtime_error("mismatched enemy id/index");
   }
-  auto ene_st = l->map_state->enemy_state_for_index(c->version(), cmd.enemy_index);
+  std::shared_ptr<MapState::EnemyState> ene_st = nullptr;
+  try {
+    ene_st = l->map_state->enemy_state_for_index(c->version(), c->floor, cmd.enemy_index);
+  } catch (const std::exception& e) {
+    c->log.warning_f("Could not find enemy state for entity {:04X} on floor {}: {}", cmd.enemy_index, c->floor, e.what());
+  }
+
   uint32_t src_flags = is_big_endian(c->version()) ? bswap32(cmd.game_flags) : cmd.game_flags.load();
   if (src_flags & 0xD0000000) { // Don't allow player, object, or item flags to be set
     throw std::runtime_error("incorrect entity type flags in 6x0A command");
   }
-  if (l->difficulty == Difficulty::ULTIMATE) {
-    src_flags = (src_flags & 0xFFFFFFC0) | (ene_st->game_flags & 0x0000003F);
-  }
 
-  bool should_track_hit = (src_flags & 0x00000200); // "Enemy was hit" flag (see 6x0A comments in CommandFormats.hh)
-  if (should_track_hit) {
-    ene_st->set_last_hit_by_client_id(c->lobby_client_id);
-  }
-  ene_st->game_flags = src_flags;
-  ene_st->total_damage = cmd.total_damage;
-  l->log.info_f("E-{:03X} updated to damage={} game_flags={:08X}; last hit {}",
-      ene_st->e_id, ene_st->total_damage, ene_st->game_flags, should_track_hit ? "claimed" : "not claimed");
-  if (ene_st->alias_target_ene_st) {
-    if (should_track_hit) {
-      ene_st->alias_target_ene_st->set_last_hit_by_client_id(c->lobby_client_id);
+  if (ene_st) {
+    if (l->difficulty == Difficulty::ULTIMATE) {
+      src_flags = (src_flags & 0xFFFFFFC0) | (ene_st->game_flags & 0x0000003F);
     }
-    ene_st->alias_target_ene_st->game_flags = src_flags;
-    ene_st->alias_target_ene_st->total_damage = cmd.total_damage;
-    l->log.info_f("Alias target E-{:03X} updated to damage={} game_flags={:08X}; last hit {}",
-        ene_st->alias_target_ene_st->e_id, ene_st->alias_target_ene_st->total_damage, ene_st->alias_target_ene_st->game_flags, should_track_hit ? "claimed" : "not claimed");
-  }
 
-  // TODO: It'd be nice if this worked on bosses too, but it seems we have to use each boss' specific state-syncing
-  // command, or the cutscenes misbehave. Just setting flag 0x800 does work on Vol Opt (and the various parts), but
-  // doesn't work on other Episode 1 bosses. Other episodes' bosses are not yet tested.
-  bool is_fast_kill = c->check_flag(Client::Flag::FAST_KILLS_ENABLED) &&
-      !type_definition_for_enemy(ene_st->super_ene->type).is_boss() &&
-      !(ene_st->game_flags & 0x00000800);
-  if (is_fast_kill) {
-    ene_st->game_flags |= 0x00000800;
-  }
+    bool should_track_hit = (src_flags & 0x00000200); // "Enemy was hit" flag (see 6x0A comments in CommandFormats.hh)
+    if (should_track_hit) {
+      ene_st->set_last_hit_by_client_id(c->lobby_client_id);
+    }
+    ene_st->game_flags = src_flags;
+    ene_st->total_damage = cmd.total_damage;
+    l->log.info_f("E-{:03X} updated to damage={} game_flags={:08X}; last hit {}",
+        ene_st->e_id, ene_st->total_damage, ene_st->game_flags, should_track_hit ? "claimed" : "not claimed");
+    if (ene_st->alias_target_ene_st) {
+      if (should_track_hit) {
+        ene_st->alias_target_ene_st->set_last_hit_by_client_id(c->lobby_client_id);
+      }
+      ene_st->alias_target_ene_st->game_flags = src_flags;
+      ene_st->alias_target_ene_st->total_damage = cmd.total_damage;
+      l->log.info_f("Alias target E-{:03X} updated to damage={} game_flags={:08X}; last hit {}",
+          ene_st->alias_target_ene_st->e_id, ene_st->alias_target_ene_st->total_damage, ene_st->alias_target_ene_st->game_flags, should_track_hit ? "claimed" : "not claimed");
+    }
 
-  for (auto lc : l->clients) {
-    if (lc && (is_fast_kill || (lc != c))) {
-      cmd.enemy_index = l->map_state->index_for_enemy_state(lc->version(), ene_st);
-      if (cmd.enemy_index != 0xFFFF) {
-        cmd.header.entity_id = 0x1000 | cmd.enemy_index;
-        cmd.game_flags = is_big_endian(lc->version()) ? phosg::bswap32(ene_st->game_flags) : ene_st->game_flags;
+    // TODO: It'd be nice if this worked on bosses too, but it seems we have to use each boss' specific state-syncing
+    // command, or the cutscenes misbehave. Just setting flag 0x800 does work on Vol Opt (and the various parts), but
+    // doesn't work on other Episode 1 bosses. Other episodes' bosses are not yet tested.
+    bool is_fast_kill = c->check_flag(Client::Flag::FAST_KILLS_ENABLED) &&
+        !type_definition_for_enemy(ene_st->super_ene->type).is_boss() &&
+        !(ene_st->game_flags & 0x00000800);
+    if (is_fast_kill) {
+      ene_st->game_flags |= 0x00000800;
+    }
+
+    for (auto lc : l->clients) {
+      if (lc && (is_fast_kill || (lc != c))) {
+        cmd.enemy_index = l->map_state->index_for_enemy_state(lc->version(), ene_st);
+        if (cmd.enemy_index != 0xFFFF) {
+          cmd.header.entity_id = 0x1000 | cmd.enemy_index;
+          cmd.game_flags = is_big_endian(lc->version()) ? phosg::bswap32(ene_st->game_flags) : ene_st->game_flags;
+          send_command_t(lc, 0x60, 0x00, cmd);
+        }
+      }
+    }
+  } else {
+    l->log.info_f("Enemy {:04X} updated to damage={} game_flags={:08X}",
+        cmd.enemy_index, cmd.total_damage.load(), src_flags);
+    // Forward as-is since we don't have enemy state to translate/transcode relative indexes
+    for (auto lc : l->clients) {
+      if (lc && (lc != c)) {
         send_command_t(lc, 0x60, 0x00, cmd);
       }
     }
@@ -3586,30 +3639,52 @@ static void on_incr_enemy_damage(std::shared_ptr<Client> c, SubcommandMessage& m
   if (cmd.header.entity_id < 0x1000 || cmd.header.entity_id >= 0x4000) {
     throw std::runtime_error("6xE4 received for non-enemy entity");
   }
-  auto ene_st = l->map_state->enemy_state_for_index(c->version(), cmd.header.entity_id & 0x0FFF);
-
-  c->log.info_f("E-{:03X} damage incremented by {} with factor {}; before hit, damage was {} (cmd) or {} (ene_st) and HP was {}/{}",
-      ene_st->e_id,
-      cmd.hit_amount.load(),
-      cmd.factor.load(),
-      ene_st->total_damage,
-      cmd.total_damage_before_hit.load(),
-      cmd.current_hp_before_hit.load(),
-      cmd.max_hp.load());
-
-  if (cmd.hit_amount > 0) {
-    c->log.info_f("Claiming last hit on E-{:03X}", ene_st->e_id);
-    ene_st->set_last_hit_by_client_id(c->lobby_client_id);
+  std::shared_ptr<MapState::EnemyState> ene_st = nullptr;
+  try {
+    ene_st = l->map_state->enemy_state_for_index(c->version(), c->floor, cmd.header.entity_id & 0x0FFF);
+  } catch (const std::exception& e) {
+    c->log.warning_f("Could not find enemy state for entity {:04X} on floor {}: {}", cmd.header.entity_id.load(), c->floor, e.what());
   }
-  ene_st->total_damage = std::min<uint32_t>(ene_st->total_damage + cmd.hit_amount, cmd.max_hp);
-  if (ene_st->alias_target_ene_st) {
+
+  if (c->check_flag(Client::Flag::FAST_KILLS_ENABLED)) {
+    cmd.hit_amount = cmd.max_hp.load();
+  }
+
+  if (ene_st) {
+    c->log.info_f("E-{:03X} damage incremented by {} with factor {}; before hit, damage was {} (cmd) or {} (ene_st) and HP was {}/{}",
+        ene_st->e_id,
+        cmd.hit_amount.load(),
+        cmd.factor.load(),
+        ene_st->total_damage,
+        cmd.total_damage_before_hit.load(),
+        cmd.current_hp_before_hit.load(),
+        cmd.max_hp.load());
+
     if (cmd.hit_amount > 0) {
-      c->log.info_f("Claiming last hit on E-{:03X} (alias of E-{:03X})",
-          ene_st->alias_target_ene_st->e_id, ene_st->e_id);
-      ene_st->alias_target_ene_st->set_last_hit_by_client_id(c->lobby_client_id);
+      c->log.info_f("Claiming last hit on E-{:03X}", ene_st->e_id);
+      ene_st->set_last_hit_by_client_id(c->lobby_client_id);
     }
-    ene_st->alias_target_ene_st->total_damage = std::min<uint32_t>(
-        ene_st->alias_target_ene_st->total_damage + cmd.hit_amount, cmd.max_hp);
+    ene_st->total_damage = std::min<uint32_t>(ene_st->total_damage + cmd.hit_amount, cmd.max_hp);
+    if (ene_st->alias_target_ene_st) {
+      if (cmd.hit_amount > 0) {
+        c->log.info_f("Claiming last hit on E-{:03X} (alias of E-{:03X})",
+            ene_st->alias_target_ene_st->e_id, ene_st->e_id);
+        ene_st->alias_target_ene_st->set_last_hit_by_client_id(c->lobby_client_id);
+      }
+      ene_st->alias_target_ene_st->total_damage = std::min<uint32_t>(
+          ene_st->alias_target_ene_st->total_damage + cmd.hit_amount, cmd.max_hp);
+    }
+  } else {
+    c->log.info_f("Enemy {:04X} damage incremented by {} with factor {}; HP before hit {}/{}",
+        cmd.header.entity_id.load(),
+        cmd.hit_amount.load(),
+        cmd.factor.load(),
+        cmd.current_hp_before_hit.load(),
+        cmd.max_hp.load());
+  }
+
+  if (c->check_flag(Client::Flag::FAST_KILLS_ENABLED)) {
+    send_command_t(c, msg.command, msg.flag, cmd);
   }
 
   forward_subcommand_with_entity_id_transcode_t<G_IncrementEnemyDamage_Extension_6xE4>(c, msg);
@@ -3630,12 +3705,18 @@ static void on_set_enemy_status_effect_flags_ultimate(std::shared_ptr<Client> c,
     return;
   }
 
-  auto ene_st = l->map_state->enemy_state_for_index(c->version(), cmd.header.entity_id - 0x1000);
-  if (!(ene_st->game_flags & cmd.status_effect_flags)) {
+  std::shared_ptr<MapState::EnemyState> ene_st = nullptr;
+  try {
+    ene_st = l->map_state->enemy_state_for_index(c->version(), c->floor, cmd.header.entity_id - 0x1000);
+  } catch (const std::exception& e) {
+    c->log.warning_f("Could not find enemy state for entity {:04X} on floor {}: {}", cmd.header.entity_id.load(), c->floor, e.what());
+  }
+
+  if (ene_st && !(ene_st->game_flags & cmd.status_effect_flags)) {
     ene_st->game_flags |= cmd.status_effect_flags;
     l->log.info_f("E-{:03X} updated to game_flags={:08X}", ene_st->e_id, ene_st->game_flags);
   }
-  if (ene_st->alias_target_ene_st && !(ene_st->alias_target_ene_st->game_flags & cmd.status_effect_flags)) {
+  if (ene_st && ene_st->alias_target_ene_st && !(ene_st->alias_target_ene_st->game_flags & cmd.status_effect_flags)) {
     ene_st->alias_target_ene_st->game_flags |= cmd.status_effect_flags;
     l->log.info_f("Alias E-{:03X} updated to game_flags={:08X}",
         ene_st->alias_target_ene_st->e_id, ene_st->alias_target_ene_st->game_flags);
@@ -3656,7 +3737,7 @@ static void on_update_object_state_t(std::shared_ptr<Client> c, SubcommandMessag
     return;
   }
 
-  auto obj_st = l->map_state->object_state_for_index(c->version(), cmd.object_index);
+  auto obj_st = l->map_state->object_state_for_index(c->version(), c->floor, cmd.object_index);
   obj_st->game_flags = cmd.flags;
   l->log.info_f("K-{:03X} updated with game_flags={:08X}", obj_st->k_id, obj_st->game_flags);
 
@@ -3759,12 +3840,20 @@ static void on_dragon_actions_6x12(std::shared_ptr<Client> c, SubcommandMessage&
     return;
   }
 
-  auto ene_st = l->map_state->enemy_state_for_index(c->version(), cmd.header.entity_id - 0x1000);
-  if (ene_st->super_ene->type != EnemyType::DRAGON) {
-    throw std::runtime_error("6x12 command sent for incorrect enemy type");
+  std::shared_ptr<MapState::EnemyState> ene_st = nullptr;
+  try {
+    ene_st = l->map_state->enemy_state_for_index(c->version(), c->floor, cmd.header.entity_id - 0x1000);
+  } catch (const std::exception& e) {
+    c->log.warning_f("Could not find enemy state for entity {:04X} on floor {}: {}", cmd.header.entity_id.load(), c->floor, e.what());
   }
-  if (ene_st->alias_target_ene_st) {
-    throw std::runtime_error("DRAGON enemy is an alias");
+
+  if (ene_st) {
+    if (ene_st->super_ene->type != EnemyType::DRAGON) {
+      throw std::runtime_error("6x12 command sent for incorrect enemy type");
+    }
+    if (ene_st->alias_target_ene_st) {
+      throw std::runtime_error("DRAGON enemy is an alias");
+    }
   }
 
   G_DragonBossActions_GC_6x12 sw_cmd = {{cmd.header.subcommand, cmd.header.size, cmd.header.entity_id.load()},
@@ -3772,16 +3861,20 @@ static void on_dragon_actions_6x12(std::shared_ptr<Client> c, SubcommandMessage&
   bool sender_is_be = is_big_endian(c->version());
   for (auto lc : l->clients) {
     if (lc && (lc != c)) {
-      if (is_big_endian(lc->version()) == sender_is_be) {
-        cmd.header.entity_id = 0x1000 | l->map_state->index_for_enemy_state(lc->version(), ene_st);
-        if (cmd.header.entity_id != 0xFFFF) {
-          send_command_t(lc, 0x60, 0x00, cmd);
+      if (ene_st) {
+        if (is_big_endian(lc->version()) == sender_is_be) {
+          cmd.header.entity_id = 0x1000 | l->map_state->index_for_enemy_state(lc->version(), ene_st);
+          if (cmd.header.entity_id != 0xFFFF) {
+            send_command_t(lc, 0x60, 0x00, cmd);
+          }
+        } else {
+          sw_cmd.header.entity_id = 0x1000 | l->map_state->index_for_enemy_state(lc->version(), ene_st);
+          if (sw_cmd.header.entity_id != 0xFFFF) {
+            send_command_t(lc, 0x60, 0x00, sw_cmd);
+          }
         }
       } else {
-        sw_cmd.header.entity_id = 0x1000 | l->map_state->index_for_enemy_state(lc->version(), ene_st);
-        if (sw_cmd.header.entity_id != 0xFFFF) {
-          send_command_t(lc, 0x60, 0x00, sw_cmd);
-        }
+        send_command(lc, msg.command, msg.flag, msg.data, msg.size);
       }
     }
   }
@@ -3798,12 +3891,20 @@ static void on_gol_dragon_actions(std::shared_ptr<Client> c, SubcommandMessage& 
     return;
   }
 
-  auto ene_st = l->map_state->enemy_state_for_index(c->version(), cmd.header.entity_id - 0x1000);
-  if (ene_st->super_ene->type != EnemyType::GOL_DRAGON) {
-    throw std::runtime_error("6xA8 command sent for incorrect enemy type");
+  std::shared_ptr<MapState::EnemyState> ene_st = nullptr;
+  try {
+    ene_st = l->map_state->enemy_state_for_index(c->version(), c->floor, cmd.header.entity_id - 0x1000);
+  } catch (const std::exception& e) {
+    c->log.warning_f("Could not find enemy state for entity {:04X} on floor {}: {}", cmd.header.entity_id.load(), c->floor, e.what());
   }
-  if (ene_st->alias_target_ene_st) {
-    throw std::runtime_error("GOL_DRAGON enemy is an alias");
+
+  if (ene_st) {
+    if (ene_st->super_ene->type != EnemyType::GOL_DRAGON) {
+      throw std::runtime_error("6xA8 command sent for incorrect enemy type");
+    }
+    if (ene_st->alias_target_ene_st) {
+      throw std::runtime_error("GOL_DRAGON enemy is an alias");
+    }
   }
 
   G_GolDragonBossActions_GC_6xA8 sw_cmd = {{cmd.header.subcommand, cmd.header.size, cmd.header.entity_id},
@@ -3817,16 +3918,20 @@ static void on_gol_dragon_actions(std::shared_ptr<Client> c, SubcommandMessage& 
   bool sender_is_be = is_big_endian(c->version());
   for (auto lc : l->clients) {
     if (lc && (lc != c)) {
-      if (is_big_endian(lc->version()) == sender_is_be) {
-        cmd.header.entity_id = 0x1000 | l->map_state->index_for_enemy_state(lc->version(), ene_st);
-        if (cmd.header.entity_id != 0xFFFF) {
-          send_command_t(lc, 0x60, 0x00, cmd);
+      if (ene_st) {
+        if (is_big_endian(lc->version()) == sender_is_be) {
+          cmd.header.entity_id = 0x1000 | l->map_state->index_for_enemy_state(lc->version(), ene_st);
+          if (cmd.header.entity_id != 0xFFFF) {
+            send_command_t(lc, 0x60, 0x00, cmd);
+          }
+        } else {
+          sw_cmd.header.entity_id = 0x1000 | l->map_state->index_for_enemy_state(lc->version(), ene_st);
+          if (sw_cmd.header.entity_id != 0xFFFF) {
+            send_command_t(lc, 0x60, 0x00, sw_cmd);
+          }
         }
       } else {
-        sw_cmd.header.entity_id = 0x1000 | l->map_state->index_for_enemy_state(lc->version(), ene_st);
-        if (sw_cmd.header.entity_id != 0xFFFF) {
-          send_command_t(lc, 0x60, 0x00, sw_cmd);
-        }
+        send_command(lc, msg.command, msg.flag, msg.data, msg.size);
       }
     }
   }
@@ -3900,7 +4005,7 @@ static void on_set_boss_warp_flags_6x6A(std::shared_ptr<Client> c, SubcommandMes
     throw std::runtime_error("6x6A sent for non-object entity");
   }
 
-  auto obj_st = l->map_state->object_state_for_index(c->version(), cmd.header.entity_id - 0x4000);
+  auto obj_st = l->map_state->object_state_for_index(c->version(), c->floor, cmd.header.entity_id - 0x4000);
   if (!obj_st->super_obj) {
     throw std::runtime_error("missing object for 6x6A command");
   }
@@ -4106,7 +4211,15 @@ static void on_steal_exp_bb(std::shared_ptr<Client> c, SubcommandMessage& msg) {
     return;
   }
 
-  auto ene_st = l->map_state->enemy_state_for_index(c->version(), cmd.enemy_index);
+  std::shared_ptr<const MapState::EnemyState> ene_st = nullptr;
+  try {
+    ene_st = l->map_state->enemy_state_for_index(c->version(), c->floor, cmd.enemy_index);
+  } catch (const std::exception& e) {
+    c->log.warning_f("Could not find enemy state for entity {:04X} on floor {}: {}", cmd.enemy_index, c->floor, e.what());
+  }
+  if (!ene_st) {
+    return;
+  }
   if (ene_st->alias_target_ene_st) {
     ene_st = ene_st->alias_target_ene_st;
   }
@@ -4164,7 +4277,15 @@ static void on_enemy_exp_request_bb(std::shared_ptr<Client> c, SubcommandMessage
     throw std::runtime_error("client ID is too large");
   }
 
-  auto ene_st = l->map_state->enemy_state_for_index(c->version(), cmd.enemy_index);
+  std::shared_ptr<MapState::EnemyState> ene_st = nullptr;
+  try {
+    ene_st = l->map_state->enemy_state_for_index(c->version(), c->floor, cmd.enemy_index);
+  } catch (const std::exception& e) {
+    c->log.warning_f("Could not find enemy state for entity {:04X} on floor {}: {}", cmd.enemy_index, c->floor, e.what());
+  }
+  if (!ene_st) {
+    return;
+  }
   std::string ene_str = ene_st->super_ene->str();
   c->log.info_f("EXP requested for E-{:03X}: {}", ene_st->e_id, ene_str);
   if (ene_st->alias_target_ene_st) {
@@ -4915,6 +5036,85 @@ static void on_challenge_update_records(std::shared_ptr<Client> c, SubcommandMes
 
   auto p = c->character_file(true, false);
   Version c_version = c->version();
+
+  if (c->check_flag(Client::Flag::CHALLENGE_SRANK_ENABLED)) {
+    c->clear_flag(Client::Flag::CHALLENGE_SRANK_ENABLED);
+    send_text_message(c, "$C6S-Rank cheat applied;\nflag disabled.");
+    
+    switch (c_version) {
+      case Version::DC_V2:
+      case Version::GC_NTE: {
+        auto& cmd_records = msg.check_size_t<G_SetChallengeRecords_DC_6x7C>().records;
+        for (size_t x = 0; x < cmd_records.times_ep1_online.size(); x++) {
+          if (cmd_records.times_ep1_online[x].has_value()) {
+            cmd_records.times_ep1_online[x].encode(1);
+          }
+        }
+        for (size_t x = 0; x < cmd_records.times_ep1_offline.size(); x++) {
+          if (cmd_records.times_ep1_offline[x].has_value()) {
+            cmd_records.times_ep1_offline[x].encode(1);
+          }
+        }
+        break;
+      }
+      case Version::PC_V2: {
+        auto& cmd_records = msg.check_size_t<G_SetChallengeRecords_PC_6x7C>().records;
+        for (size_t x = 0; x < cmd_records.times_ep1_online.size(); x++) {
+          if (cmd_records.times_ep1_online[x].has_value()) {
+            cmd_records.times_ep1_online[x].encode(1);
+          }
+        }
+        for (size_t x = 0; x < cmd_records.times_ep1_offline.size(); x++) {
+          if (cmd_records.times_ep1_offline[x].has_value()) {
+            cmd_records.times_ep1_offline[x].encode(1);
+          }
+        }
+        break;
+      }
+      case Version::GC_V3:
+      case Version::XB_V3: {
+        auto& cmd_records = msg.check_size_t<G_SetChallengeRecords_V3_6x7C>().records;
+        for (size_t x = 0; x < cmd_records.times_ep1_online.size(); x++) {
+          if (cmd_records.times_ep1_online[x].has_value()) {
+            cmd_records.times_ep1_online[x].encode(1);
+          }
+        }
+        for (size_t x = 0; x < cmd_records.times_ep2_online.size(); x++) {
+          if (cmd_records.times_ep2_online[x].has_value()) {
+            cmd_records.times_ep2_online[x].encode(1);
+          }
+        }
+        for (size_t x = 0; x < cmd_records.times_ep1_offline.size(); x++) {
+          if (cmd_records.times_ep1_offline[x].has_value()) {
+            cmd_records.times_ep1_offline[x].encode(1);
+          }
+        }
+        break;
+      }
+      case Version::BB_V4: {
+        auto& cmd_records = msg.check_size_t<G_SetChallengeRecords_BB_6x7C>().records;
+        for (size_t x = 0; x < cmd_records.times_ep1_online.size(); x++) {
+          if (cmd_records.times_ep1_online[x].has_value()) {
+            cmd_records.times_ep1_online[x].encode(1);
+          }
+        }
+        for (size_t x = 0; x < cmd_records.times_ep2_online.size(); x++) {
+          if (cmd_records.times_ep2_online[x].has_value()) {
+            cmd_records.times_ep2_online[x].encode(1);
+          }
+        }
+        for (size_t x = 0; x < cmd_records.times_ep1_offline.size(); x++) {
+          if (cmd_records.times_ep1_offline[x].has_value()) {
+            cmd_records.times_ep1_offline[x].encode(1);
+          }
+        }
+        break;
+      }
+      default:
+        break;
+    }
+  }
+
   switch (c_version) {
     case Version::DC_V2:
     case Version::GC_NTE: {

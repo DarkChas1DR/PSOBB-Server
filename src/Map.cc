@@ -6173,6 +6173,7 @@ MapState::MapState(
       random_seed(random_seed),
       bb_rare_rates(bb_rare_rates),
       rare_monster_multiplier(rare_monster_multiplier) {
+  this->is_quest = true;
   FloorConfig& fc = this->floor_config_entries.emplace_back();
   fc.super_map = quest_map_def;
   this->index_super_map(fc, rand_crypt);
@@ -6338,6 +6339,20 @@ uint16_t MapState::index_for_object_state(Version version, std::shared_ptr<const
 }
 
 uint16_t MapState::index_for_enemy_state(Version version, std::shared_ptr<const EnemyState> ene_st) const {
+  if (this->is_quest) {
+    uint16_t actual_enemy_count = 0;
+    const auto& version_enemies = this->floor_config_entries[0].super_map->version(version).enemies;
+    for (const auto& ene : version_enemies) {
+      if (ene->type != EnemyType::NON_ENEMY_NPC) {
+        if (ene->super_id == ene_st->super_ene->super_id) {
+          return actual_enemy_count;
+        }
+        actual_enemy_count++;
+      }
+    }
+    return 0xFFFF;
+  }
+
   uint16_t relative_index = ene_st->super_ene->version(version).relative_enemy_index;
   return (relative_index == 0xFFFF)
       ? 0xFFFF
@@ -6345,6 +6360,20 @@ uint16_t MapState::index_for_enemy_state(Version version, std::shared_ptr<const 
 }
 
 uint16_t MapState::set_index_for_enemy_state(Version version, std::shared_ptr<const EnemyState> ene_st) const {
+  if (this->is_quest) {
+    uint16_t actual_set_count = 0;
+    const auto& version_enemy_sets = this->floor_config_entries[0].super_map->version(version).enemy_sets;
+    for (const auto& ene : version_enemy_sets) {
+      if (ene->type != EnemyType::NON_ENEMY_NPC) {
+        if (ene->super_id == ene_st->super_ene->super_id) {
+          return actual_set_count;
+        }
+        actual_set_count++;
+      }
+    }
+    return 0xFFFF;
+  }
+
   uint16_t relative_set_index = ene_st->super_ene->version(version).relative_set_index;
   return (relative_set_index == 0xFFFF)
       ? 0xFFFF
@@ -6385,6 +6414,10 @@ std::shared_ptr<MapState::ObjectState> MapState::object_state_for_index(Version 
 }
 
 std::shared_ptr<MapState::ObjectState> MapState::object_state_for_index(Version version, uint8_t floor, uint16_t object_index) {
+  if (this->is_quest) {
+    return this->object_state_for_index(version, object_index);
+  }
+
   size_t dynamic_obj_base_index = this->dynamic_obj_base_index_for_version.at(static_cast<size_t>(version));
   if (object_index < dynamic_obj_base_index) {
     const auto& fc = this->floor_config(floor);
@@ -6432,6 +6465,20 @@ std::vector<std::shared_ptr<MapState::ObjectState>> MapState::door_states_for_sw
 }
 
 std::shared_ptr<MapState::EnemyState> MapState::enemy_state_for_index(Version version, uint16_t enemy_index) {
+  if (this->is_quest) {
+    uint16_t actual_enemy_count = 0;
+    const auto& version_enemies = this->floor_config_entries[0].super_map->version(version).enemies;
+    for (const auto& ene : version_enemies) {
+      if (ene->type != EnemyType::NON_ENEMY_NPC) {
+        if (actual_enemy_count == enemy_index) {
+          return this->enemy_states.at(this->floor_config_entries[0].base_super_ids.base_enemy_index + ene->super_id);
+        }
+        actual_enemy_count++;
+      }
+    }
+    throw std::out_of_range("the specified quest enemy does not exist");
+  }
+
   int8_t floor;
   for (floor = this->floor_config_entries.size() - 1; floor >= 0; floor--) {
     const auto& fc = this->floor_config_entries[floor];
@@ -6448,6 +6495,10 @@ std::shared_ptr<MapState::EnemyState> MapState::enemy_state_for_index(Version ve
 }
 
 std::shared_ptr<MapState::EnemyState> MapState::enemy_state_for_index(Version version, uint8_t floor, uint16_t enemy_index) {
+  if (this->is_quest) {
+    return this->enemy_state_for_index(version, enemy_index);
+  }
+
   const auto& fc = this->floor_config(floor);
   size_t base_enemy_index = fc.base_indexes_for_version(version).base_enemy_index;
   if (enemy_index < base_enemy_index) {
@@ -6864,7 +6915,9 @@ void MapState::verify() const {
         continue;
       }
       size_t base_enemy_index = this->floor_config(ene->super_ene->floor).base_indexes_for_version(Version::BB_V4).base_enemy_index;
-      size_t enemy_index = base_enemy_index + ene->super_ene->version(Version::BB_V4).relative_enemy_index;
+      size_t enemy_index = this->is_quest
+          ? ene->super_ene->version(Version::BB_V4).relative_enemy_index
+          : (base_enemy_index + ene->super_ene->version(Version::BB_V4).relative_enemy_index);
       if (!remaining_bb_rare_indexes.erase(enemy_index)) {
         throw std::logic_error(std::format("BB random rare enemy index {:04X} not present in indexes set", enemy_index));
       }

@@ -951,6 +951,7 @@ public:
   phosg::PrefixedLogger log;
   std::array<uint8_t, 0x12> floor_to_area = {};
   std::vector<FloorConfig> floor_config_entries;
+  bool is_quest = false;
   Difficulty difficulty = Difficulty::NORMAL;
   uint8_t event = 0;
   uint32_t random_seed = 0;

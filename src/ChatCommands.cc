@@ -247,6 +247,145 @@ ChatCommandDefinition cc_ann_anonymous(
     +[](const Args& a) -> asio::awaitable<void> {
       return server_command_announce_inner(a, false, true);
     });
+
+ChatCommandDefinition cc_srank(
+    {"$srank"},
+    +[](const Args& a) -> asio::awaitable<void> {
+      a.check_account_flag(Account::Flag::DEBUG);
+
+      if (a.c->check_flag(Client::Flag::CHALLENGE_SRANK_ENABLED)) {
+        a.c->clear_flag(Client::Flag::CHALLENGE_SRANK_ENABLED);
+        send_text_message(a.c, "$C6Challenge S-Rank\ncheat disabled");
+      } else {
+        a.c->set_flag(Client::Flag::CHALLENGE_SRANK_ENABLED);
+        send_text_message(a.c, "$C6Challenge S-Rank\ncheat enabled");
+      }
+      co_return;
+    });
+
+ChatCommandDefinition cc_pb(
+    {"$pb"},
+    +[](const Args& a) -> asio::awaitable<void> {
+      a.check_account_flag(Account::Flag::DEBUG);
+      if (!a.c->proxy_session) {
+        a.check_is_game(true);
+      }
+      
+      auto l = a.c->require_lobby();
+      
+      G_SetPhotonBlastReadyFlag_6x39 cmd;
+      cmd.header = {0x39, sizeof(G_SetPhotonBlastReadyFlag_6x39) >> 2, a.c->lobby_client_id};
+      for (auto& lc : l->clients) {
+        if (lc) {
+          send_command_t(lc, 0x60, 0x00, cmd);
+        }
+      }
+      send_text_message(a.c, "$C6PB gauge set to 100%");
+      co_return;
+    });
+
+ChatCommandDefinition cc_sd(
+    {"$sd"},
+    +[](const Args& a) -> asio::awaitable<void> {
+      a.check_account_flag(Account::Flag::DEBUG);
+      if (!a.c->proxy_session) {
+        a.check_is_game(true);
+      }
+      
+      size_t level = 0;
+      try {
+        level = std::stoul(a.text);
+      } catch (const std::exception&) {
+        throw precondition_failed("$C6Usage: $sd <level>");
+      }
+      if (level < 1 || level > 81) {
+        throw precondition_failed("$C6Level must be between 1 and 81");
+      }
+
+      auto l = a.c->require_lobby();
+
+      G_AddOrRemoveStatusEffect_6x0C_6x0D cmd;
+      cmd.header = {0x0C, sizeof(G_AddOrRemoveStatusEffect_6x0C_6x0D) >> 2, a.c->lobby_client_id};
+      cmd.amount = static_cast<float>(level - 1);
+
+      // Shifta (09)
+      cmd.effect_type = 9;
+      if (!co_await send_protected_command(a.c, &cmd, sizeof(cmd), true)) {
+        for (auto& lc : l->clients) {
+          if (!lc) continue;
+          uint32_t sender_id = (lc == a.c) ? ((a.c->lobby_client_id + 1) % 4) : a.c->lobby_client_id;
+          send_command_t(lc, 0x60, sender_id, cmd);
+        }
+      }
+
+      // Deband (0A)
+      cmd.effect_type = 10;
+      if (!co_await send_protected_command(a.c, &cmd, sizeof(cmd), true)) {
+        for (auto& lc : l->clients) {
+          if (!lc) continue;
+          uint32_t sender_id = (lc == a.c) ? ((a.c->lobby_client_id + 1) % 4) : a.c->lobby_client_id;
+          send_command_t(lc, 0x60, sender_id, cmd);
+        }
+      }
+
+      send_text_message_fmt(a.c, "$C6Shifta & Deband Lv{} applied", level);
+      co_return;
+    });
+
+ChatCommandDefinition cc_sdall(
+    {"$sdall"},
+    +[](const Args& a) -> asio::awaitable<void> {
+      a.check_account_flag(Account::Flag::DEBUG);
+      if (!a.c->proxy_session) {
+        a.check_is_game(true);
+      }
+      
+      size_t level = 0;
+      try {
+        level = std::stoul(a.text);
+      } catch (const std::exception&) {
+        throw precondition_failed("$C6Usage: $sdall <level>");
+      }
+      if (level < 1 || level > 81) {
+        throw precondition_failed("$C6Level must be between 1 and 81");
+      }
+
+      auto l = a.c->require_lobby();
+      if (a.check_permissions && (l->leader_id != a.c->lobby_client_id)) {
+        throw precondition_failed("$C6Only the party leader\ncan run this command.");
+      }
+
+      for (auto& target_client : l->clients) {
+        if (!target_client) continue;
+
+        G_AddOrRemoveStatusEffect_6x0C_6x0D cmd;
+        cmd.header = {0x0C, sizeof(G_AddOrRemoveStatusEffect_6x0C_6x0D) >> 2, target_client->lobby_client_id};
+        cmd.amount = static_cast<float>(level - 1);
+
+        // Shifta (09)
+        cmd.effect_type = 9;
+        if (!co_await send_protected_command(target_client, &cmd, sizeof(cmd), true)) {
+          for (auto& lc : l->clients) {
+            if (!lc) continue;
+            uint32_t sender_id = (lc == target_client) ? ((target_client->lobby_client_id + 1) % 4) : target_client->lobby_client_id;
+            send_command_t(lc, 0x60, sender_id, cmd);
+          }
+        }
+
+        // Deband (0A)
+        cmd.effect_type = 10;
+        if (!co_await send_protected_command(target_client, &cmd, sizeof(cmd), true)) {
+          for (auto& lc : l->clients) {
+            if (!lc) continue;
+            uint32_t sender_id = (lc == target_client) ? ((target_client->lobby_client_id + 1) % 4) : target_client->lobby_client_id;
+            send_command_t(lc, 0x60, sender_id, cmd);
+          }
+        }
+      }
+
+      send_text_message_fmt(a.c, "$C6Shifta & Deband Lv{} applied to party", level);
+      co_return;
+    });
 ChatCommandDefinition cc_ann_mail_named(
     {"$ann!"},
     +[](const Args& a) -> asio::awaitable<void> {
