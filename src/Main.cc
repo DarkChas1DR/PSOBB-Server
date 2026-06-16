@@ -1505,7 +1505,7 @@ Action a_decode_gci(
       std::string seed = args.get<std::string>("seed");
       size_t num_threads = args.get<size_t>("threads", 0);
       bool skip_checksum = args.get<bool>("skip-checksum");
-      int64_t dec_seed = seed.empty() ? -1 : stoul(seed, nullptr, 16);
+      int64_t dec_seed = seed.empty() ? -1 : static_cast<int64_t>(stoul(seed, nullptr, 16));
       auto decoded = decode_gci_data(read_input_data(args), num_threads, dec_seed, skip_checksum);
       phosg::save_file(input_filename + ".dec", decoded);
     });
@@ -1518,7 +1518,7 @@ Action a_decode_vms(
       std::string seed = args.get<std::string>("seed");
       size_t num_threads = args.get<size_t>("threads", 0);
       bool skip_checksum = args.get<bool>("skip-checksum");
-      int64_t dec_seed = seed.empty() ? -1 : stoul(seed, nullptr, 16);
+      int64_t dec_seed = seed.empty() ? -1 : static_cast<int64_t>(stoul(seed, nullptr, 16));
       auto decoded = decode_vms_data(read_input_data(args), num_threads, dec_seed, skip_checksum);
       phosg::save_file(input_filename + ".dec", decoded);
     });
@@ -3689,7 +3689,7 @@ Action a_check_quests(
       uint64_t script_time = 0, map_time = 0;
       if (reassemble_scripts || reassemble_maps) {
         std::mutex output_lock;
-        auto check_vq = [&](const std::shared_ptr<const VersionedQuest>& vq, size_t) -> void {
+        auto check_vq = [&](const std::shared_ptr<const VersionedQuest>& vq, size_t) -> bool {
           if (reassemble_maps) {
             uint64_t start_time = phosg::now();
             auto dat = prs_decompress(*vq->dat_contents);
@@ -3795,6 +3795,7 @@ Action a_check_quests(
                 vq->meta.name,
                 phosg::format_duration(end_time - start_time));
           }
+          return true;
         };
 
         if (num_threads == 1) {
@@ -3832,8 +3833,9 @@ Action a_check_quests(
 Action a_test_shop_generation(
     "test-shop-generation", nullptr,
     +[](phosg::Arguments& args) {
-      auto s = std::make_shared<ServerState>(get_config_filename(args));
-      s->load_all(false);
+      auto data_index = std::make_shared<DataIndex>(get_config_filename(args));
+      data_index->load_all();
+      auto s = ServerState::create_shared(data_index, false);
 
       phosg::JSON tool_json = phosg::JSON::dict({
         {"CommonRecoveryTable", phosg::JSON::list({
@@ -3895,14 +3897,14 @@ Action a_test_shop_generation(
       auto rand_crypt = std::make_shared<PSOV2Encryption>(12345);
 
       ItemCreator creator(
-          s->common_item_set(Version::BB_V4, nullptr),
-          s->rare_item_set(Version::BB_V4, nullptr),
-          s->armor_random_set,
+          s->data->common_item_set(Version::BB_V4, nullptr),
+          s->data->rare_item_set(Version::BB_V4, nullptr),
+          s->data->armor_random_set,
           custom_tool_set,
-          s->weapon_random_set(Difficulty::NORMAL),
-          s->tekker_adjustment_set,
-          s->item_parameter_table(Version::BB_V4),
-          s->item_stack_limits(Version::BB_V4),
+          s->data->weapon_random_set(Difficulty::NORMAL),
+          s->data->tekker_adjustment_set,
+          s->data->item_parameter_table(Version::BB_V4),
+          s->data->item_stack_limits(Version::BB_V4),
           GameMode::NORMAL,
           Difficulty::NORMAL,
           0,
@@ -4026,8 +4028,9 @@ Action a_test_shop_safety(
       }
 
       // Part 2 & 3 need the static game data (item parameters, prices, etc.).
-      auto s = std::make_shared<ServerState>(get_config_filename(args));
-      s->load_all(false);
+      auto data_index = std::make_shared<DataIndex>(get_config_filename(args));
+      data_index->load_all();
+      auto s = ServerState::create_shared(data_index, false);
       auto rand_crypt = std::make_shared<PSOV2Encryption>(12345);
 
       // Part 2: weapon generation against empty bonus/special tables must not
@@ -4075,14 +4078,14 @@ Action a_test_shop_safety(
 
         auto custom_weapon_set = std::make_shared<WeaponShopRandomSet>(weapon_json);
         ItemCreator creator(
-            s->common_item_set(Version::BB_V4, nullptr),
-            s->rare_item_set(Version::BB_V4, nullptr),
-            s->armor_random_set,
-            s->tool_random_set,
+            s->data->common_item_set(Version::BB_V4, nullptr),
+            s->data->rare_item_set(Version::BB_V4, nullptr),
+            s->data->armor_random_set,
+            s->data->tool_random_set,
             custom_weapon_set,
-            s->tekker_adjustment_set,
-            s->item_parameter_table(Version::BB_V4),
-            s->item_stack_limits(Version::BB_V4),
+            s->data->tekker_adjustment_set,
+            s->data->item_parameter_table(Version::BB_V4),
+            s->data->item_stack_limits(Version::BB_V4),
             GameMode::NORMAL,
             Difficulty::NORMAL,
             0,
@@ -4119,14 +4122,14 @@ Action a_test_shop_safety(
 
         auto custom_tool_set = std::make_shared<ToolShopRandomSet>(tool_json);
         ItemCreator creator(
-            s->common_item_set(Version::BB_V4, nullptr),
-            s->rare_item_set(Version::BB_V4, nullptr),
-            s->armor_random_set,
+            s->data->common_item_set(Version::BB_V4, nullptr),
+            s->data->rare_item_set(Version::BB_V4, nullptr),
+            s->data->armor_random_set,
             custom_tool_set,
-            s->weapon_random_set(Difficulty::NORMAL),
-            s->tekker_adjustment_set,
-            s->item_parameter_table(Version::BB_V4),
-            s->item_stack_limits(Version::BB_V4),
+            s->data->weapon_random_set(Difficulty::NORMAL),
+            s->data->tekker_adjustment_set,
+            s->data->item_parameter_table(Version::BB_V4),
+            s->data->item_stack_limits(Version::BB_V4),
             GameMode::NORMAL,
             Difficulty::NORMAL,
             0,

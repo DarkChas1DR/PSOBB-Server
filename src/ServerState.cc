@@ -140,7 +140,9 @@ void ServerState::add_client_to_available_lobby(std::shared_ptr<Client> c, bool 
     c->log.info_f("Created and joined lobby {:08X}", added_to_lobby->lobby_id);
   }
 
-  c->lobby_client_id = added_to_lobby->client_id_for_client(c);
+  if (added_to_lobby) {
+    this->send_lobby_join_notifications(added_to_lobby, c);
+  }
 }
 
 void ServerState::remove_client_from_lobby(std::shared_ptr<Client> c) {
@@ -186,6 +188,16 @@ bool ServerState::change_client_lobby(
 }
 
 void ServerState::send_lobby_join_notifications(std::shared_ptr<Lobby> l, std::shared_ptr<Client> joining_client) {
+  for (auto& other_client : l->clients) {
+    if (!other_client) {
+      continue;
+    } else if (other_client == joining_client) {
+      send_join_lobby(joining_client, l);
+    } else {
+      send_player_join_notification(other_client, l, joining_client);
+    }
+  }
+
   for (auto& watcher_l : l->watcher_lobbies) {
     for (auto& watcher_c : watcher_l->clients) {
       if (!watcher_c) {

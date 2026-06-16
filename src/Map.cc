@@ -4699,7 +4699,10 @@ std::shared_ptr<SuperMap::Enemy> SuperMap::add_enemy_and_children(
       } else if (area < 0x24) {
         add(EnemyType::GAL_GRYPHON);
       } else {
-        throw std::runtime_error("DRAGON placed outside of Episode 1 or 2");
+        // area >= 0x24 is EP4 range; Gal Gryphon only appears in EP2 (0x12-0x23).
+        // Treat 0x00C0 in EP4-range areas as DRAGON (may be a custom/quest map).
+        this->log.warning_f("DRAGON/GAL_GRYPHON (0x00C0) on floor {} has EP4 area 0x{:02X}; defaulting to DRAGON", floor, area);
+        add(EnemyType::DRAGON);
       }
       break;
     }

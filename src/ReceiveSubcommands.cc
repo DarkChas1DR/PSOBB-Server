@@ -3844,7 +3844,9 @@ static void on_dragon_actions_6x12(std::shared_ptr<Client> c, SubcommandMessage&
 
   if (ene_st) {
     if (ene_st->super_ene->type != EnemyType::DRAGON) {
-      throw std::runtime_error("6x12 command sent for incorrect enemy type");
+      c->log.warning_f("6x12 command sent for enemy type {} (expected DRAGON); forwarding anyway",
+          phosg::name_for_enum(ene_st->super_ene->type));
+      ene_st = nullptr; // forward as-is, same as when ene_st is unknown
     }
     if (ene_st->alias_target_ene_st) {
       throw std::runtime_error("DRAGON enemy is an alias");

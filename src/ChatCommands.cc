@@ -3451,7 +3451,7 @@ ChatCommandDefinition cc_partyinfo(
       std::string sec_id_name = name_for_section_id(effective_section_id);
 
       bool apply_rdr_boost = (s->current_event() == ServerState::RotatingEvent::RDR_BOOST);
-      double base_rdr = s->server_global_drop_rate_multiplier * (apply_rdr_boost ? 1.25 : 1.0);
+      double base_rdr = s->data->server_global_drop_rate_multiplier * (apply_rdr_boost ? 1.25 : 1.0);
 
       std::string msg = std::format("$C7EXP: $C6{:g}%%$C7 | $C7DAR: $C6{:g}%%$C7\n$C7RDR: ",
           exp_rate, dar_rate);
