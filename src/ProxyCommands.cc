@@ -957,23 +957,24 @@ static asio::awaitable<HandlerResult> SC_6x60_6xA2(std::shared_ptr<Client> c, Ch
   auto rec = reconcile_drop_request_with_map(
       c, cmd, c->proxy_session->lobby_difficulty, c->proxy_session->lobby_event, c->proxy_session->map_state, false);
 
+  auto s = c->require_server_state();
   ItemCreator::DropResult res;
   if (rec.obj_st) {
     if (rec.ignore_def) {
       c->log.info_f("Creating item from box {:04X} (area {:02X})", cmd.entity_index, cmd.effective_area);
       res = c->proxy_session->item_creator->on_box_item_drop(
-          cmd.effective_area, c->check_flag(Client::Flag::ALL_RARES_ENABLED));
+          cmd.effective_area, c->check_flag(Client::Flag::ALL_RARES_ENABLED), s->happy_hour_multiplier());
     } else {
       c->log.info_f("Creating item from box {:04X} (area {:02X}; specialized with {:g} {:08X} {:08X} {:08X})",
           cmd.entity_index, cmd.effective_area,
           cmd.param3, cmd.param4, cmd.param5, cmd.param6);
       res = c->proxy_session->item_creator->on_specialized_box_item_drop(
-          cmd.effective_area, cmd.param3, cmd.param4, cmd.param5, cmd.param6);
+          cmd.effective_area, cmd.param3, cmd.param4, cmd.param5, cmd.param6, s->happy_hour_multiplier());
     }
   } else {
     c->log.info_f("Creating item from enemy {:04X} (area {:02X})", cmd.entity_index, cmd.effective_area);
     res = c->proxy_session->item_creator->on_monster_item_drop(
-        rec.effective_enemy_type, cmd.effective_area, c->check_flag(Client::Flag::ALL_RARES_ENABLED));
+        rec.effective_enemy_type, cmd.effective_area, c->check_flag(Client::Flag::ALL_RARES_ENABLED), s->happy_hour_multiplier());
   }
 
   if (res.item.empty()) {

@@ -4,6 +4,7 @@
 
 #include <filesystem>
 #include <memory>
+#include <random>
 #include <phosg/Filesystem.hh>
 #include <phosg/Image.hh>
 #include <phosg/Network.hh>
@@ -82,7 +83,69 @@ void ServerState::reload_config() {
   try {
     this->event_changer_mode = this->data->config_json->get_string("EventChangerMode", "none");
   } catch (const std::out_of_range&) {}
+
+  try {
+    const auto& hh = this->data->config_json->get_dict("HappyHour");
+    this->happy_hour_enabled = hh.at("Enabled")->as_bool();
+    this->happy_hour_min_multiplier = hh.at("MinDropMultiplier")->as_float();
+    this->happy_hour_max_multiplier = hh.at("MaxDropMultiplier")->as_float();
+  } catch (const std::out_of_range&) {}
+
+  try {
+    const auto& ph = this->data->config_json->get_dict("PartyHour");
+    this->party_hour_enabled = ph.at("Enabled")->as_bool();
+    this->party_hour_min_multiplier = ph.at("MinEXPMultiplier")->as_float();
+    this->party_hour_max_multiplier = ph.at("MaxEXPMultiplier")->as_float();
+  } catch (const std::out_of_range&) {}
+
+  try {
+    this->hour_event_interval_seconds = this->data->config_json->get_int("HourEventIntervalSeconds", 18000);
+  } catch (const std::out_of_range&) {}
+  try {
+    this->hour_event_duration_seconds = this->data->config_json->get_int("HourEventDurationSeconds", 5400);
+  } catch (const std::out_of_range&) {}
 }
+
+float ServerState::happy_hour_multiplier() const {
+  if (!this->happy_hour_enabled) {
+    return 1.0f;
+  }
+  uint64_t t = time(nullptr);
+  uint64_t interval = this->hour_event_interval_seconds;
+  uint64_t duration = this->hour_event_duration_seconds;
+  if (interval == 0 || duration == 0) {
+    return 1.0f;
+  }
+  uint64_t cycle_start = t - (t % interval);
+  uint64_t cycle_end = cycle_start + duration;
+  if (t >= cycle_start && t < cycle_end) {
+    std::mt19937 prng(cycle_start);
+    std::uniform_real_distribution<float> dist(this->happy_hour_min_multiplier, this->happy_hour_max_multiplier);
+    return dist(prng);
+  }
+  return 1.0f;
+}
+
+float ServerState::party_hour_multiplier() const {
+  if (!this->party_hour_enabled) {
+    return 1.0f;
+  }
+  uint64_t t = time(nullptr);
+  uint64_t interval = this->hour_event_interval_seconds;
+  uint64_t duration = this->hour_event_duration_seconds;
+  if (interval == 0 || duration == 0) {
+    return 1.0f;
+  }
+  uint64_t cycle_start = t - (t % interval);
+  uint64_t cycle_end = cycle_start + duration;
+  if (t >= cycle_start && t < cycle_end) {
+    std::mt19937 prng(cycle_start + 1);
+    std::uniform_real_distribution<float> dist(this->party_hour_min_multiplier, this->party_hour_max_multiplier);
+    return dist(prng);
+  }
+  return 1.0f;
+}
+
 
 void ServerState::add_client_to_available_lobby(std::shared_ptr<Client> c, bool allow_games) {
   std::shared_ptr<Lobby> added_to_lobby;

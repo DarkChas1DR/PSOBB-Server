@@ -1,4 +1,5 @@
 #include "ChatCommands.hh"
+#include <ctime>
 
 #include <ctype.h>
 #include <string.h>
@@ -3439,7 +3440,7 @@ ChatCommandDefinition cc_partyinfo(
       auto s = a.c->require_server_state();
 
       bool is_challenge = (l->mode == GameMode::SOLO) ? false : (l->mode == GameMode::CHALLENGE);
-      double lobby_mult = is_challenge ? l->challenge_exp_multiplier : l->base_exp_multiplier;
+      double lobby_mult = is_challenge ? l->challenge_exp_multiplier : (l->base_exp_multiplier * s->party_hour_multiplier());
       Episode episode = l->episode;
       double episode_mult = (episode == Episode::EP2) ? 1.3 : 1.0;
       double exp_rate = lobby_mult * episode_mult * 100.0;
@@ -3451,7 +3452,7 @@ ChatCommandDefinition cc_partyinfo(
       std::string sec_id_name = name_for_section_id(effective_section_id);
 
       bool apply_rdr_boost = (s->current_event() == ServerState::RotatingEvent::RDR_BOOST);
-      double base_rdr = s->data->server_global_drop_rate_multiplier * (apply_rdr_boost ? 1.25 : 1.0);
+      double base_rdr = s->data->server_global_drop_rate_multiplier * (apply_rdr_boost ? 1.25 : 1.0) * s->happy_hour_multiplier();
 
       std::string msg = std::format("$C7EXP: $C6{:g}%%$C7 | $C7DAR: $C6{:g}%%$C7\n$C7RDR: ",
           exp_rate, dar_rate);
@@ -3542,6 +3543,89 @@ ChatCommandDefinition cc_showwep(
             }
           }
         }
+      }
+      co_return;
+    });
+
+static std::string format_duration(uint64_t seconds) {
+  uint64_t h = seconds / 3600;
+  uint64_t m = (seconds % 3600) / 60;
+  uint64_t s = seconds % 60;
+  if (h > 0) {
+    return std::format("{}h {}m {}s", h, m, s);
+  } else if (m > 0) {
+    return std::format("{}m {}s", m, s);
+  } else {
+    return std::format("{}s", s);
+  }
+}
+
+ChatCommandDefinition cc_happyhour(
+    {"$happyhour"},
+    +[](const Args& a) -> asio::awaitable<void> {
+      a.check_is_proxy(false);
+      auto s = a.c->require_server_state();
+
+      if (!s->happy_hour_enabled) {
+        send_text_message(a.c, "$C7Happy Hour is disabled on this server.");
+        co_return;
+      }
+
+      uint64_t t = time(nullptr);
+      uint64_t interval = s->hour_event_interval_seconds;
+      uint64_t duration = s->hour_event_duration_seconds;
+      if (interval == 0 || duration == 0) {
+        send_text_message(a.c, "$C7Happy Hour event schedule is misconfigured.");
+        co_return;
+      }
+
+      uint64_t cycle_start = t - (t % interval);
+      uint64_t cycle_end = cycle_start + duration;
+      if (t >= cycle_start && t < cycle_end) {
+        float mult = s->happy_hour_multiplier();
+        uint64_t seconds_left = cycle_end - t;
+        std::string time_str = format_duration(seconds_left);
+        send_text_message_fmt(a.c, "$C7Happy Hour is $C6ACTIVE$C7! Rare drops: $C6{:.2f}x$C7 ({} left)", mult, time_str);
+      } else {
+        uint64_t next_start = cycle_start + interval;
+        uint64_t seconds_until = next_start - t;
+        std::string time_str = format_duration(seconds_until);
+        send_text_message_fmt(a.c, "$C7Happy Hour is $C6INACTIVE$C7. Next event starts in {}", time_str);
+      }
+      co_return;
+    });
+
+ChatCommandDefinition cc_partyhour(
+    {"$partyhour"},
+    +[](const Args& a) -> asio::awaitable<void> {
+      a.check_is_proxy(false);
+      auto s = a.c->require_server_state();
+
+      if (!s->party_hour_enabled) {
+        send_text_message(a.c, "$C7Party Hour is disabled on this server.");
+        co_return;
+      }
+
+      uint64_t t = time(nullptr);
+      uint64_t interval = s->hour_event_interval_seconds;
+      uint64_t duration = s->hour_event_duration_seconds;
+      if (interval == 0 || duration == 0) {
+        send_text_message(a.c, "$C7Party Hour event schedule is misconfigured.");
+        co_return;
+      }
+
+      uint64_t cycle_start = t - (t % interval);
+      uint64_t cycle_end = cycle_start + duration;
+      if (t >= cycle_start && t < cycle_end) {
+        float mult = s->party_hour_multiplier();
+        uint64_t seconds_left = cycle_end - t;
+        std::string time_str = format_duration(seconds_left);
+        send_text_message_fmt(a.c, "$C7Party Hour is $C6ACTIVE$C7! EXP rate: $C6{:.2f}x$C7 ({} left)", mult, time_str);
+      } else {
+        uint64_t next_start = cycle_start + interval;
+        uint64_t seconds_until = next_start - t;
+        std::string time_str = format_duration(seconds_until);
+        send_text_message_fmt(a.c, "$C7Party Hour is $C6INACTIVE$C7. Next event starts in {}", time_str);
       }
       co_return;
     });

@@ -3052,7 +3052,7 @@ static void on_entity_drop_item_request(std::shared_ptr<Client> c, SubcommandMes
   if (rec.should_drop) {
     auto generate_item_for_client = [&](std::shared_ptr<Client> c) -> ItemCreator::DropResult {
       bool force_rare = c->check_flag(Client::Flag::ALL_RARES_ENABLED);
-      double rdr_multiplier = 1.0;
+      double rdr_multiplier = s->happy_hour_multiplier();
       if (is_v4(c->version()) && c->login && c->login->account && !c->login->account->check_user_flag(Account::UserFlag::DISABLE_DAILY_FORECAST_LUCK)) {
         auto player = c->character_file(false, false);
         if (player) {
@@ -4331,7 +4331,7 @@ static void on_enemy_exp_request_bb(std::shared_ptr<Client> c, SubcommandMessage
   // edit the BattleParamEntry files so the monsters would all give more EXP, but they did something far lazier
   // instead: they just stuck an if statement in the client's EXP request function. We, unfortunately, have to do
   // the same thing here.
-  double lobby_mult = is_challenge ? l->challenge_exp_multiplier : l->base_exp_multiplier;
+  double lobby_mult = is_challenge ? l->challenge_exp_multiplier : (l->base_exp_multiplier * s->party_hour_multiplier());
   double episode_mult = (episode == Episode::EP2) ? 1.3 : 1.0;
   int32_t full_exp = std::max<int32_t>(0, base_exp * std::max<double>(1.0, share_mult) * lobby_mult * episode_mult);
   int32_t tag_exp = std::max<int32_t>(0, base_exp * std::max<double>(0.8, share_mult) * lobby_mult * episode_mult);

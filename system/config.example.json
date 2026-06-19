@@ -1427,4 +1427,29 @@
     "songcount":      [0x03, 0x07C00000], // Song count
     "wrappingpapers": [0x0B, 0x1FF00000], // Wrapping Papers
   },
+
+  // Happy Hour: periodically boosts rare drop rates. Every HourEventIntervalSeconds, Happy Hour activates for
+  // HourEventDurationSeconds, during which rare drop rates are multiplied by a random amount between MinDropMultiplier
+  // and MaxDropMultiplier (chosen fresh each event). Use $happyhour in-game to check status.
+  "HappyHour": {
+    "Enabled": true,
+    "MinDropMultiplier": 1.1,
+    "MaxDropMultiplier": 3.5
+  },
+
+  // Party Hour: periodically boosts EXP rates (same schedule as Happy Hour). EXP gained is multiplied by a random
+  // amount between MinEXPMultiplier and MaxEXPMultiplier (chosen fresh each event). Use $partyhour in-game to check
+  // status. The effective EXP multiplier is the Party Hour multiplier multiplied on top of BBGlobalEXPMultiplier (or
+  // the base EXP rate for non-BB versions). Only applies to non-challenge games.
+  "PartyHour": {
+    "Enabled": true,
+    "MinEXPMultiplier": 1.0,
+    "MaxEXPMultiplier": 10.0
+  },
+
+  // Shared schedule for Happy Hour and Party Hour events. Both events activate and deactivate at the same time, but
+  // each rolls its own independent random multiplier on activation.
+  "HourEventIntervalSeconds": 18000,  // 5 hours between event starts
+  "HourEventDurationSeconds": 5400   // 1.5 hours each event lasts
 }
+

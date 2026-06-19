@@ -77,6 +77,21 @@ public:
   float event_exp_multiplier() const;
   void reload_config();
 
+  bool happy_hour_enabled = true;
+  float happy_hour_min_multiplier = 1.1f;
+  float happy_hour_max_multiplier = 3.5f;
+
+  bool party_hour_enabled = true;
+  float party_hour_min_multiplier = 1.0f;
+  float party_hour_max_multiplier = 10.0f;
+
+  uint64_t hour_event_interval_seconds = 18000;
+  uint64_t hour_event_duration_seconds = 5400;
+
+  float happy_hour_multiplier() const;
+  float party_hour_multiplier() const;
+
+
   std::shared_ptr<Episode3::TournamentIndex> ep3_tournament_index;
 
   std::shared_ptr<AccountIndex> account_index;
