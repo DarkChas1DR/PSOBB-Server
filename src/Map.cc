@@ -5562,10 +5562,10 @@ std::shared_ptr<const SuperMap::Enemy> SuperMap::enemy_for_floor_type(Version ve
   size_t start_z = entities.enemy_floor_start_indexes.at(floor);
   size_t end_z = (floor < entities.enemy_floor_start_indexes.size() - 1)
       ? entities.enemy_floor_start_indexes[floor + 1]
-      : entities.enemy_floor_start_indexes.size();
+      : entities.enemies.size();
   for (size_t z = start_z; z < end_z; z++) {
     auto& ene = entities.enemies[z];
-    if ((ene->floor == floor) || (ene->type == type)) {
+    if ((ene->floor == floor) && (ene->type == type)) {
       return ene;
     }
   }

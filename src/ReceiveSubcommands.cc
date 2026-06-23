@@ -748,9 +748,11 @@ static void on_sync_joining_player_quest_flags_t(std::shared_ptr<Client> c, Subc
   if (l->is_game() && l->any_client_loading() && (l->leader_id == c->lobby_client_id)) {
     l->quest_flags_known = nullptr; // All quest flags are now known
     l->quest_flag_values = std::make_unique<QuestFlags>(cmd.quest_flags);
-    auto target = l->clients.at(msg.flag);
-    if (target) {
-      send_game_flag_state(target);
+    if (msg.flag < l->clients.size()) {
+      auto target = l->clients.at(msg.flag);
+      if (target) {
+        send_game_flag_state(target);
+      }
     }
   }
 }
@@ -1427,6 +1429,9 @@ static void on_ep3_trade_card_counts(std::shared_ptr<Client> c, SubcommandMessag
   if (!l->is_game() || !l->is_ep3()) {
     return;
   }
+  if (msg.flag >= l->clients.size()) {
+    return;
+  }
   auto target = l->clients.at(msg.flag);
   if (!target || !target->check_flag(Client::Flag::EP3_ALLOW_6xBC)) {
     return;
@@ -1985,7 +1990,7 @@ static void on_create_inventory_item_t(std::shared_ptr<Client> c, SubcommandMess
   auto s = c->require_server_state();
   if (cmd.header.client_id != c->lobby_client_id) {
     // Don't allow creating items in other players' inventories, only in NPCs'
-    if (l->clients.at(cmd.header.client_id)) {
+    if (cmd.header.client_id < l->clients.size() && l->clients.at(cmd.header.client_id)) {
       return;
     }
 
@@ -3848,7 +3853,7 @@ static void on_dragon_actions_6x12(std::shared_ptr<Client> c, SubcommandMessage&
           phosg::name_for_enum(ene_st->super_ene->type));
       ene_st = nullptr; // forward as-is, same as when ene_st is unknown
     }
-    if (ene_st->alias_target_ene_st) {
+    if (ene_st && ene_st->alias_target_ene_st) {
       throw std::runtime_error("DRAGON enemy is an alias");
     }
   }
@@ -3897,9 +3902,11 @@ static void on_gol_dragon_actions(std::shared_ptr<Client> c, SubcommandMessage& 
 
   if (ene_st) {
     if (ene_st->super_ene->type != EnemyType::GOL_DRAGON) {
-      throw std::runtime_error("6xA8 command sent for incorrect enemy type");
+      c->log.warning_f("6xA8 command sent for enemy type {} (expected GOL_DRAGON); forwarding anyway",
+          phosg::name_for_enum(ene_st->super_ene->type));
+      ene_st = nullptr; // forward as-is, same as when ene_st is unknown
     }
-    if (ene_st->alias_target_ene_st) {
+    if (ene_st && ene_st->alias_target_ene_st) {
       throw std::runtime_error("GOL_DRAGON enemy is an alias");
     }
   }
@@ -3972,12 +3979,14 @@ static void on_set_entity_pos_and_angle_6x17(std::shared_ptr<Client> c, Subcomma
   // 6x17 is used to transport players to the other part of the Vol Opt boss arena, so phase 2 can begin. We only allow
   // 6x17 in the Monitor Room (Vol Opt arena).
   if (l->area_for_floor(c->version(), c->floor) != 0x0D) {
-    throw std::runtime_error("client sent 6x17 command in area other than Vol Opt");
+    c->log.warning_f("client sent 6x17 command in area other than Vol Opt (area={:02X}); dropping",
+        l->area_for_floor(c->version(), c->floor));
+    return;
   }
 
   // If the target is on a different floor or does not exist, just drop the command instead of raising; this could have
   // been due to a data race
-  if (cmd.header.entity_id < 0x1000) {
+  if (cmd.header.entity_id < l->clients.size()) {
     auto target = l->clients.at(cmd.header.entity_id);
     if (!target || target->floor != c->floor) {
       return;
@@ -3999,19 +4008,27 @@ static void on_set_boss_warp_flags_6x6A(std::shared_ptr<Client> c, SubcommandMes
     return;
   }
   if (cmd.header.entity_id < 0x4000) {
-    throw std::runtime_error("6x6A sent for non-object entity");
+    c->log.warning_f("6x6A sent for non-object entity {:04X}; dropping", cmd.header.entity_id.load());
+    return;
   }
 
   auto obj_st = l->map_state->object_state_for_index(c->version(), c->floor, cmd.header.entity_id - 0x4000);
   if (!obj_st->super_obj) {
-    throw std::runtime_error("missing object for 6x6A command");
+    c->log.warning_f("6x6A: missing object for entity {:04X}; forwarding anyway", cmd.header.entity_id.load());
+    send_command(c, msg.command, msg.flag, msg.data, msg.size);
+    return;
   }
   auto set_entry = obj_st->super_obj->version(c->version()).set_entry;
   if (!set_entry) {
-    throw std::runtime_error("missing set entry for 6x6A command");
+    c->log.warning_f("6x6A: missing set entry for entity {:04X}; forwarding anyway", cmd.header.entity_id.load());
+    send_command(c, msg.command, msg.flag, msg.data, msg.size);
+    return;
   }
   if (set_entry->base_type != 0x0019 && set_entry->base_type != 0x0055) {
-    throw std::runtime_error("incorrect object type for 6x6A command");
+    c->log.warning_f("6x6A: incorrect object type {:04X} for entity {:04X}; forwarding anyway",
+        set_entry->base_type, cmd.header.entity_id.load());
+    send_command(c, msg.command, msg.flag, msg.data, msg.size);
+    return;
   }
 
   forward_subcommand_with_entity_id_transcode_t<G_SetBossWarpFlags_6x6A>(c, msg);
@@ -4894,6 +4911,9 @@ static void on_battle_level_up_bb(std::shared_ptr<Client> c, SubcommandMessage& 
     throw std::runtime_error("client requested incorrect level count");
   }
 
+  if (cmd.header.client_id >= l->clients.size()) {
+    return;
+  }
   auto lc = l->clients.at(cmd.header.client_id);
   if (lc) {
     auto s = c->require_server_state();
@@ -4931,6 +4951,9 @@ static void on_battle_tech_level_up(std::shared_ptr<Client> c, SubcommandMessage
     throw std::runtime_error("client requested incorrect technique level count");
   }
 
+  if (cmd.header.client_id >= l->clients.size()) {
+    return;
+  }
   auto lc = l->clients.at(cmd.header.client_id);
   if (lc) {
     auto s = c->require_server_state();
