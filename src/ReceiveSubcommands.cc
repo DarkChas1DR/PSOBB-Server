@@ -1787,47 +1787,60 @@ static void on_switch_state_changed(std::shared_ptr<Client> c, SubcommandMessage
       (cmd.header.entity_id != 0xFFFF) &&
       (cmd.switch_flag_num < 0x100) &&
       c->check_flag(Client::Flag::SWITCH_ASSIST_ENABLED)) {
-    auto sw_obj_st = l->map_state->object_state_for_index(c->version(), cmd.switch_flag_floor, cmd.header.entity_id - 0x4000);
-    c->log.info_f("Switch assist triggered by K-{:03X} setting SW-{:02X}-{:02X}",
-        sw_obj_st->k_id, cmd.switch_flag_floor, cmd.switch_flag_num);
-    for (auto obj_st : l->map_state->door_states_for_switch_flag(c->version(), cmd.switch_flag_floor, cmd.switch_flag_num)) {
-      if (obj_st->game_flags & 0x0001) {
-        c->log.info_f("K-{:03X} is already unlocked", obj_st->k_id);
-        continue;
-      }
-      if (c->check_flag(Client::Flag::DEBUG_ENABLED)) {
-        send_text_message_fmt(c, "$C5SWA K-{:03X} {:02X} {:02X}",
-            obj_st->k_id, cmd.switch_flag_floor, cmd.switch_flag_num);
-      }
-      obj_st->game_flags |= 1;
-
-      for (auto lc : l->clients) {
-        if (!lc) {
+    std::shared_ptr<MapState::ObjectState> sw_obj_st = nullptr;
+    try {
+      sw_obj_st = l->map_state->object_state_for_index(c->version(), cmd.switch_flag_floor, cmd.header.entity_id - 0x4000);
+    } catch (const std::exception& e) {
+      c->log.warning_f("Switch assist: Could not find object state for entity {:04X} on floor {}: {}",
+          cmd.header.entity_id.load(), cmd.switch_flag_floor, e.what());
+    }
+    if (sw_obj_st) {
+      c->log.info_f("Switch assist triggered by K-{:03X} setting SW-{:02X}-{:02X}",
+          sw_obj_st->k_id, cmd.switch_flag_floor, cmd.switch_flag_num);
+      for (auto obj_st : l->map_state->door_states_for_switch_flag(c->version(), cmd.switch_flag_floor, cmd.switch_flag_num)) {
+        if (obj_st->game_flags & 0x0001) {
+          c->log.info_f("K-{:03X} is already unlocked", obj_st->k_id);
           continue;
         }
-        uint16_t object_index = l->map_state->index_for_object_state(lc->version(), obj_st);
-        lc->log.info_f("Switch assist: door object K-{:03X} has index {:04X} on version {}",
-            obj_st->k_id, object_index, phosg::name_for_enum(lc->version()));
-        if (object_index != 0xFFFF) {
-          G_UpdateObjectState_6x0B cmd0B;
-          cmd0B.header.subcommand = 0x0B;
-          cmd0B.header.size = sizeof(cmd0B) / 4;
-          cmd0B.header.entity_id = object_index | 0x4000;
-          cmd0B.flags = obj_st->game_flags;
-          cmd0B.object_index = object_index;
-          send_command_t(l, 0x60, 0x00, cmd0B);
+        if (c->check_flag(Client::Flag::DEBUG_ENABLED)) {
+          send_text_message_fmt(c, "$C5SWA K-{:03X} {:02X} {:02X}",
+              obj_st->k_id, cmd.switch_flag_floor, cmd.switch_flag_num);
+        }
+        obj_st->game_flags |= 1;
+
+        for (auto lc : l->clients) {
+          if (!lc) {
+            continue;
+          }
+          uint16_t object_index = l->map_state->index_for_object_state(lc->version(), obj_st);
+          lc->log.info_f("Switch assist: door object K-{:03X} has index {:04X} on version {}",
+              obj_st->k_id, object_index, phosg::name_for_enum(lc->version()));
+          if (object_index != 0xFFFF) {
+            G_UpdateObjectState_6x0B cmd0B;
+            cmd0B.header.subcommand = 0x0B;
+            cmd0B.header.size = sizeof(cmd0B) / 4;
+            cmd0B.header.entity_id = object_index | 0x4000;
+            cmd0B.flags = obj_st->game_flags;
+            cmd0B.object_index = object_index;
+            send_command_t(l, 0x60, 0x00, cmd0B);
+          }
         }
       }
     }
   }
 
   if (cmd.header.entity_id != 0xFFFF && c->check_flag(Client::Flag::DEBUG_ENABLED)) {
-    const auto& obj_st = l->map_state->object_state_for_index(
-        c->version(), cmd.switch_flag_floor, cmd.header.entity_id - 0x4000);
-    auto s = c->require_server_state();
-    uint8_t area = l->area_for_floor(c->version(), c->floor);
-    auto type_name = obj_st->type_name(c->version(), area);
-    send_text_message_fmt(c, "$C5K-{:03X} A {}", obj_st->k_id, type_name);
+    try {
+      const auto& obj_st = l->map_state->object_state_for_index(
+          c->version(), cmd.switch_flag_floor, cmd.header.entity_id - 0x4000);
+      auto s = c->require_server_state();
+      uint8_t area = l->area_for_floor(c->version(), c->floor);
+      auto type_name = obj_st->type_name(c->version(), area);
+      send_text_message_fmt(c, "$C5K-{:03X} A {}", obj_st->k_id, type_name);
+    } catch (const std::exception& e) {
+      c->log.warning_f("Debug: Could not find object state for entity {:04X} on floor {}: {}",
+          cmd.header.entity_id.load(), cmd.switch_flag_floor, e.what());
+    }
   }
 
   // Apparently sometimes 6x05 is sent with an invalid switch flag number. The client seems to just ignore the command
@@ -3253,8 +3266,8 @@ static void on_set_quest_flag(std::shared_ptr<Client> c, SubcommandMessage& msg)
               c->floor, ene_st->super_ene->floor);
         }
         l->log.info_f("Found enemy E-{:03X} at index {:04X} on floor {:X}", ene_st->e_id, enemy_index, ene_st->super_ene->floor);
-      } catch (const std::out_of_range&) {
-        l->log.warning_f("Could not find enemy on floor {:X}; unable to determine enemy type", c->floor);
+      } catch (const std::exception& e) {
+        l->log.warning_f("Could not find enemy on floor {:X}; unable to determine enemy type: {}", c->floor, e.what());
         boss_enemy_type = EnemyType::NONE;
       }
 
@@ -3358,8 +3371,8 @@ static void on_set_entity_set_flag(std::shared_ptr<Client> c, SubcommandMessage&
       obj_st->set_flags |= cmd.flags;
       l->log.info_f("Client set set flags {:04X} on K-{:03X} (flags are now {:04X})",
           cmd.flags, obj_st->k_id, cmd.flags);
-    } catch (const std::out_of_range&) {
-      l->log.warning_f("Flag update refers to missing object");
+    } catch (const std::exception& e) {
+      l->log.warning_f("Flag update refers to missing object: {}", e.what());
     }
 
   } else if (cmd.header.entity_id >= 0x1000) {
@@ -3386,8 +3399,8 @@ static void on_set_entity_set_flag(std::shared_ptr<Client> c, SubcommandMessage&
       room = set_entry->room;
       wave_number = set_entry->wave_number;
       l->log.info_f("Client set set flags {:04X} on E-{:03X} (flags are now {:04X})", cmd.flags, ene_st->e_id, cmd.flags);
-    } catch (const std::out_of_range&) {
-      l->log.warning_f("Flag update refers to missing enemy");
+    } catch (const std::exception& e) {
+      l->log.warning_f("Flag update refers to missing enemy: {}", e.what());
     }
 
     if ((room >= 0) && (wave_number >= 0)) {
@@ -3737,7 +3750,16 @@ static void on_update_object_state_t(std::shared_ptr<Client> c, SubcommandMessag
     return;
   }
 
-  auto obj_st = l->map_state->object_state_for_index(c->version(), c->floor, cmd.object_index);
+  std::shared_ptr<MapState::ObjectState> obj_st = nullptr;
+  try {
+    obj_st = l->map_state->object_state_for_index(c->version(), c->floor, cmd.object_index);
+  } catch (const std::exception& e) {
+    c->log.warning_f("Could not find object state for entity {:04X} on floor {}: {}; forwarding anyway",
+        cmd.object_index, c->floor, e.what());
+    send_command(c, msg.command, msg.flag, msg.data, msg.size);
+    return;
+  }
+
   obj_st->game_flags = cmd.flags;
   l->log.info_f("K-{:03X} updated with game_flags={:08X}", obj_st->k_id, obj_st->game_flags);
 
@@ -3956,7 +3978,7 @@ static void on_vol_opt_actions_t(std::shared_ptr<Client> c, SubcommandMessage& m
   if (cmd.entity_index_count > 6) {
     throw std::runtime_error("invalid 6x16/6x84 command");
   }
-  for (size_t z = 0; z < cmd.entity_index_table.size(); z++) {
+  for (size_t z = 0; z < cmd.entity_index_count; z++) {
     if (cmd.entity_index_table[z] >= 6) {
       throw std::runtime_error("invalid 6x16/6x84 command");
     }
@@ -4012,7 +4034,15 @@ static void on_set_boss_warp_flags_6x6A(std::shared_ptr<Client> c, SubcommandMes
     return;
   }
 
-  auto obj_st = l->map_state->object_state_for_index(c->version(), c->floor, cmd.header.entity_id - 0x4000);
+  std::shared_ptr<MapState::ObjectState> obj_st = nullptr;
+  try {
+    obj_st = l->map_state->object_state_for_index(c->version(), c->floor, cmd.header.entity_id - 0x4000);
+  } catch (const std::exception& e) {
+    c->log.warning_f("6x6A: Could not find object state for entity {:04X} on floor {}: {}; forwarding anyway",
+        cmd.header.entity_id.load(), c->floor, e.what());
+    send_command(c, msg.command, msg.flag, msg.data, msg.size);
+    return;
+  }
   if (!obj_st->super_obj) {
     c->log.warning_f("6x6A: missing object for entity {:04X}; forwarding anyway", cmd.header.entity_id.load());
     send_command(c, msg.command, msg.flag, msg.data, msg.size);

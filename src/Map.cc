@@ -4711,12 +4711,14 @@ std::shared_ptr<SuperMap::Enemy> SuperMap::add_enemy_and_children(
         this->log.warning_f("DE_ROL_LE has an unusual num_children (0x{:X})", set_entry->num_children);
       }
       default_num_children = -1; // Skip adding children (because we do it here)
-      add(EnemyType::DE_ROL_LE);
-      for (size_t z = 0; z < 0x0A; z++) {
-        add(EnemyType::DE_ROL_LE_BODY);
-      }
-      for (size_t z = 0; z < 0x09; z++) {
-        add(EnemyType::DE_ROL_LE_MINE);
+      {
+        auto root_ene = add(EnemyType::DE_ROL_LE);
+        for (size_t z = 0; z < 0x0A; z++) {
+          add(EnemyType::DE_ROL_LE_BODY, false, false, root_ene);
+        }
+        for (size_t z = 0; z < 0x09; z++) {
+          add(EnemyType::DE_ROL_LE_MINE, false, false, root_ene);
+        }
       }
       break;
     case 0x00C2: // TBoss3Volopt
@@ -4724,19 +4726,21 @@ std::shared_ptr<SuperMap::Enemy> SuperMap::add_enemy_and_children(
         this->log.warning_f("VOL_OPT has an unusual num_children (0x{:X})", set_entry->num_children);
       }
       default_num_children = -1; // Skip adding children (because we do it here)
-      add(EnemyType::VOL_OPT_1);
-      for (size_t z = 0; z < 0x06; z++) {
-        add(EnemyType::VOL_OPT_PILLAR);
+      {
+        auto root_ene = add(EnemyType::VOL_OPT_1);
+        for (size_t z = 0; z < 0x06; z++) {
+          add(EnemyType::VOL_OPT_PILLAR, false, false, root_ene);
+        }
+        for (size_t z = 0; z < 0x18; z++) {
+          add(EnemyType::VOL_OPT_MONITOR, false, false, root_ene);
+        }
+        for (size_t z = 0; z < 0x02; z++) {
+          add(EnemyType::NONE, false, false, root_ene);
+        }
+        add(EnemyType::VOL_OPT_AMP, false, false, root_ene);
+        add(EnemyType::VOL_OPT_CORE, false, false, root_ene);
+        add(EnemyType::NONE, false, false, root_ene);
       }
-      for (size_t z = 0; z < 0x18; z++) {
-        add(EnemyType::VOL_OPT_MONITOR);
-      }
-      for (size_t z = 0; z < 0x02; z++) {
-        add(EnemyType::NONE);
-      }
-      add(EnemyType::VOL_OPT_AMP);
-      add(EnemyType::VOL_OPT_CORE);
-      add(EnemyType::NONE);
       break;
     case 0x00C5: // Unnamed subclass of TObjEnemyCustom
       add(EnemyType::VOL_OPT_2);
@@ -4768,14 +4772,16 @@ std::shared_ptr<SuperMap::Enemy> SuperMap::add_enemy_and_children(
         this->log.warning_f("BARBA_RAY has an unusual num_children (0x{:X})", set_entry->num_children);
       }
       default_num_children = -1; // Skip adding children (because we do it here)
-      add(EnemyType::BARBA_RAY);
-      for (size_t z = 0; z < 0x0A; z++) {
-        add(EnemyType::BARBA_RAY_JOINT);
+      {
+        auto root_ene = add(EnemyType::BARBA_RAY);
+        for (size_t z = 0; z < 0x0A; z++) {
+          add(EnemyType::BARBA_RAY_JOINT, false, false, root_ene);
+        }
+        for (size_t z = 0; z < 0x24; z++) {
+          add(EnemyType::PIG_RAY, false, false, root_ene);
+        }
+        add(EnemyType::BARBA_RAY, false, false, root_ene); // TODO: What is this actually?
       }
-      for (size_t z = 0; z < 0x24; z++) {
-        add(EnemyType::PIG_RAY);
-      }
-      add(EnemyType::BARBA_RAY); // TODO: What is this actually?
       break;
     case 0x00CC: // TBoss8Dragon
       add(EnemyType::GOL_DRAGON);
@@ -4922,10 +4928,10 @@ std::shared_ptr<SuperMap::Enemy> SuperMap::add_enemy_and_children(
       EnemyType spinner_type = is_shambertin ? EnemyType::SHAMBERTIN_SPINNER : EnemyType::SAINT_MILION_SPINNER;
       auto root_ene = add(base_type);
       for (size_t z = 0; z < 8; z++) {
-        add(base_type);
+        add(base_type, false, false, root_ene);
       }
       for (size_t z = 0; z < 0x10; z++) { // 16 spinners
-        add(spinner_type);
+        add(spinner_type, false, false, root_ene);
       }
       break;
     }
