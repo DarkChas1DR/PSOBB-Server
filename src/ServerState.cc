@@ -211,7 +211,9 @@ void ServerState::add_client_to_available_lobby(std::shared_ptr<Client> c, bool 
 void ServerState::remove_client_from_lobby(std::shared_ptr<Client> c) {
   auto l = c->lobby.lock();
   if (l) {
+    uint8_t leaving_client_id = c->lobby_client_id;
     l->remove_client(c);
+    this->on_player_left_lobby(l, leaving_client_id);
   }
 }
 
@@ -226,7 +228,9 @@ bool ServerState::change_client_lobby(
   }
 
   if (old_lobby) {
+    uint8_t leaving_client_id = c->lobby_client_id;
     old_lobby->remove_client(c);
+    this->on_player_left_lobby(old_lobby, leaving_client_id);
   }
   try {
     new_lobby->add_client(c, required_client_id);
