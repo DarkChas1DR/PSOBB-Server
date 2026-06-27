@@ -1,4 +1,2 @@
-// "QuestName": "White Day"
 {
-  "AvailableIf": "V_Event == 9",
 }
