@@ -1,0 +1,4 @@
+// "QuestName": "Pioneer Halloween"
+{
+  "AvailableIf": "V_Event == 5",
+}

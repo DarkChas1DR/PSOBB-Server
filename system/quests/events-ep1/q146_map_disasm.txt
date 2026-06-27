@@ -1,0 +1,940 @@
+.object_sets 0 /* offset 0x10 in file; 0x6E8 bytes */
+/* K-000 */ [ObjectSetEntry type=0040 "TShopGenerator" floor=0000 group=0000 room=000A a3=0000 x=-16.3136 y=3 z=-579.512 x_angle=0000000A y_angle=00000000 z_angle=00000000 params=[1 1 1 00000001 00000000 00000000]]
+/* K-001 */ [ObjectSetEntry type=0040 "TShopGenerator" floor=0000 group=0000 room=000A a3=0000 x=-393.073 y=10 z=-12.9648 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[9.18355e-41 1 1 00000000 00000000 00000000]]
+/* K-002 */ [ObjectSetEntry type=0040 "TShopGenerator" floor=0000 group=0000 room=000A a3=0000 x=-458.607 y=10 z=-51.2707 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 00000002 00010000 0000000A]]
+/* K-003 */ [ObjectSetEntry type=0040 "TShopGenerator" floor=0000 group=0000 room=000A a3=0000 x=-430.197 y=10 z=-24.4904 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 00000003 00000000 00000000]]
+/* K-004 */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=0000 group=0000 room=000A a3=0000 x=0.995331 y=0 z=-37.0011 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[0 1 1 00000000 00000000 00000000]]
+/* K-005 */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=0000 group=0000 room=000A a3=0000 x=3.00093 y=0 z=-23.9969 x_angle=00000000 y_angle=0000C600 z_angle=00000000 params=[1 1 1 00000000 00000000 00000000]]
+/* K-006 */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=0000 group=0000 room=000A a3=0000 x=2.00151 y=0 z=-50.0039 x_angle=00000000 y_angle=0000BA00 z_angle=00000000 params=[2 1 1 00000000 00000000 00000000]]
+/* K-007 */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=0000 group=0000 room=000A a3=0000 x=4.99739 y=0 z=-61.9966 x_angle=00000000 y_angle=0000B200 z_angle=00000000 params=[3 1 1 00000000 0000000A 00000000]]
+/* K-008 */ [ObjectSetEntry type=0043 "TObjCityMainWarp" floor=0000 group=0000 room=000A a3=0000 x=132.003 y=1 z=-265.002 x_angle=00000000 y_angle=00001400 z_angle=00000000 params=[1 1 1 00000001 00000000 00000000]]
+/* K-009 */ [ObjectSetEntry type=0045 "TObjCityMapWarp" floor=0000 group=0000 room=000A a3=0000 x=-228 y=0 z=-2021 x_angle=00000000 y_angle=00007800 z_angle=00000000 params=[-10 0 -30 00000000 00010000 00010000]]
+/* K-00A */ [ObjectSetEntry type=0040 "TShopGenerator" floor=0000 group=0000 room=000A a3=0001 x=-41 y=0 z=42.3732 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 00000004 00000000 00000000]]
+/* K-00B */ [ObjectSetEntry type=0040 "TShopGenerator" floor=0000 group=0000 room=000A a3=0000 x=-479.217 y=8.78126 z=-322.466 x_angle=00010000 y_angle=0000000A z_angle=00000000 params=[1 1 1 00000005 00000000 00000000]]
+/* K-00C */ [ObjectSetEntry type=0045 "TObjCityMapWarp" floor=0000 group=0000 room=000A a3=0000 x=-228 y=0 z=-351.002 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[10 0 -1760 00008000 00000000 00000000]]
+/* K-00D */ [ObjectSetEntry type=0041 "TObjLuker" floor=0000 group=0000 room=000A a3=0000 x=-561.882 y=0 z=-406.883 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 00000000 00000000 00000000]]
+/* K-00E */ [ObjectSetEntry type=0041 "TObjLuker" floor=0000 group=0000 room=000A a3=0000 x=-547.856 y=0 z=-444.882 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 00000001 00000000 00000000]]
+/* K-00F */ [ObjectSetEntry type=0041 "TObjLuker" floor=0000 group=0000 room=000A a3=0000 x=-486.442 y=0 z=-497.45 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[9.18355e-41 1 1 00000003 00000000 00000000]]
+/* K-010 */ [ObjectSetEntry type=0041 "TObjLuker" floor=0000 group=0000 room=000A a3=0000 x=-522.405 y=0 z=-474.188 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 00000002 00010000 0000000A]]
+/* K-011 */ [ObjectSetEntry type=0049 "TObjCityDoor_Med" floor=0000 group=0000 room=000A a3=0000 x=-34.4985 y=0 z=-384.495 x_angle=00000000 y_angle=0000E000 z_angle=00000000 params=[3 1 1 00000001 00000000 00000000]]
+/* K-012 */ [ObjectSetEntry type=0046 "TObjCityDoor_Shop" floor=0000 group=0000 room=000A a3=0000 x=-393.003 y=0 z=-143.5 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[3 1 1 00000001 00000000 00000000]]
+/* K-013 */ [ObjectSetEntry type=0040 "TShopGenerator" floor=0000 group=0000 room=000A a3=0000 x=-355.175 y=0 z=-43.1519 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 00000006 00000000 00000000]]
+/* K-014 */ [ObjectSetEntry type=0047 "TObjCityDoor_Guild" floor=0000 group=0000 room=000A a3=0000 x=-43.0024 y=0 z=-118.001 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[3 1 1 00000001 00000000 00000000]]
+/* K-015 */ [ObjectSetEntry type=0048 "TObjCityDoor_Warp" floor=0000 group=0000 room=000A a3=0000 x=26.0008 y=0 z=-265.998 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[3 1 1 00000001 00000000 00000000]]
+/* K-016 */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=0000 group=0000 room=000A a3=0000 x=57.8101 y=0 z=-268.547 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[0 1 1 00000001 00000000 00000000]]
+/* K-017 */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=0000 group=0000 room=000A a3=0000 x=66.7693 y=0 z=-252.375 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[1 1 1 00000001 00000000 00000000]]
+/* K-018 */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=0000 group=0000 room=000A a3=0000 x=67.3682 y=0 z=-284.93 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[2 1 1 00000001 00000000 00000000]]
+/* K-019 */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=0000 group=0000 room=000A a3=0000 x=77.1049 y=0 z=-269.283 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[3 1 1 00000001 00000000 00000000]]
+
+.enemy_sets 0 /* offset 0x2D00 in file; 0x5A0 bytes */
+/* S-000 */ [EnemySetEntry type=001D "TObjNpcCloakroomBase" num_children=0000 floor=0000 room=000A wave_number=0000 wave_number2=0000 a1=0000 x=-49.0011 y=0 z=51 x_angle=00000000 y_angle=00006000 z_angle=00000000 params=[0 0 0 1011 850 0000 0000]]
+/* S-001 */ [EnemySetEntry type=001B "TObjNpcGovernorBase" num_children=0000 floor=0000 room=000A wave_number=0000 wave_number2=0000 a1=0000 x=-3 y=0 z=63.9993 x_angle=00000000 y_angle=00007800 z_angle=00000000 params=[0 0 0 133 1133 0000 0000]]
+/* S-002 */ [EnemySetEntry type=0020 "TObjNpcSecretaryBase" num_children=0000 floor=0000 room=000A wave_number=0000 wave_number2=0000 a1=0000 x=18.36 y=0 z=62.06 x_angle=00000000 y_angle=00008800 z_angle=00000000 params=[0 0 0 134 1134 0000 0000]]
+/* S-003 */ [EnemySetEntry type=0004 "TObjNpcFemaleFat" num_children=0000 floor=0000 room=0014 wave_number=0000 wave_number2=0000 a1=0000 x=167.998 y=0 z=83.9969 x_angle=00000000 y_angle=0000A000 z_angle=00000000 params=[24 0 0 1016 100 0001 0000]]
+/* S-004 */ [EnemySetEntry type=000A "TObjNpcMaleDwarf" num_children=0000 floor=0000 room=0014 wave_number=0000 wave_number2=0000 a1=0000 x=156.003 y=0 z=-49.9997 x_angle=00000000 y_angle=0000E000 z_angle=00000000 params=[30 0 0 1015 90 0001 0000]]
+/* S-005 */ [EnemySetEntry type=001A "TObjNpcSoldierMacho" num_children=0000 floor=0000 room=0014 wave_number=0000 wave_number2=0000 a1=0000 x=237.999 y=0 z=-14.0001 x_angle=00000000 y_angle=0000E000 z_angle=00000000 params=[0 0 0 1019 120 0000 0000]]
+/* S-006 */ [EnemySetEntry type=0019 "TObjNpcSoldierBase" num_children=0000 floor=0000 room=0014 wave_number=0000 wave_number2=0000 a1=0000 x=238.004 y=0 z=63.0041 x_angle=00000000 y_angle=0000A000 z_angle=00000000 params=[0 0 0 1020 130 0000 0000]]
+/* S-007 */ [EnemySetEntry type=0005 "TObjNpcFemaleMacho" num_children=0000 floor=0000 room=0014 wave_number=0000 wave_number2=0000 a1=0000 x=-2.00188 y=0 z=35.0037 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[26 0 0 1014 80.0001 0001 0000]]
+/* S-008 */ [EnemySetEntry type=001E "TObjNpcExpertBase" num_children=0000 floor=0000 room=0014 wave_number=0000 wave_number2=0000 a1=0000 x=-147 y=0 z=-7.99654 x_angle=00000000 y_angle=00006900 z_angle=00000000 params=[30 0 0 1013 70.0001 0001 0000]]
+/* S-009 */ [EnemySetEntry type=0030 "TObjNpcHFW01" num_children=0000 floor=0000 room=0014 wave_number=0000 wave_number2=0000 a1=0000 x=-211.997 y=0 z=-140.001 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[37 0 0 137 1137 0001 0000]]
+/* S-00A */ [EnemySetEntry type=001D "TObjNpcCloakroomBase" num_children=0000 floor=0000 room=0014 wave_number=0000 wave_number2=0000 a1=0000 x=-262.511 y=0 z=-24.542 x_angle=00000000 y_angle=00005000 z_angle=00000000 params=[0 0 0 1010 840 0000 0000]]
+/* S-00B */ [EnemySetEntry type=0021 "TObjNpcHHM00" num_children=0000 floor=0000 room=0014 wave_number=0000 wave_number2=0000 a1=0000 x=-33.4438 y=0 z=-24.5251 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[30 0 0 135 1135 0000 0000]]
+/* S-00C */ [EnemySetEntry type=0024 "TObjNpcHRM00" num_children=0000 floor=0000 room=0014 wave_number=0000 wave_number2=0000 a1=0000 x=-49.85 y=0 z=-24.5251 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[30 0 0 136 1136 0000 0000]]
+/* S-00D */ [EnemySetEntry type=001C "TObjNpcConnoisseur" num_children=0000 floor=0000 room=001E wave_number=0000 wave_number2=0000 a1=0000 x=-43.7098 y=2.6 z=-52.7825 x_angle=00000000 y_angle=00002000 z_angle=00000000 params=[0 0 0 1009 830 0000 0000]]
+/* S-00E */ [EnemySetEntry type=000C "TObjNpcMaleMacho" num_children=0000 floor=0000 room=001E wave_number=0000 wave_number2=0000 a1=0000 x=0.342331 y=2.6 z=-84.72 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 1006 800 0000 0000]]
+/* S-00F */ [EnemySetEntry type=0005 "TObjNpcFemaleMacho" num_children=0000 floor=0000 room=001E wave_number=0000 wave_number2=0000 a1=0000 x=43.8711 y=2.6 z=-74.803 x_angle=00000000 y_angle=FFFFE900 z_angle=00000000 params=[0 0 0 1008 820 0000 0000]]
+/* S-010 */ [EnemySetEntry type=000B "TObjNpcMaleFat" num_children=0000 floor=0000 room=001E wave_number=0000 wave_number2=0000 a1=0000 x=75.8838 y=2.6 z=-42.6933 x_angle=00000000 y_angle=FFFFD600 z_angle=00000000 params=[0 0 0 1007 810 0000 0000]]
+/* S-011 */ [EnemySetEntry type=0007 "TObjNpcFemaleTall" num_children=0000 floor=0000 room=001E wave_number=0000 wave_number2=0000 a1=0000 x=16.004 y=0 z=5.99567 x_angle=00000000 y_angle=FFFFD000 z_angle=00000000 params=[22 0 0 1021 140 0001 0000]]
+/* S-012 */ [EnemySetEntry type=001F "TObjNpcNurseBase" num_children=0000 floor=0000 room=0028 wave_number=0000 wave_number2=0000 a1=0000 x=0.309738 y=3 z=-105.387 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 1017 860 0000 0000]]
+/* S-013 */ [EnemySetEntry type=001F "TObjNpcNurseBase" num_children=0000 floor=0000 room=0028 wave_number=0000 wave_number2=0000 a1=0000 x=53.4992 y=0 z=-26.4967 x_angle=00000000 y_angle=0000E000 z_angle=00000000 params=[18 0 0 1018 110 0001 0000]]
+
+.object_sets 4 /* offset 0x708 in file; 0x11CC bytes */
+/* K-01A */ [ObjectSetEntry type=0002 "TObjAreaWarpForest" floor=0004 group=0000 room=0003 a3=0000 x=0 y=0 z=-30 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[1 1 1 00000007 00000000 00000001]]
+/* K-01B */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=0004 group=0000 room=0003 a3=0000 x=10 y=0 z=-10 x_angle=00000000 y_angle=FFFF0000 z_angle=00000000 params=[0 1 1 00000001 00000000 00000000]]
+/* K-01C */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=0004 group=0000 room=0003 a3=0000 x=-10 y=0 z=-10 x_angle=00000000 y_angle=FFFF0000 z_angle=00000000 params=[1 1 1 00000001 00000000 00000000]]
+/* K-01D */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=0004 group=0000 room=0003 a3=0000 x=-20 y=0 z=0 x_angle=00000000 y_angle=FFFF0000 z_angle=00000000 params=[2 1 1 00000001 00000000 00000000]]
+/* K-01E */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=0004 group=0000 room=0003 a3=0000 x=20 y=0 z=0 x_angle=00000000 y_angle=FFFF0000 z_angle=00000000 params=[3 1 1 00000001 00000000 00000000]]
+/* K-01F */ [ObjectSetEntry type=0003 "TObjMapWarpForest" floor=0004 group=0000 room=0007 a3=0000 x=0 y=0 z=0 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[2200 0 500 00008000 00000000 00000000]]
+/* K-020 */ [ObjectSetEntry type=008B "TObjComputer" floor=0004 group=0000 room=0009 a3=0000 x=-30 y=0 z=55 x_angle=00000000 y_angle=00006000 z_angle=00000000 params=[1 1 1 00000009 00000002 00000000]]
+/* K-021 */ [ObjectSetEntry type=0008 "TObjEvtCollision" floor=0004 group=0000 room=0009 a3=0000 x=-0.353088 y=0 z=115.125 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[30 1 1 000000DD 00000000 00000000]]
+/* K-022 */ [ObjectSetEntry type=0008 "TObjEvtCollision" floor=0004 group=0000 room=0009 a3=0000 x=-0.0473022 y=0 z=626.256 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[30 1 1 00000079 00000000 00000000]]
+/* K-023 */ [ObjectSetEntry type=0008 "TObjEvtCollision" floor=0004 group=0000 room=0009 a3=0000 x=1027.78 y=0 z=747.681 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[30 1 1 000001C3 00000000 00000000]]
+/* K-024 */ [ObjectSetEntry type=0008 "TObjEvtCollision" floor=0004 group=0000 room=0009 a3=0000 x=1428.94 y=0 z=831.659 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[30 1 1 0000012D 00000000 00000000]]
+/* K-025 */ [ObjectSetEntry type=0008 "TObjEvtCollision" floor=0004 group=0000 room=0009 a3=0000 x=1598.7 y=0 z=1145.81 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[30 1 1 0000015F 00000000 00000000]]
+/* K-026 */ [ObjectSetEntry type=0008 "TObjEvtCollision" floor=0004 group=0000 room=0009 a3=0000 x=1914.18 y=0 z=1716.5 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[30 1 1 00000191 00000000 00000000]]
+/* K-027 */ [ObjectSetEntry type=0008 "TObjEvtCollision" floor=0004 group=0000 room=0009 a3=0000 x=1486.35 y=0 z=1894.4 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[30 1 1 00000097 00000000 00000000]]
+/* K-028 */ [ObjectSetEntry type=0008 "TObjEvtCollision" floor=0004 group=0000 room=0009 a3=0000 x=2025.71 y=0 z=831.84 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[30 1 1 000000A1 00000000 00000000]]
+/* K-029 */ [ObjectSetEntry type=0008 "TObjEvtCollision" floor=0004 group=0000 room=0009 a3=0000 x=2148.35 y=0 z=655.673 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[30 1 1 000000E7 00000000 00000000]]
+/* K-02A */ [ObjectSetEntry type=0008 "TObjEvtCollision" floor=0004 group=0000 room=0009 a3=0000 x=1743.19 y=0 z=1895.32 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[30 1 1 00000191 00000000 00000000]]
+/* K-02B */ [ObjectSetEntry type=0008 "TObjEvtCollision" floor=0004 group=0000 room=0009 a3=0000 x=1365.56 y=0 z=2031.86 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[30 1 1 00000097 00000000 00000000]]
+/* K-02C */ [ObjectSetEntry type=0008 "TObjEvtCollision" floor=0004 group=0000 room=0009 a3=0000 x=381.88 y=0 z=751.024 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[30 1 1 00000259 00000000 00000000]]
+/* K-02D */ [ObjectSetEntry type=0002 "TObjAreaWarpForest" floor=0004 group=0000 room=0009 a3=0000 x=0 y=0 z=-30 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 00000000 00000000 00000000]]
+/* K-02E */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=0004 group=0000 room=0009 a3=0000 x=10 y=0 z=-10 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 00000000 00000000 00000000]]
+/* K-02F */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=0004 group=0000 room=0009 a3=0000 x=-10 y=0 z=-10 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 1 1 00000000 00000000 00000000]]
+/* K-030 */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=0004 group=0000 room=0009 a3=0000 x=20 y=0 z=0 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[2 1 1 00000000 00000000 00000000]]
+/* K-031 */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=0004 group=0000 room=0009 a3=0000 x=-20 y=0 z=0 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[3 1 1 00000000 00000000 00000000]]
+/* K-032 */ [ObjectSetEntry type=00C2 "TODoorCave02" floor=0004 group=0000 room=000C a3=0000 x=0 y=0 z=150 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 00000050 00000003 00000000]]
+/* K-033 */ [ObjectSetEntry type=00C2 "TODoorCave02" floor=0004 group=0000 room=000C a3=0000 x=150 y=0 z=0 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[1 1 1 00000079 00000000 00000000]]
+/* K-034 */ [ObjectSetEntry type=00C2 "TODoorCave02" floor=0004 group=0000 room=000C a3=0000 x=0 y=0 z=-150 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 00000016 00000003 00000000]]
+/* K-035 */ [ObjectSetEntry type=00C2 "TODoorCave02" floor=0004 group=0000 room=000F a3=0000 x=0 y=0 z=150 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 0000000F 00000003 00000000]]
+/* K-036 */ [ObjectSetEntry type=00C2 "TODoorCave02" floor=0004 group=0000 room=000F a3=0000 x=150 y=0 z=0 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[1 1 1 00000028 00000003 00000000]]
+/* K-037 */ [ObjectSetEntry type=00C2 "TODoorCave02" floor=0004 group=0000 room=0010 a3=0000 x=0 y=0 z=-150 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 00000010 00000000 00000000]]
+/* K-038 */ [ObjectSetEntry type=00C2 "TODoorCave02" floor=0004 group=0000 room=0010 a3=0000 x=-150 y=0 z=0 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[1 1 1 0000001E 00000003 00000000]]
+/* K-039 */ [ObjectSetEntry type=00C2 "TODoorCave02" floor=0004 group=0000 room=0015 a3=0000 x=0.0191733 y=0 z=200 x_angle=00000000 y_angle=00000001 z_angle=00000000 params=[1 1 1 0000000C 00000003 00000000]]
+/* K-03A */ [ObjectSetEntry type=00C2 "TODoorCave02" floor=0004 group=0000 room=0015 a3=0000 x=-150 y=0 z=0.0143902 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[1 1 1 00000015 00000000 00000000]]
+/* K-03B */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0004 group=0000 room=0015 a3=0000 x=-3.97935 y=0.999999 z=-182.501 x_angle=00000000 y_angle=00000001 z_angle=00000000 params=[1 1 1 00000000 00000000 00000000]]
+/* K-03C */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0004 group=0000 room=0015 a3=0000 x=-9.97743 y=-1e-06 z=-162.501 x_angle=00000000 y_angle=00000001 z_angle=00000000 params=[1 1 1 00000000 00000000 00000000]]
+/* K-03D */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0004 group=0000 room=0015 a3=0000 x=10.0226 y=-1e-06 z=-162.503 x_angle=00000000 y_angle=00000001 z_angle=00000000 params=[1 1 1 00000000 00000000 00000000]]
+/* K-03E */ [ObjectSetEntry type=00C2 "TODoorCave02" floor=0004 group=0000 room=0016 a3=0000 x=-150 y=0 z=0.0143749 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[1 1 1 00000016 00000003 00000000]]
+/* K-03F */ [ObjectSetEntry type=00C2 "TODoorCave02" floor=0004 group=0000 room=0016 a3=0000 x=150 y=0 z=-0.0143876 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[1 1 1 00000063 00000003 00000000]]
+/* K-040 */ [ObjectSetEntry type=00C2 "TODoorCave02" floor=0004 group=0000 room=0017 a3=0000 x=0 y=0 z=-200 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 00000017 00000003 00000000]]
+/* K-041 */ [ObjectSetEntry type=00C2 "TODoorCave02" floor=0004 group=0000 room=001E a3=0000 x=200 y=0 z=-50 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[1 1 1 0000001E 00000000 00000000]]
+/* K-042 */ [ObjectSetEntry type=00C2 "TODoorCave02" floor=0004 group=0000 room=001E a3=0000 x=0 y=0 z=200 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 0000001E 00000003 00000000]]
+/* K-043 */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0004 group=0000 room=001E a3=0000 x=-163.195 y=-2.00001 z=86.6239 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[1 1 1 00000000 00000000 00000000]]
+/* K-044 */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0004 group=0000 room=001E a3=0000 x=-165.553 y=-2.00001 z=65.419 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[1 1 1 00000000 00000000 00000000]]
+/* K-045 */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0004 group=0000 room=001E a3=0000 x=-166.167 y=-2.00001 z=43.7386 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[1 1 1 00000000 00000000 00000000]]
+/* K-046 */ [ObjectSetEntry type=0003 "TObjMapWarpForest" floor=0004 group=0001 room=0023 a3=0000 x=127.62 y=0 z=-95.03 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[2570 0 -305 00002000 00000000 00000000]]
+/* K-047 */ [ObjectSetEntry type=0003 "TObjMapWarpForest" floor=0004 group=0001 room=0023 a3=0000 x=-134.72 y=-2 z=17.4718 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[2320 0 -240 00009000 00000000 00000000]]
+/* K-048 */ [ObjectSetEntry type=00C2 "TODoorCave02" floor=0004 group=0000 room=0023 a3=0000 x=0 y=0 z=200 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[1 1 1 0000001E 00000003 00000000]]
+/* K-049 */ [ObjectSetEntry type=00C2 "TODoorCave02" floor=0004 group=0000 room=0023 a3=0000 x=200 y=0 z=-50 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[1 1 1 00000050 00000003 00000000]]
+/* K-04A */ [ObjectSetEntry type=00C2 "TODoorCave02" floor=0004 group=0000 room=0023 a3=0000 x=-200 y=0 z=-50 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[1 1 1 00000023 00000000 00000000]]
+/* K-04B */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0004 group=0000 room=0023 a3=0000 x=-146.778 y=-2 z=-90.2572 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[1 1 1 00000019 00000003 00000000]]
+/* K-04C */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0004 group=0000 room=0023 a3=0000 x=-139.263 y=-2 z=-108.184 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[1 1 1 00000019 00000003 00000000]]
+/* K-04D */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0004 group=0000 room=0023 a3=0000 x=-126.382 y=-2 z=-89.8271 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[1 1 1 00000019 00000003 00000000]]
+/* K-04E */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0004 group=0000 room=0023 a3=0000 x=-133.326 y=0 z=98.3957 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[1 1 1 00000019 00000003 00000000]]
+/* K-04F */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0004 group=0000 room=0023 a3=0000 x=-149.914 y=0 z=81.4957 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[1 1 1 00000019 00000003 00000000]]
+/* K-050 */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0004 group=0000 room=0023 a3=0000 x=-133.166 y=0 z=70.8051 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[1 1 1 00000019 00000003 00000000]]
+/* K-051 */ [ObjectSetEntry type=00C2 "TODoorCave02" floor=0004 group=0000 room=0028 a3=0000 x=-200 y=0 z=0 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[1 1 1 00000023 00000003 00000000]]
+/* K-052 */ [ObjectSetEntry type=00C2 "TODoorCave02" floor=0004 group=0000 room=0028 a3=0000 x=80 y=0 z=-200 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[1 1 1 00000029 00000003 00000000]]
+/* K-053 */ [ObjectSetEntry type=00C2 "TODoorCave02" floor=0004 group=0000 room=0028 a3=0000 x=0 y=0 z=200 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[1 1 1 00000028 00000000 00000000]]
+/* K-054 */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0004 group=0000 room=0028 a3=0000 x=-84.5753 y=0 z=-151.945 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[1 1 1 00000019 00000003 00000000]]
+/* K-055 */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0004 group=0000 room=0028 a3=0000 x=-64.5753 y=0 z=-151.945 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[1 1 1 00000019 00000003 00000000]]
+/* K-056 */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0004 group=0000 room=0028 a3=0000 x=-44.5753 y=0 z=-151.945 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[1 1 1 00000019 00000003 00000000]]
+/* K-057 */ [ObjectSetEntry type=00C2 "TODoorCave02" floor=0004 group=0000 room=002D a3=0000 x=80 y=0 z=-200 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 0000003C 00000003 00000000]]
+/* K-058 */ [ObjectSetEntry type=00C2 "TODoorCave02" floor=0004 group=0000 room=002D a3=0000 x=-80 y=0 z=-200 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 00000050 00000003 00000000]]
+/* K-059 */ [ObjectSetEntry type=00C2 "TODoorCave02" floor=0004 group=0000 room=002D a3=0000 x=0 y=0 z=200 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 0000002D 00000003 00000000]]
+/* K-05A */ [ObjectSetEntry type=00C2 "TODoorCave02" floor=0004 group=0000 room=002D a3=0000 x=-200 y=0 z=0 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[1 1 1 00000050 00000003 00000000]]
+/* K-05B */ [ObjectSetEntry type=00C2 "TODoorCave02" floor=0004 group=0000 room=003C a3=0000 x=-0.0215733 y=0 z=-225 x_angle=00000000 y_angle=00000001 z_angle=00000000 params=[1 1 1 00000079 00000003 00000000]]
+/* K-05C */ [ObjectSetEntry type=00C2 "TODoorCave02" floor=0004 group=0000 room=003C a3=0000 x=0.0215704 y=0 z=225 x_angle=00000000 y_angle=00000001 z_angle=00000000 params=[1 1 1 0000003C 00000003 00000000]]
+
+.enemy_sets 4 /* offset 0x32B0 in file; 0x3D50 bytes */
+/* S-014 */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=000C wave_number=0003 wave_number2=0003 a1=0000 x=0 y=-0.629276 z=80 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-015 */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=000C wave_number=0003 wave_number2=0003 a1=0000 x=80 y=0 z=80 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-016 */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=000C wave_number=0003 wave_number2=0003 a1=0000 x=-80 y=0 z=80 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-017 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=000C wave_number=0003 wave_number2=0003 a1=0000 x=40 y=-0.992108 z=0 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-018 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=000C wave_number=0003 wave_number2=0003 a1=0000 x=-40 y=-0.99 z=0 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-019 */ [EnemySetEntry type=0062 "TObjEneNanoDrago" num_children=0000 floor=0004 room=000C wave_number=0004 wave_number2=0004 a1=0000 x=80 y=0 z=80 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-01A */ [EnemySetEntry type=0062 "TObjEneNanoDrago" num_children=0000 floor=0004 room=000C wave_number=0004 wave_number2=0004 a1=0000 x=0 y=-0.992108 z=0 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-01B */ [EnemySetEntry type=0062 "TObjEneNanoDrago" num_children=0000 floor=0004 room=000C wave_number=0004 wave_number2=0004 a1=0000 x=-70 y=0 z=-80 x_angle=00000000 y_angle=00002000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-01C */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=000C wave_number=0004 wave_number2=0004 a1=0000 x=92.71 y=0 z=-59.538 x_angle=00000000 y_angle=0000E000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-01D */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=000C wave_number=0004 wave_number2=0004 a1=0000 x=59.3184 y=0 z=-67.0919 x_angle=00000000 y_angle=0000E000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-01E */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=000C wave_number=0004 wave_number2=0004 a1=0000 x=53.9578 y=0 z=-97.358 x_angle=00000000 y_angle=0000E000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-01F */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=000C wave_number=0001 wave_number2=0001 a1=0000 x=80 y=0 z=-70 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-020 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=000C wave_number=0001 wave_number2=0001 a1=0000 x=80 y=-1.43051e-06 z=90 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-021 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=000C wave_number=0001 wave_number2=0001 a1=0000 x=-80 y=8.58307e-07 z=90 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-022 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=000C wave_number=0001 wave_number2=0001 a1=0000 x=-80 y=0 z=-70 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-023 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=000C wave_number=0001 wave_number2=0001 a1=0000 x=0 y=-0.99 z=0 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-024 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=000C wave_number=0001 wave_number2=0001 a1=0000 x=40 y=-0.992108 z=0 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-025 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=000C wave_number=0001 wave_number2=0001 a1=0000 x=-40 y=-0.992108 z=0 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-026 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=000C wave_number=0002 wave_number2=0002 a1=0000 x=80 y=0 z=-70 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-027 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=000C wave_number=0002 wave_number2=0002 a1=0000 x=80 y=-1.43051e-06 z=90 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-028 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=000C wave_number=0002 wave_number2=0002 a1=0000 x=-80 y=8.58307e-07 z=90 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-029 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=000C wave_number=0002 wave_number2=0002 a1=0000 x=-80 y=0 z=-70 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-02A */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=000C wave_number=0002 wave_number2=0002 a1=0000 x=0 y=-0.99 z=0 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-02B */ [EnemySetEntry type=0064 "TObjEneSlime" num_children=0000 floor=0004 room=000C wave_number=0002 wave_number2=0002 a1=0000 x=0 y=-0.992108 z=-40 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-02C */ [EnemySetEntry type=0064 "TObjEneSlime" num_children=0000 floor=0004 room=000C wave_number=0002 wave_number2=0002 a1=0000 x=0 y=-0.992108 z=40 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-02D */ [EnemySetEntry type=0064 "TObjEneSlime" num_children=0000 floor=0004 room=000F wave_number=0003 wave_number2=0003 a1=0000 x=0 y=-0.992108 z=0 x_angle=00000000 y_angle=0000A000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-02E */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=000F wave_number=0002 wave_number2=0002 a1=0000 x=0 y=-0.99 z=0 x_angle=00000000 y_angle=0000A000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-02F */ [EnemySetEntry type=0064 "TObjEneSlime" num_children=0000 floor=0004 room=000F wave_number=0002 wave_number2=0002 a1=0000 x=-100 y=-0.260856 z=0 x_angle=00000000 y_angle=0000A000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-030 */ [EnemySetEntry type=0064 "TObjEneSlime" num_children=0000 floor=0004 room=000F wave_number=0002 wave_number2=0002 a1=0000 x=100 y=-0.144842 z=0 x_angle=00000000 y_angle=0000A000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-031 */ [EnemySetEntry type=0064 "TObjEneSlime" num_children=0000 floor=0004 room=000F wave_number=0002 wave_number2=0002 a1=0000 x=0 y=-0.0463402 z=100 x_angle=00000000 y_angle=0000A000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-032 */ [EnemySetEntry type=0064 "TObjEneSlime" num_children=0000 floor=0004 room=000F wave_number=0002 wave_number2=0002 a1=0000 x=0 y=-0.181106 z=-100 x_angle=00000000 y_angle=0000A000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-033 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=000F wave_number=0001 wave_number2=0001 a1=0000 x=0 y=-0.99 z=0 x_angle=00000000 y_angle=0000A000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-034 */ [EnemySetEntry type=0064 "TObjEneSlime" num_children=0000 floor=0004 room=000F wave_number=0001 wave_number2=0001 a1=0000 x=-100 y=-0.260856 z=0 x_angle=00000000 y_angle=0000A000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-035 */ [EnemySetEntry type=0064 "TObjEneSlime" num_children=0000 floor=0004 room=000F wave_number=0001 wave_number2=0001 a1=0000 x=100 y=-0.144842 z=0 x_angle=00000000 y_angle=0000A000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-036 */ [EnemySetEntry type=0064 "TObjEneSlime" num_children=0000 floor=0004 room=000F wave_number=0001 wave_number2=0001 a1=0000 x=0 y=-0.0463402 z=100 x_angle=00000000 y_angle=0000A000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-037 */ [EnemySetEntry type=0064 "TObjEneSlime" num_children=0000 floor=0004 room=000F wave_number=0001 wave_number2=0001 a1=0000 x=0 y=-0.181106 z=-100 x_angle=00000000 y_angle=0000A000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-038 */ [EnemySetEntry type=0062 "TObjEneNanoDrago" num_children=0000 floor=0004 room=0010 wave_number=0003 wave_number2=0003 a1=0000 x=4.50562 y=-0.370387 z=87.21 x_angle=00000000 y_angle=0000A000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-039 */ [EnemySetEntry type=0062 "TObjEneNanoDrago" num_children=0000 floor=0004 room=0010 wave_number=0003 wave_number2=0003 a1=0000 x=79.6765 y=0 z=67.25 x_angle=00000000 y_angle=0000A000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-03A */ [EnemySetEntry type=0062 "TObjEneNanoDrago" num_children=0000 floor=0004 room=0010 wave_number=0003 wave_number2=0003 a1=0000 x=75.0154 y=0 z=-83.42 x_angle=00000000 y_angle=0000E000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-03B */ [EnemySetEntry type=0062 "TObjEneNanoDrago" num_children=0000 floor=0004 room=0010 wave_number=0003 wave_number2=0003 a1=0000 x=19.3171 y=-0.43 z=-80.3786 x_angle=00000000 y_angle=0000E000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-03C */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0010 wave_number=0004 wave_number2=0004 a1=0000 x=0 y=-0.992108 z=0 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-03D */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0010 wave_number=0004 wave_number2=0004 a1=0000 x=-0.0961914 y=-0.992108 z=42.1406 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-03E */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0010 wave_number=0004 wave_number2=0004 a1=0000 x=0.136475 y=-0.992108 z=-58.875 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-03F */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0010 wave_number=0004 wave_number2=0004 a1=0000 x=-36.2283 y=-0.992108 z=-23.5093 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-040 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0010 wave_number=0004 wave_number2=0004 a1=0000 x=-38.7075 y=-0.992108 z=17.9944 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-041 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0010 wave_number=0004 wave_number2=0004 a1=0000 x=45.5596 y=-0.992108 z=-3.78961 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-042 */ [EnemySetEntry type=0062 "TObjEneNanoDrago" num_children=0000 floor=0004 room=0010 wave_number=0001 wave_number2=0001 a1=0000 x=4.50562 y=-0.370387 z=87.21 x_angle=00000000 y_angle=0000A000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-043 */ [EnemySetEntry type=0062 "TObjEneNanoDrago" num_children=0000 floor=0004 room=0010 wave_number=0001 wave_number2=0001 a1=0000 x=79.6765 y=0 z=67.25 x_angle=00000000 y_angle=0000A000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-044 */ [EnemySetEntry type=0062 "TObjEneNanoDrago" num_children=0000 floor=0004 room=0010 wave_number=0001 wave_number2=0001 a1=0000 x=75.0154 y=0 z=-83.42 x_angle=00000000 y_angle=0000E000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-045 */ [EnemySetEntry type=0062 "TObjEneNanoDrago" num_children=0000 floor=0004 room=0010 wave_number=0001 wave_number2=0001 a1=0000 x=19.3171 y=-0.43 z=-80.3786 x_angle=00000000 y_angle=0000E000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-046 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0010 wave_number=0002 wave_number2=0002 a1=0000 x=-88.9836 y=0 z=-48.77 x_angle=00000000 y_angle=00002000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-047 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0010 wave_number=0002 wave_number2=0002 a1=0000 x=-59.7246 y=-0.12 z=-72.8423 x_angle=00000000 y_angle=00002000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-048 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0010 wave_number=0002 wave_number2=0002 a1=0000 x=-88.4006 y=0 z=-77.9236 x_angle=00000000 y_angle=00002000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-049 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0010 wave_number=0002 wave_number2=0002 a1=0000 x=85.7371 y=-0.483225 z=4.29932 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-04A */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0010 wave_number=0002 wave_number2=0002 a1=0000 x=67.563 y=-0.483225 z=-23.3076 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-04B */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0010 wave_number=0002 wave_number2=0002 a1=0000 x=67.4497 y=-0.483225 z=25.9111 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-04C */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=0016 wave_number=0003 wave_number2=0003 a1=0000 x=0.00769043 y=-0.9 z=80 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-04D */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=0016 wave_number=0003 wave_number2=0003 a1=0000 x=-0.00769043 y=-0.900001 z=-80 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-04E */ [EnemySetEntry type=0064 "TObjEneSlime" num_children=0000 floor=0004 room=0016 wave_number=0003 wave_number2=0003 a1=0000 x=-46.2378 y=-0.900001 z=-23.1219 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-04F */ [EnemySetEntry type=0064 "TObjEneSlime" num_children=0000 floor=0004 room=0016 wave_number=0003 wave_number2=0003 a1=0000 x=-46.2323 y=-0.900001 z=34.4406 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-050 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0016 wave_number=0002 wave_number2=0002 a1=0000 x=30 y=-0.9 z=-0.00286865 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-051 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0016 wave_number=0002 wave_number2=0002 a1=0000 x=-60 y=-0.54 z=0.0057373 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-052 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0016 wave_number=0002 wave_number2=0002 a1=0000 x=60 y=-0.536192 z=-0.00579834 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-053 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0016 wave_number=0002 wave_number2=0002 a1=0000 x=0.0057373 y=-0.9 z=60 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-054 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0016 wave_number=0002 wave_number2=0002 a1=0000 x=-0.0057373 y=-0.9 z=-60 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-055 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0016 wave_number=0002 wave_number2=0002 a1=0000 x=-0.00292969 y=-0.9 z=-30 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-056 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0016 wave_number=0002 wave_number2=0002 a1=0000 x=-30 y=-0.9 z=0.00286865 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-057 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0016 wave_number=0002 wave_number2=0002 a1=0000 x=0.00280762 y=-0.900001 z=30 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-058 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0016 wave_number=0001 wave_number2=0001 a1=0000 x=75.0133 y=-0.21984 z=-57.8643 x_angle=00000000 y_angle=00003001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-059 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0016 wave_number=0001 wave_number2=0001 a1=0000 x=54.2391 y=-0.657357 z=-87.3779 x_angle=00000000 y_angle=00003001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-05A */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0016 wave_number=0001 wave_number2=0001 a1=0000 x=25.5251 y=-0.83546 z=93.2665 x_angle=00000000 y_angle=00005001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-05B */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0016 wave_number=0001 wave_number2=0001 a1=0000 x=-10.3301 y=-0.467625 z=111.67 x_angle=00000000 y_angle=00005001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-05C */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0016 wave_number=0001 wave_number2=0001 a1=0000 x=47.6383 y=-0.796454 z=-57.8616 x_angle=00000000 y_angle=00003001 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-05D */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0016 wave_number=0001 wave_number2=0001 a1=0000 x=22.0126 y=-0.211366 z=124.486 x_angle=00000000 y_angle=00005001 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-05E */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0016 wave_number=0001 wave_number2=0001 a1=0000 x=-30 y=-0.9 z=0.00286865 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-05F */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0016 wave_number=0001 wave_number2=0001 a1=0000 x=-60 y=-0.536192 z=0.0057373 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-060 */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=0017 wave_number=0003 wave_number2=0003 a1=0000 x=-85.6653 y=0 z=45.8201 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-061 */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=0017 wave_number=0003 wave_number2=0003 a1=0000 x=95.3208 y=0 z=61.7374 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-062 */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=0017 wave_number=0003 wave_number2=0003 a1=0000 x=-69.4331 y=-0.337499 z=-46.78 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-063 */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=0017 wave_number=0003 wave_number2=0003 a1=0000 x=73.2595 y=-0.256901 z=-57.76 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-064 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0017 wave_number=0002 wave_number2=0002 a1=0000 x=0 y=-0.9 z=-20 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-065 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0017 wave_number=0002 wave_number2=0002 a1=0000 x=0 y=-0.9 z=-60 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-066 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0017 wave_number=0002 wave_number2=0002 a1=0000 x=0 y=-0.7 z=-100 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-067 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0017 wave_number=0002 wave_number2=0002 a1=0000 x=0 y=-0.9 z=20 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-068 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0017 wave_number=0002 wave_number2=0002 a1=0000 x=0 y=-0.9 z=60 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-069 */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=0017 wave_number=0002 wave_number2=0002 a1=0000 x=-69.4331 y=-0.337499 z=-46.78 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-06A */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=0017 wave_number=0002 wave_number2=0002 a1=0000 x=73.2595 y=-0.256901 z=-57.76 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-06B */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0017 wave_number=0002 wave_number2=0002 a1=0000 x=0 y=-0.9 z=90 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-06C */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0017 wave_number=0001 wave_number2=0001 a1=0000 x=99.9976 y=0 z=41.9 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-06D */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0017 wave_number=0001 wave_number2=0001 a1=0000 x=79.0745 y=-0.13 z=65.4556 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-06E */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0017 wave_number=0001 wave_number2=0001 a1=0000 x=102.674 y=0 z=86.266 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-06F */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0017 wave_number=0001 wave_number2=0001 a1=0000 x=-89.7075 y=0 z=-116.132 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-070 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0017 wave_number=0001 wave_number2=0001 a1=0000 x=-95.0176 y=0 z=-87.9817 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-071 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0017 wave_number=0001 wave_number2=0001 a1=0000 x=-62.1428 y=-0.08 z=-124.464 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-072 */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=0017 wave_number=0001 wave_number2=0001 a1=0000 x=67.4297 y=-0.379698 z=-88.9131 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-073 */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=0017 wave_number=0001 wave_number2=0001 a1=0000 x=-45.1516 y=-0.848951 z=4.6842 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-074 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=001E wave_number=0003 wave_number2=0003 a1=0000 x=12.9302 y=0 z=66.7672 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[1 0 0 0 0 0002 0000]]
+/* S-075 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=001E wave_number=0003 wave_number2=0003 a1=0000 x=30.9209 y=0 z=93.2839 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[1 0 0 0 0 0002 0000]]
+/* S-076 */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=001E wave_number=0003 wave_number2=0003 a1=0000 x=-91.5835 y=-0.151838 z=-84.7195 x_angle=00000000 y_angle=00002000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-077 */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=001E wave_number=0003 wave_number2=0003 a1=0000 x=111.455 y=0 z=-45.7863 x_angle=00000000 y_angle=0000D000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-078 */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=001E wave_number=0003 wave_number2=0003 a1=0000 x=101.63 y=0 z=46.42 x_angle=00000000 y_angle=0000B000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-079 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=001E wave_number=0004 wave_number2=0004 a1=0000 x=-17.6821 y=-1.66 z=110.021 x_angle=00000000 y_angle=0000B000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-07A */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=001E wave_number=0004 wave_number2=0004 a1=0000 x=-91.5835 y=-0.151838 z=-84.7195 x_angle=00000000 y_angle=00002000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-07B */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=001E wave_number=0004 wave_number2=0004 a1=0000 x=-85.2854 y=0 z=17.9916 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-07C */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=001E wave_number=0004 wave_number2=0004 a1=0000 x=111.455 y=0 z=-45.7863 x_angle=00000000 y_angle=0000D000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-07D */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=001E wave_number=0004 wave_number2=0004 a1=0000 x=101.63 y=0 z=46.42 x_angle=00000000 y_angle=0000B000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-07E */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=001E wave_number=0001 wave_number2=0001 a1=0000 x=-136.567 y=0 z=-101.457 x_angle=00000000 y_angle=FFFEE000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-07F */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=001E wave_number=0001 wave_number2=0001 a1=0000 x=-105.73 y=0 z=-87.6998 x_angle=00000000 y_angle=FFFEE000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-080 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=001E wave_number=0001 wave_number2=0001 a1=0000 x=-86.2761 y=0 z=-10.5052 x_angle=00000000 y_angle=0000A000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-081 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=001E wave_number=0001 wave_number2=0001 a1=0000 x=-65.5002 y=-0.460337 z=-3.66461 x_angle=00000000 y_angle=0000A000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-082 */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=001E wave_number=0001 wave_number2=0001 a1=0000 x=111.455 y=0 z=-45.7863 x_angle=00000000 y_angle=0000D000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-083 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=001E wave_number=0002 wave_number2=0002 a1=0000 x=-57.9583 y=0 z=-57.2695 x_angle=00000000 y_angle=00002000 z_angle=00000000 params=[1 0 0 0 0 0001 0000]]
+/* S-084 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=001E wave_number=0002 wave_number2=0002 a1=0000 x=-85.5166 y=0 z=-31.0001 x_angle=00000000 y_angle=00002000 z_angle=00000000 params=[1 0 0 0 0 0001 0000]]
+/* S-085 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=001E wave_number=0002 wave_number2=0002 a1=0000 x=-101.393 y=0 z=-64.0997 x_angle=00000000 y_angle=00002000 z_angle=00000000 params=[1 0 0 0 0 0001 0000]]
+/* S-086 */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=001E wave_number=0002 wave_number2=0002 a1=0000 x=111.455 y=0 z=-45.7863 x_angle=00000000 y_angle=0000D000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-087 */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=001E wave_number=0002 wave_number2=0002 a1=0000 x=101.63 y=0 z=46.42 x_angle=00000000 y_angle=0000B000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-088 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0023 wave_number=0004 wave_number2=0004 a1=0000 x=118.91 y=-2 z=-41.2334 x_angle=00000000 y_angle=00006000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-089 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0023 wave_number=0004 wave_number2=0004 a1=0000 x=139.24 y=0 z=-16.6474 x_angle=00000000 y_angle=00006000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-08A */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0023 wave_number=0004 wave_number2=0004 a1=0000 x=135.52 y=-2 z=-73.2603 x_angle=00000000 y_angle=00006000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-08B */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=0023 wave_number=0005 wave_number2=0005 a1=0000 x=107.84 y=-2 z=-20.041 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-08C */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=0023 wave_number=0005 wave_number2=0005 a1=0000 x=97.05 y=0 z=-94.1815 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-08D */ [EnemySetEntry type=0062 "TObjEneNanoDrago" num_children=0000 floor=0004 room=0023 wave_number=0006 wave_number2=0006 a1=0000 x=119.73 y=-2 z=-73.4633 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-08E */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=0023 wave_number=0001 wave_number2=0001 a1=0000 x=72.3865 y=1.94 z=163.115 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-08F */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=0023 wave_number=0001 wave_number2=0001 a1=0000 x=52.8093 y=0 z=99.6569 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-090 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=0023 wave_number=0001 wave_number2=0001 a1=0000 x=68.4253 y=-3.95 z=47.1783 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-091 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=0023 wave_number=0001 wave_number2=0001 a1=0000 x=44.0398 y=-2 z=15.84 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-092 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=0023 wave_number=0001 wave_number2=0001 a1=0000 x=7.10156 y=-2 z=-34.5708 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-093 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=0023 wave_number=0001 wave_number2=0001 a1=0000 x=-31.9607 y=-2 z=-95.8221 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-094 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=0023 wave_number=0001 wave_number2=0001 a1=0000 x=-91.7002 y=-2 z=-88.1448 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-095 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=0023 wave_number=0001 wave_number2=0001 a1=0000 x=-135.443 y=-2 z=-116.33 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-096 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=0023 wave_number=0002 wave_number2=0002 a1=0000 x=72.3865 y=1.94 z=163.115 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-097 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=0023 wave_number=0002 wave_number2=0002 a1=0000 x=52.8093 y=0 z=99.6569 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-098 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=0023 wave_number=0002 wave_number2=0002 a1=0000 x=68.4253 y=-3.95 z=47.1783 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-099 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=0023 wave_number=0002 wave_number2=0002 a1=0000 x=44.0398 y=-2 z=15.84 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-09A */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=0023 wave_number=0002 wave_number2=0002 a1=0000 x=7.10156 y=-2 z=-34.5708 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-09B */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=0023 wave_number=0002 wave_number2=0002 a1=0000 x=-31.9607 y=-2 z=-95.8221 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-09C */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=0023 wave_number=0002 wave_number2=0002 a1=0000 x=-91.7002 y=-2 z=-88.1448 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-09D */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=0023 wave_number=0002 wave_number2=0002 a1=0000 x=-135.443 y=-2 z=-116.33 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-09E */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=0023 wave_number=0003 wave_number2=0003 a1=0000 x=72.3865 y=1.94 z=163.115 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-09F */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=0023 wave_number=0003 wave_number2=0003 a1=0000 x=52.8093 y=0 z=99.6569 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-0A0 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=0023 wave_number=0003 wave_number2=0003 a1=0000 x=68.4253 y=-3.95 z=47.1783 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-0A1 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=0023 wave_number=0003 wave_number2=0003 a1=0000 x=44.0398 y=-2 z=15.84 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-0A2 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=0023 wave_number=0003 wave_number2=0003 a1=0000 x=7.10156 y=-2 z=-34.5708 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-0A3 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=0023 wave_number=0003 wave_number2=0003 a1=0000 x=-31.9607 y=-2 z=-95.8221 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-0A4 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=0023 wave_number=0003 wave_number2=0003 a1=0000 x=-91.7002 y=-2 z=-88.1448 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-0A5 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=0023 wave_number=0003 wave_number2=0003 a1=0000 x=-135.443 y=-2 z=-116.33 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-0A6 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0028 wave_number=0004 wave_number2=0004 a1=0000 x=-15.69 y=0 z=95.2461 x_angle=00000000 y_angle=FFFFA000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-0A7 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0028 wave_number=0004 wave_number2=0004 a1=0000 x=-19.75 y=0 z=123.785 x_angle=00000000 y_angle=FFFFA000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-0A8 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0028 wave_number=0004 wave_number2=0004 a1=0000 x=11.4286 y=-0.3 z=129.773 x_angle=00000000 y_angle=FFFFA000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-0A9 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0028 wave_number=0004 wave_number2=0004 a1=0000 x=-145.406 y=0 z=-1.14795 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-0AA */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0028 wave_number=0004 wave_number2=0004 a1=0000 x=-110.051 y=-0.04 z=10.6333 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-0AB */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0028 wave_number=0004 wave_number2=0004 a1=0000 x=-111.63 y=0 z=-18.293 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-0AC */ [EnemySetEntry type=0062 "TObjEneNanoDrago" num_children=0000 floor=0004 room=0028 wave_number=0004 wave_number2=0004 a1=0000 x=-71.2964 y=-2 z=69.9846 x_angle=00000000 y_angle=FFFF6000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0AD */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=0028 wave_number=0005 wave_number2=0005 a1=0000 x=-112.06 y=-2 z=-59.0322 x_angle=00000000 y_angle=FFFF3000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0AE */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=0028 wave_number=0005 wave_number2=0005 a1=0000 x=56.17 y=0 z=-124.856 x_angle=00000000 y_angle=FFFFE000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0AF */ [EnemySetEntry type=0062 "TObjEneNanoDrago" num_children=0000 floor=0004 room=0028 wave_number=0005 wave_number2=0005 a1=0000 x=-71.2964 y=-2 z=69.9846 x_angle=00000000 y_angle=FFFF6000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0B0 */ [EnemySetEntry type=0062 "TObjEneNanoDrago" num_children=0000 floor=0004 room=0028 wave_number=0006 wave_number2=0006 a1=0000 x=-88.5866 y=0 z=-118.47 x_angle=00000000 y_angle=00002000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0B1 */ [EnemySetEntry type=0062 "TObjEneNanoDrago" num_children=0000 floor=0004 room=0028 wave_number=0006 wave_number2=0006 a1=0000 x=-6.64 y=0 z=75.814 x_angle=00000000 y_angle=00009000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0B2 */ [EnemySetEntry type=0062 "TObjEneNanoDrago" num_children=0000 floor=0004 room=0028 wave_number=0006 wave_number2=0006 a1=0000 x=71.59 y=0 z=-133.005 x_angle=00000000 y_angle=FFFFE000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0B3 */ [EnemySetEntry type=0062 "TObjEneNanoDrago" num_children=0000 floor=0004 room=0028 wave_number=0001 wave_number2=0001 a1=0000 x=-88.5866 y=0 z=-118.47 x_angle=00000000 y_angle=00002000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0B4 */ [EnemySetEntry type=0062 "TObjEneNanoDrago" num_children=0000 floor=0004 room=0028 wave_number=0001 wave_number2=0001 a1=0000 x=-6.64 y=0 z=75.814 x_angle=00000000 y_angle=00009000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0B5 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0028 wave_number=0002 wave_number2=0002 a1=0000 x=-110 y=0 z=0 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0B6 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0028 wave_number=0002 wave_number2=0002 a1=0000 x=-80 y=0 z=0 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0B7 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0028 wave_number=0002 wave_number2=0002 a1=0000 x=-50 y=0 z=0 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0B8 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0028 wave_number=0002 wave_number2=0002 a1=0000 x=-20 y=0 z=0 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0B9 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0028 wave_number=0002 wave_number2=0002 a1=0000 x=-20 y=0 z=-30 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-0BA */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0028 wave_number=0002 wave_number2=0002 a1=0000 x=-20 y=0 z=-60 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-0BB */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0028 wave_number=0002 wave_number2=0002 a1=0000 x=-20 y=-0.689206 z=30 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-0BC */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0028 wave_number=0002 wave_number2=0002 a1=0000 x=-20 y=0 z=60 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-0BD */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0028 wave_number=0003 wave_number2=0003 a1=0000 x=-20 y=0 z=0 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-0BE */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0028 wave_number=0003 wave_number2=0003 a1=0000 x=-20 y=-0.689206 z=30 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-0BF */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0028 wave_number=0003 wave_number2=0003 a1=0000 x=-20 y=0 z=60 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-0C0 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0028 wave_number=0003 wave_number2=0003 a1=0000 x=-20 y=0 z=-30 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-0C1 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=0028 wave_number=0003 wave_number2=0003 a1=0000 x=-20 y=0 z=-60 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-0C2 */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=0028 wave_number=0003 wave_number2=0003 a1=0000 x=63.7639 y=0 z=-134.665 x_angle=00000000 y_angle=FFFFE000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0C3 */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=0028 wave_number=0003 wave_number2=0003 a1=0000 x=-88.27 y=0 z=-134.295 x_angle=00000000 y_angle=00002000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0C4 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=002D wave_number=0003 wave_number2=0003 a1=0000 x=-5.39001 y=0 z=54.147 x_angle=00000000 y_angle=FFFF7000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0C5 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=002D wave_number=0003 wave_number2=0003 a1=0000 x=-31.36 y=0 z=54.147 x_angle=00000000 y_angle=FFFF7000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0C6 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=002D wave_number=0003 wave_number2=0003 a1=0000 x=-14.7198 y=0 z=76.5569 x_angle=00000000 y_angle=FFFF7000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-0C7 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=002D wave_number=0003 wave_number2=0003 a1=0000 x=-40.5325 y=0 z=-123.843 x_angle=00000000 y_angle=FFFF2000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-0C8 */ [EnemySetEntry type=0060 "TObjGrass" num_children=0000 floor=0004 room=002D wave_number=0003 wave_number2=0003 a1=0000 x=-72.19 y=0 z=-146.441 x_angle=00000000 y_angle=FFFF2000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-0C9 */ [EnemySetEntry type=0062 "TObjEneNanoDrago" num_children=0000 floor=0004 room=002D wave_number=0004 wave_number2=0004 a1=0000 x=-68.5466 y=0 z=-143.85 x_angle=00000000 y_angle=FFFF2000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-0CA */ [EnemySetEntry type=0062 "TObjEneNanoDrago" num_children=0000 floor=0004 room=002D wave_number=0004 wave_number2=0004 a1=0000 x=57.19 y=0 z=-127.195 x_angle=00000000 y_angle=FFFEE000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-0CB */ [EnemySetEntry type=0062 "TObjEneNanoDrago" num_children=0000 floor=0004 room=002D wave_number=0004 wave_number2=0004 a1=0000 x=15.14 y=-0.41 z=136.335 x_angle=00000000 y_angle=FFFE9000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-0CC */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=002D wave_number=0001 wave_number2=0001 a1=0000 x=10.6432 y=0 z=-141.411 x_angle=00000000 y_angle=FFFF5000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0CD */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=002D wave_number=0001 wave_number2=0001 a1=0000 x=-5.38672 y=0 z=-115.165 x_angle=00000000 y_angle=FFFF5000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0CE */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=002D wave_number=0001 wave_number2=0001 a1=0000 x=-11.0624 y=0 z=-135.982 x_angle=00000000 y_angle=FFFF5000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-0CF */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=002D wave_number=0001 wave_number2=0001 a1=0000 x=21.05 y=0 z=-35.7001 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-0D0 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=002D wave_number=0001 wave_number2=0001 a1=0000 x=38.5583 y=-2 z=-17.2976 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-0D1 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=002D wave_number=0001 wave_number2=0001 a1=0000 x=5.69891 y=0 z=-17.3 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-0D2 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=002D wave_number=0002 wave_number2=0002 a1=0000 x=-5.39001 y=0 z=54.147 x_angle=00000000 y_angle=FFFF7000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0D3 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=002D wave_number=0002 wave_number2=0002 a1=0000 x=-31.36 y=0 z=54.147 x_angle=00000000 y_angle=FFFF7000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0D4 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=002D wave_number=0002 wave_number2=0002 a1=0000 x=-14.7198 y=0 z=76.5569 x_angle=00000000 y_angle=FFFF7000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-0D5 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=002D wave_number=0002 wave_number2=0002 a1=0000 x=21.05 y=0 z=-35.7001 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-0D6 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=002D wave_number=0002 wave_number2=0002 a1=0000 x=38.5583 y=-2 z=-17.2976 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-0D7 */ [EnemySetEntry type=0063 "TObjEneShark" num_children=0000 floor=0004 room=002D wave_number=0002 wave_number2=0002 a1=0000 x=5.69891 y=0 z=-17.3 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-0D8 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=003C wave_number=0003 wave_number2=0003 a1=0000 x=100 y=-1.90735e-06 z=-0.00952148 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0D9 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=003C wave_number=0003 wave_number2=0003 a1=0000 x=70.0048 y=-1.90735e-06 z=49.9933 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0DA */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=003C wave_number=0003 wave_number2=0003 a1=0000 x=69.9952 y=0 z=-50.0067 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0DB */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=003C wave_number=0003 wave_number2=0003 a1=0000 x=-100 y=0 z=0.00964355 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0DC */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=003C wave_number=0003 wave_number2=0003 a1=0000 x=-79.9952 y=-1.90735e-06 z=50.0077 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0DD */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=003C wave_number=0003 wave_number2=0003 a1=0000 x=-80.0048 y=0 z=-49.9923 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0DE */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=003C wave_number=0003 wave_number2=0003 a1=0000 x=-60.0096 y=0 z=-99.9943 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0DF */ [EnemySetEntry type=0064 "TObjEneSlime" num_children=0000 floor=0004 room=003C wave_number=0004 wave_number2=0004 a1=0000 x=0 y=0 z=0 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0E0 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=003C wave_number=0001 wave_number2=0001 a1=0000 x=100 y=-1.90735e-06 z=-0.00952148 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0E1 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=003C wave_number=0001 wave_number2=0001 a1=0000 x=70.0048 y=-1.90735e-06 z=49.9933 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0E2 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=003C wave_number=0001 wave_number2=0001 a1=0000 x=69.9952 y=0 z=-50.0067 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0E3 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=003C wave_number=0001 wave_number2=0001 a1=0000 x=-100 y=0 z=0.00964355 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0E4 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=003C wave_number=0001 wave_number2=0001 a1=0000 x=-79.9952 y=-1.90735e-06 z=50.0077 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0E5 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=003C wave_number=0001 wave_number2=0001 a1=0000 x=-80.0048 y=0 z=-49.9923 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0E6 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=003C wave_number=0001 wave_number2=0001 a1=0000 x=-60.0096 y=0 z=-99.9943 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0E7 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=003C wave_number=0002 wave_number2=0002 a1=0000 x=100 y=-1.90735e-06 z=-0.00952148 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0E8 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=003C wave_number=0002 wave_number2=0002 a1=0000 x=60 y=0 z=-0.0057373 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0E9 */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=003C wave_number=0002 wave_number2=0002 a1=0000 x=20 y=-1.90735e-06 z=-0.00195312 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0EA */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=003C wave_number=0002 wave_number2=0002 a1=0000 x=-100 y=0 z=0.00964355 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0EB */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=003C wave_number=0002 wave_number2=0002 a1=0000 x=-20 y=0 z=0.00195312 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0EC */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=003C wave_number=0002 wave_number2=0002 a1=0000 x=-60 y=-1.90735e-06 z=0.0057373 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0ED */ [EnemySetEntry type=0061 "TObjEneRe2Flower" num_children=0000 floor=0004 room=003C wave_number=0002 wave_number2=0002 a1=0000 x=0.00384521 y=0 z=40 x_angle=00000000 y_angle=00004001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+
+.events 4 /* offset 0xB1C8 in file; 0x430 bytes; 0xEC bytes in action stream */
+/* W-000 */ [Event1Entry event_id=00000079 flags=0000 event_type=0001 room=000C wave_number=0001 delay=00000003 action_stream_offset=00000000]
+  0C 0000007A   trigger_event           event_id=0000007A
+  01            stop
+/* W-001 */ [Event1Entry event_id=0000007A flags=0000 event_type=0001 room=000C wave_number=0002 delay=00000003 action_stream_offset=00000006]
+  0C 0000007B   trigger_event           event_id=0000007B
+  01            stop
+/* W-002 */ [Event1Entry event_id=0000007B flags=0000 event_type=0001 room=000C wave_number=0003 delay=00000003 action_stream_offset=0000000C]
+  0C 0000007C   trigger_event           event_id=0000007C
+  01            stop
+/* W-003 */ [Event1Entry event_id=0000007C flags=0000 event_type=0001 room=000C wave_number=0004 delay=00000003 action_stream_offset=00000012]
+  0A 0079       set_switch_flag         id=0079
+  01            stop
+/* W-004 */ [Event1Entry event_id=000000DD flags=0000 event_type=0001 room=0016 wave_number=0001 delay=00000003 action_stream_offset=00000016]
+  0C 000000DE   trigger_event           event_id=000000DE
+  01            stop
+/* W-005 */ [Event1Entry event_id=000000DE flags=0000 event_type=0001 room=0016 wave_number=0002 delay=00000003 action_stream_offset=0000001C]
+  0C 000000DF   trigger_event           event_id=000000DF
+  01            stop
+/* W-006 */ [Event1Entry event_id=000000DF flags=0000 event_type=0001 room=0016 wave_number=0003 delay=00000003 action_stream_offset=00000022]
+  0A 0016       set_switch_flag         id=0016
+  01            stop
+/* W-007 */ [Event1Entry event_id=00000259 flags=0000 event_type=0001 room=003C wave_number=0001 delay=00000003 action_stream_offset=00000026]
+  0C 0000025A   trigger_event           event_id=0000025A
+  01            stop
+/* W-008 */ [Event1Entry event_id=0000025A flags=0000 event_type=0001 room=003C wave_number=0002 delay=00000003 action_stream_offset=0000002C]
+  0C 0000025B   trigger_event           event_id=0000025B
+  01            stop
+/* W-009 */ [Event1Entry event_id=0000025B flags=0000 event_type=0001 room=003C wave_number=0003 delay=00000003 action_stream_offset=00000032]
+  0C 0000025C   trigger_event           event_id=0000025C
+  0A 003C       set_switch_flag         id=003C
+  01            stop
+/* W-00A */ [Event1Entry event_id=0000025C flags=0000 event_type=0001 room=003C wave_number=0004 delay=000001C2 action_stream_offset=0000003B]
+  01            stop
+/* W-00B */ [Event1Entry event_id=000001C3 flags=0000 event_type=0001 room=002D wave_number=0001 delay=00000003 action_stream_offset=0000003C]
+  0C 000001C4   trigger_event           event_id=000001C4
+  01            stop
+/* W-00C */ [Event1Entry event_id=000001C4 flags=0000 event_type=0001 room=002D wave_number=0002 delay=00000003 action_stream_offset=00000042]
+  0C 000001C5   trigger_event           event_id=000001C5
+  01            stop
+/* W-00D */ [Event1Entry event_id=000001C5 flags=0000 event_type=0001 room=002D wave_number=0003 delay=00000003 action_stream_offset=00000048]
+  0C 000001C6   trigger_event           event_id=000001C6
+  01            stop
+/* W-00E */ [Event1Entry event_id=000001C6 flags=0000 event_type=0001 room=002D wave_number=0004 delay=00000003 action_stream_offset=0000004E]
+  0A 002D       set_switch_flag         id=002D
+  01            stop
+/* W-00F */ [Event1Entry event_id=0000012D flags=0000 event_type=0001 room=001E wave_number=0001 delay=00000003 action_stream_offset=00000052]
+  0C 0000012E   trigger_event           event_id=0000012E
+  01            stop
+/* W-010 */ [Event1Entry event_id=0000012E flags=0000 event_type=0001 room=001E wave_number=0002 delay=00000003 action_stream_offset=00000058]
+  0C 0000012F   trigger_event           event_id=0000012F
+  01            stop
+/* W-011 */ [Event1Entry event_id=0000012F flags=0000 event_type=0001 room=001E wave_number=0003 delay=00000003 action_stream_offset=0000005E]
+  0C 00000130   trigger_event           event_id=00000130
+  01            stop
+/* W-012 */ [Event1Entry event_id=00000130 flags=0000 event_type=0001 room=001E wave_number=0004 delay=00000003 action_stream_offset=00000064]
+  0A 001E       set_switch_flag         id=001E
+  01            stop
+/* W-013 */ [Event1Entry event_id=0000015F flags=0000 event_type=0001 room=0023 wave_number=0001 delay=00000003 action_stream_offset=00000068]
+  0C 00000160   trigger_event           event_id=00000160
+  01            stop
+/* W-014 */ [Event1Entry event_id=00000160 flags=0000 event_type=0001 room=0023 wave_number=0002 delay=00000003 action_stream_offset=0000006E]
+  0C 00000161   trigger_event           event_id=00000161
+  01            stop
+/* W-015 */ [Event1Entry event_id=00000161 flags=0000 event_type=0001 room=0023 wave_number=0003 delay=00000003 action_stream_offset=00000074]
+  0A 0023       set_switch_flag         id=0023
+  0C 00000162   trigger_event           event_id=00000162
+  01            stop
+/* W-016 */ [Event1Entry event_id=00000162 flags=0000 event_type=0001 room=0023 wave_number=0004 delay=00000003 action_stream_offset=0000007D]
+  0C 00000163   trigger_event           event_id=00000163
+  01            stop
+/* W-017 */ [Event1Entry event_id=00000163 flags=0000 event_type=0001 room=0023 wave_number=0005 delay=00000003 action_stream_offset=00000083]
+  0C 00000164   trigger_event           event_id=00000164
+  01            stop
+/* W-018 */ [Event1Entry event_id=00000164 flags=0000 event_type=0001 room=0023 wave_number=0006 delay=00000003 action_stream_offset=00000089]
+  08 0023 0001  construct_objects       room=0023 group=0001
+  01            stop
+/* W-019 */ [Event1Entry event_id=00000191 flags=0000 event_type=0001 room=0028 wave_number=0001 delay=00000003 action_stream_offset=0000008F]
+  0C 00000192   trigger_event           event_id=00000192
+  01            stop
+/* W-01A */ [Event1Entry event_id=00000192 flags=0000 event_type=0001 room=0028 wave_number=0002 delay=00000003 action_stream_offset=00000095]
+  0C 00000193   trigger_event           event_id=00000193
+  01            stop
+/* W-01B */ [Event1Entry event_id=00000193 flags=0000 event_type=0001 room=0028 wave_number=0003 delay=00000003 action_stream_offset=0000009B]
+  0C 00000194   trigger_event           event_id=00000194
+  01            stop
+/* W-01C */ [Event1Entry event_id=00000194 flags=0000 event_type=0001 room=0028 wave_number=0004 delay=00000003 action_stream_offset=000000A1]
+  0C 00000195   trigger_event           event_id=00000195
+  01            stop
+/* W-01D */ [Event1Entry event_id=00000195 flags=0000 event_type=0001 room=0028 wave_number=0005 delay=00000003 action_stream_offset=000000A7]
+  0C 00000196   trigger_event           event_id=00000196
+  01            stop
+/* W-01E */ [Event1Entry event_id=00000196 flags=0000 event_type=0001 room=0028 wave_number=0006 delay=00000003 action_stream_offset=000000AD]
+  0A 0029       set_switch_flag         id=0029
+  01            stop
+/* W-01F */ [Event1Entry event_id=000000A1 flags=0000 event_type=0001 room=0010 wave_number=0001 delay=00000003 action_stream_offset=000000B1]
+  0C 000000A2   trigger_event           event_id=000000A2
+  01            stop
+/* W-020 */ [Event1Entry event_id=000000A2 flags=0000 event_type=0001 room=0010 wave_number=0002 delay=00000003 action_stream_offset=000000B7]
+  0C 000000A3   trigger_event           event_id=000000A3
+  01            stop
+/* W-021 */ [Event1Entry event_id=000000A3 flags=0000 event_type=0001 room=0010 wave_number=0003 delay=00000003 action_stream_offset=000000BD]
+  0C 000000A4   trigger_event           event_id=000000A4
+  01            stop
+/* W-022 */ [Event1Entry event_id=000000A4 flags=0000 event_type=0001 room=0010 wave_number=0004 delay=00000003 action_stream_offset=000000C3]
+  0A 0010       set_switch_flag         id=0010
+  01            stop
+/* W-023 */ [Event1Entry event_id=000000E7 flags=0000 event_type=0001 room=0017 wave_number=0001 delay=00000003 action_stream_offset=000000C7]
+  0C 000000E8   trigger_event           event_id=000000E8
+  01            stop
+/* W-024 */ [Event1Entry event_id=000000E8 flags=0000 event_type=0001 room=0017 wave_number=0002 delay=00000003 action_stream_offset=000000CD]
+  0C 000000E9   trigger_event           event_id=000000E9
+  01            stop
+/* W-025 */ [Event1Entry event_id=000000E9 flags=0000 event_type=0001 room=0017 wave_number=0003 delay=00000003 action_stream_offset=000000D3]
+  0A 0017       set_switch_flag         id=0017
+  0A 000F       set_switch_flag         id=000F
+  01            stop
+/* W-026 */ [Event1Entry event_id=00000097 flags=0000 event_type=0001 room=000F wave_number=0001 delay=00000003 action_stream_offset=000000DA]
+  0C 00000098   trigger_event           event_id=00000098
+  01            stop
+/* W-027 */ [Event1Entry event_id=00000098 flags=0000 event_type=0001 room=000F wave_number=0002 delay=00000003 action_stream_offset=000000E0]
+  0C 00000099   trigger_event           event_id=00000099
+  0A 0028       set_switch_flag         id=0028
+  01            stop
+/* W-028 */ [Event1Entry event_id=00000099 flags=0000 event_type=0001 room=000F wave_number=0003 delay=0000012C action_stream_offset=000000E9]
+  01            stop
+
+.object_sets 7 /* offset 0x18E4 in file; 0xC7C bytes */
+/* K-05D */ [ObjectSetEntry type=0003 "TObjMapWarpForest" floor=0007 group=0000 room=0005 a3=0000 x=3.99724e-06 y=0 z=-4.81308e-06 x_angle=00000000 y_angle=00000001 z_angle=00000000 params=[2470 0 1150 00008000 00000000 00000000]]
+/* K-05E */ [ObjectSetEntry type=0008 "TObjEvtCollision" floor=0007 group=0000 room=0015 a3=0000 x=1.06091 y=0.684786 z=-149.527 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[30 1 1 00000209 00000000 00000000]]
+/* K-05F */ [ObjectSetEntry type=0008 "TObjEvtCollision" floor=0007 group=0000 room=0015 a3=0000 x=271.614 y=0.684786 z=-481.331 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[30 1 1 00000899 00000000 00000000]]
+/* K-060 */ [ObjectSetEntry type=0008 "TObjEvtCollision" floor=0007 group=0000 room=0015 a3=0000 x=511.636 y=0.188534 z=-481.775 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[30 1 1 00000213 00000000 00000000]]
+/* K-061 */ [ObjectSetEntry type=0008 "TObjEvtCollision" floor=0007 group=0000 room=0015 a3=0000 x=839.559 y=0.744801 z=-330.728 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[30 1 1 00000263 00000000 00000000]]
+/* K-062 */ [ObjectSetEntry type=0008 "TObjEvtCollision" floor=0007 group=0000 room=0015 a3=0000 x=841.225 y=1.49012e-08 z=-634.543 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[30 1 1 0000021A 00000000 00000000]]
+/* K-063 */ [ObjectSetEntry type=0008 "TObjEvtCollision" floor=0007 group=0000 room=0015 a3=0000 x=1080.08 y=2.33995e-08 z=141.88 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[30 1 1 0000019B 00000000 00000000]]
+/* K-064 */ [ObjectSetEntry type=0100 "TODoorMachine01" floor=0007 group=0000 room=0015 a3=0000 x=-120 y=0 z=0 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[1 1 1 0000001E 00000003 00000000]]
+/* K-065 */ [ObjectSetEntry type=0100 "TODoorMachine01" floor=0007 group=0000 room=0015 a3=0000 x=0 y=0 z=-120 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 -0000001 00000003 00000000]]
+/* K-066 */ [ObjectSetEntry type=0002 "TObjAreaWarpForest" floor=0007 group=0000 room=0015 a3=0000 x=0 y=0 z=20 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 00000004 00000000 00000000]]
+/* K-067 */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=0007 group=0000 room=0015 a3=0000 x=10 y=0 z=0 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 1 1 00000000 00000000 00000000]]
+/* K-068 */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=0007 group=0000 room=0015 a3=0000 x=-10 y=0 z=0 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[1 1 1 00000000 00000000 00000000]]
+/* K-069 */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=0007 group=0000 room=0015 a3=0000 x=-20 y=0 z=-10 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[2 1 1 00000000 00000000 00000000]]
+/* K-06A */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=0007 group=0000 room=0015 a3=0000 x=20 y=0 z=-10 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[3 1 1 00000000 00000000 00000000]]
+/* K-06B */ [ObjectSetEntry type=0100 "TODoorMachine01" floor=0007 group=0000 room=0029 a3=0000 x=0 y=0 z=-120 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 0000003E 00000003 00000000]]
+/* K-06C */ [ObjectSetEntry type=0100 "TODoorMachine01" floor=0007 group=0000 room=0029 a3=0000 x=0 y=0 z=120 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 00000029 00000000 00000000]]
+/* K-06D */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0006 group=0000 room=0029 a3=0000 x=-31.9792 y=0 z=-75.2305 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 00000000 00000000 00000000]]
+/* K-06E */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0007 group=0000 room=0029 a3=0000 x=-51.9792 y=0 z=-71.2305 x_angle=00000000 y_angle=00002000 z_angle=00000000 params=[1 1 1 00000000 00000000 00000000]]
+/* K-06F */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0007 group=0000 room=0029 a3=0000 x=-70.9792 y=0 z=-32.2305 x_angle=00000000 y_angle=00006000 z_angle=00000000 params=[1 1 1 00000000 00000000 00000000]]
+/* K-070 */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0007 group=0000 room=0029 a3=0000 x=-58.8545 y=0 z=-49.8628 x_angle=00000000 y_angle=00001000 z_angle=00000000 params=[1 1 1 00000000 00000000 00000000]]
+/* K-071 */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0007 group=0000 room=0029 a3=0000 x=61.5962 y=0 z=62.9797 x_angle=00000000 y_angle=00006000 z_angle=00000000 params=[1 1 1 00000000 00000000 00000000]]
+/* K-072 */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0006 group=0000 room=0029 a3=0000 x=31.5962 y=0 z=72.9797 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[1 1 1 00000000 00000000 00000000]]
+/* K-073 */ [ObjectSetEntry type=0100 "TODoorMachine01" floor=0007 group=0000 room=0034 a3=0000 x=-119.988 y=0 z=120.012 x_angle=00000000 y_angle=00000001 z_angle=00000000 params=[1 1 1 0000001E 00000003 00000000]]
+/* K-074 */ [ObjectSetEntry type=0100 "TODoorMachine01" floor=0007 group=0000 room=0034 a3=0000 x=120.012 y=0 z=119.989 x_angle=00000000 y_angle=00000001 z_angle=00000000 params=[1 1 1 00000034 00000003 00000000]]
+/* K-075 */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0007 group=0000 room=0034 a3=0000 x=-172.55 y=0 z=-80.1714 x_angle=00000000 y_angle=00009000 z_angle=00000000 params=[1 1 1 00000000 00000000 00000000]]
+/* K-076 */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0007 group=0000 room=0034 a3=0000 x=-190.77 y=0 z=-48.1345 x_angle=00000000 y_angle=00006000 z_angle=00000000 params=[1 1 1 00000000 00000000 00000000]]
+/* K-077 */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0007 group=0000 room=0034 a3=0000 x=202.001 y=0 z=60.3764 x_angle=00000000 y_angle=00009000 z_angle=00000000 params=[1 1 1 00000000 00000000 00000000]]
+/* K-078 */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0007 group=0000 room=0034 a3=0000 x=195.109 y=0 z=82.1368 x_angle=00000000 y_angle=FFFFE001 z_angle=00000000 params=[1 1 1 00000000 00000000 00000000]]
+/* K-079 */ [ObjectSetEntry type=0100 "TODoorMachine01" floor=0007 group=0000 room=0035 a3=0000 x=119.997 y=0 z=120 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 00000035 00000003 00000000]]
+/* K-07A */ [ObjectSetEntry type=0100 "TODoorMachine01" floor=0007 group=0000 room=0035 a3=0000 x=119.997 y=0 z=-120 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 00000008 00000003 00000000]]
+/* K-07B */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0007 group=0000 room=0035 a3=0000 x=-193.746 y=0 z=-43.147 x_angle=00000000 y_angle=00009000 z_angle=00000000 params=[1 1 1 00000003 00000003 00000000]]
+/* K-07C */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0007 group=0000 room=0035 a3=0000 x=-192.587 y=0 z=-62.6594 x_angle=00000000 y_angle=00004500 z_angle=00000000 params=[1 1 1 00000003 00000003 00000000]]
+/* K-07D */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0007 group=0000 room=0035 a3=0000 x=-172.587 y=0 z=-82.6594 x_angle=00000000 y_angle=00003500 z_angle=00000000 params=[1 1 1 00000003 00000003 00000000]]
+/* K-07E */ [ObjectSetEntry type=0100 "TODoorMachine01" floor=0007 group=0000 room=003D a3=0000 x=240 y=0 z=-120.003 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[1 1 1 0000003D 00000003 00000000]]
+/* K-07F */ [ObjectSetEntry type=0100 "TODoorMachine01" floor=0007 group=0000 room=005A a3=0000 x=-240 y=0 z=-120 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[1 1 1 0000001E 00000003 00000000]]
+/* K-080 */ [ObjectSetEntry type=0100 "TODoorMachine01" floor=0007 group=0000 room=005A a3=0000 x=240 y=0 z=120 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[1 1 1 0000001E 00000003 00000000]]
+/* K-081 */ [ObjectSetEntry type=0100 "TODoorMachine01" floor=0007 group=0000 room=005A a3=0000 x=119.998 y=0 z=239.998 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 -0000001 00000003 00000000]]
+/* K-082 */ [ObjectSetEntry type=0102 "__EP4_DOOR__/TODoorMachine02" floor=0007 group=0000 room=005A a3=0000 x=-119.996 y=0 z=-239.997 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 0000001E 00000001 00000000]]
+/* K-083 */ [ObjectSetEntry type=0002 "TObjAreaWarpForest" floor=0007 group=0000 room=005A a3=0000 x=0 y=10 z=-80 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[1 1 1 0000000A 00000000 00000001]]
+/* K-084 */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=0007 group=0000 room=005A a3=0000 x=20 y=10 z=-70 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[0 1 1 00000001 00000000 00000000]]
+/* K-085 */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=0007 group=0000 room=005A a3=0000 x=20 y=10 z=-90 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[1 1 1 00000001 00000000 00000000]]
+/* K-086 */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=0007 group=0000 room=005A a3=0000 x=30 y=10 z=-100 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[2 1 1 00000001 00000000 00000000]]
+/* K-087 */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=0007 group=0000 room=005A a3=0000 x=30 y=10 z=-60 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[3 1 1 00000001 00000000 00000000]]
+/* K-088 */ [ObjectSetEntry type=0100 "TODoorMachine01" floor=0007 group=0000 room=00DC a3=0000 x=-120 y=0 z=0 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[1 1 1 00000034 00000003 00000000]]
+/* K-089 */ [ObjectSetEntry type=0100 "TODoorMachine01" floor=0007 group=0000 room=00DC a3=0000 x=120 y=0 z=0 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[1 1 1 000000DC 00000003 00000000]]
+/* K-08A */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0007 group=0000 room=00DC a3=0000 x=71.491 y=0 z=51.3564 x_angle=00000000 y_angle=00001000 z_angle=00000000 params=[1 1 1 00000000 00000000 00000000]]
+/* K-08B */ [ObjectSetEntry type=0088 "TObjContainerBase2" floor=0007 group=0000 room=00DC a3=0000 x=53.062 y=0 z=67.4352 x_angle=00000000 y_angle=0000A500 z_angle=00000000 params=[1 1 1 00000000 00000000 00000000]]
+
+.enemy_sets 7 /* offset 0x7010 in file; 0x2130 bytes */
+/* S-0EE */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=0034 wave_number=0004 wave_number2=0004 a1=0000 x=0.00482178 y=100 z=50 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[1 1 0 0 0 0000 0000]]
+/* S-0EF */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=0034 wave_number=0004 wave_number2=0004 a1=0000 x=-0.00476074 y=100 z=-50 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[1 1 0 0 0 0000 0000]]
+/* S-0F0 */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=0034 wave_number=0004 wave_number2=0004 a1=0000 x=50 y=100 z=-0.00476074 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[1 1 0 0 0 0000 0000]]
+/* S-0F1 */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=0034 wave_number=0004 wave_number2=0004 a1=0000 x=-50 y=100 z=0.00488281 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[1 1 0 0 0 0000 0000]]
+/* S-0F2 */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=0034 wave_number=0003 wave_number2=0003 a1=0000 x=0.00482178 y=100 z=50 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-0F3 */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=0034 wave_number=0003 wave_number2=0003 a1=0000 x=-0.00476074 y=100 z=-50 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-0F4 */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=0034 wave_number=0003 wave_number2=0003 a1=0000 x=50 y=100 z=-0.00476074 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-0F5 */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=0034 wave_number=0003 wave_number2=0003 a1=0000 x=-50 y=100 z=0.00488281 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-0F6 */ [EnemySetEntry type=0081 "TObjEneGyaranzo" num_children=0000 floor=0007 room=0034 wave_number=0005 wave_number2=0005 a1=0000 x=180 y=-8.89122e-09 z=-0.0172119 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0F7 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0034 wave_number=0005 wave_number2=0005 a1=0000 x=120 y=-8.89122e-09 z=-0.0114746 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-0F8 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0034 wave_number=0005 wave_number2=0005 a1=0000 x=120.005 y=0 z=49.9885 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-0F9 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0034 wave_number=0005 wave_number2=0005 a1=0000 x=119.995 y=0 z=-50.0115 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-0FA */ [EnemySetEntry type=0081 "TObjEneGyaranzo" num_children=0000 floor=0007 room=0034 wave_number=0007 wave_number2=0007 a1=0000 x=50 y=0 z=-0.00476074 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0FB */ [EnemySetEntry type=0081 "TObjEneGyaranzo" num_children=0000 floor=0007 room=0034 wave_number=0007 wave_number2=0007 a1=0000 x=0.00482178 y=0 z=50 x_angle=00000000 y_angle=FFFF8001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0FC */ [EnemySetEntry type=0081 "TObjEneGyaranzo" num_children=0000 floor=0007 room=0034 wave_number=0007 wave_number2=0007 a1=0000 x=-0.00476074 y=0 z=-50 x_angle=00000000 y_angle=00000001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-0FD */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=0034 wave_number=0006 wave_number2=0006 a1=0000 x=0.00482178 y=100 z=50 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[1 1 0 0 0 0000 0000]]
+/* S-0FE */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=0034 wave_number=0006 wave_number2=0006 a1=0000 x=-0.00476074 y=100 z=-50 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-0FF */ [EnemySetEntry type=0084 "TObjEneMe1CanadinLeader" num_children=0000 floor=0007 room=0034 wave_number=0002 wave_number2=0002 a1=0000 x=-40 y=0 z=0.00399756 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-100 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0034 wave_number=0001 wave_number2=0001 a1=0000 x=-39.9923 y=0 z=80.0039 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-101 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0034 wave_number=0001 wave_number2=0001 a1=0000 x=-79.9923 y=0 z=80.0077 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-102 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0034 wave_number=0001 wave_number2=0001 a1=0000 x=-80.0076 y=0 z=-79.9923 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-103 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0034 wave_number=0001 wave_number2=0001 a1=0000 x=-40.0076 y=0 z=-79.9961 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-104 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0034 wave_number=0001 wave_number2=0001 a1=0000 x=-60.0048 y=0 z=-49.9943 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-105 */ [EnemySetEntry type=0085 "TOCtrlDubchik" num_children=0000 floor=0007 room=0034 wave_number=0001 wave_number2=0001 a1=0000 x=-60 y=0 z=0.0057373 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-106 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0034 wave_number=0001 wave_number2=0001 a1=0000 x=-59.9952 y=0 z=50.0057 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-107 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0034 wave_number=0001 wave_number2=0001 a1=0000 x=-60.0076 y=0 z=-79.9943 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-108 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0034 wave_number=0001 wave_number2=0001 a1=0000 x=-59.9923 y=0 z=80.0057 x_angle=00000000 y_angle=FFFFC001 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-109 */ [EnemySetEntry type=0081 "TObjEneGyaranzo" num_children=0000 floor=0007 room=0035 wave_number=0009 wave_number2=0009 a1=0000 x=0 y=0 z=-80 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-10A */ [EnemySetEntry type=0081 "TObjEneGyaranzo" num_children=0000 floor=0007 room=0035 wave_number=0009 wave_number2=0009 a1=0000 x=0 y=0 z=80 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-10B */ [EnemySetEntry type=0081 "TObjEneGyaranzo" num_children=0000 floor=0007 room=0035 wave_number=0009 wave_number2=0009 a1=0000 x=0 y=0 z=0 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-10C */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0035 wave_number=0005 wave_number2=0005 a1=0000 x=-33.1377 y=0 z=-82.2963 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-10D */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0035 wave_number=0005 wave_number2=0005 a1=0000 x=-32.5374 y=0 z=-34.4406 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-10E */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0035 wave_number=0005 wave_number2=0005 a1=0000 x=-32.1484 y=0 z=-3.45853 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-10F */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0035 wave_number=0005 wave_number2=0005 a1=0000 x=-31.772 y=0 z=26.5391 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-110 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0035 wave_number=0005 wave_number2=0005 a1=0000 x=-31.3079 y=0 z=63.1926 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-111 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0035 wave_number=0005 wave_number2=0005 a1=0000 x=4.41431 y=0 z=41.5099 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-112 */ [EnemySetEntry type=0085 "TOCtrlDubchik" num_children=0000 floor=0007 room=0035 wave_number=0005 wave_number2=0005 a1=0000 x=3.82861 y=0 z=-4.20697 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-113 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0035 wave_number=0005 wave_number2=0005 a1=0000 x=3.17212 y=0 z=-56.0934 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-114 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0035 wave_number=0005 wave_number2=0005 a1=0000 x=42.4888 y=0 z=-2.76971 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-115 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0035 wave_number=0004 wave_number2=0004 a1=0000 x=-33.1377 y=0 z=-82.2963 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-116 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0035 wave_number=0004 wave_number2=0004 a1=0000 x=-32.5374 y=0 z=-34.4406 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-117 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0035 wave_number=0004 wave_number2=0004 a1=0000 x=-32.1484 y=0 z=-3.45853 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-118 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0035 wave_number=0004 wave_number2=0004 a1=0000 x=-31.772 y=0 z=26.5391 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-119 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0035 wave_number=0004 wave_number2=0004 a1=0000 x=-31.3079 y=0 z=63.1926 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-11A */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0035 wave_number=0004 wave_number2=0004 a1=0000 x=4.41431 y=0 z=41.5099 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-11B */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0035 wave_number=0004 wave_number2=0004 a1=0000 x=3.82861 y=0 z=-4.20697 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-11C */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0035 wave_number=0004 wave_number2=0004 a1=0000 x=3.17212 y=0 z=-56.0934 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-11D */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=0035 wave_number=0004 wave_number2=0004 a1=0000 x=42.4888 y=0 z=-2.76971 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-11E */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=0035 wave_number=0006 wave_number2=0006 a1=0000 x=0 y=100 z=-50 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[1 1 0 0 0 0000 0000]]
+/* S-11F */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=0035 wave_number=0006 wave_number2=0006 a1=0000 x=0 y=100 z=50 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[1 1 0 0 0 0000 0000]]
+/* S-120 */ [EnemySetEntry type=0081 "TObjEneGyaranzo" num_children=0000 floor=0007 room=0035 wave_number=0007 wave_number2=0007 a1=0000 x=107.93 y=0 z=-70.0145 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-121 */ [EnemySetEntry type=0081 "TObjEneGyaranzo" num_children=0000 floor=0007 room=0035 wave_number=0007 wave_number2=0007 a1=0000 x=104.35 y=0 z=45.3524 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-122 */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=0035 wave_number=0008 wave_number2=0008 a1=0000 x=30 y=100 z=-30 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[1 1 0 0 0 0000 0000]]
+/* S-123 */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=0035 wave_number=0008 wave_number2=0008 a1=0000 x=30 y=100 z=30 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[1 1 0 0 0 0000 0000]]
+/* S-124 */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=0035 wave_number=0008 wave_number2=0008 a1=0000 x=-30 y=100 z=-50 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-125 */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=0035 wave_number=0008 wave_number2=0008 a1=0000 x=-30 y=100 z=0 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-126 */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=0035 wave_number=0008 wave_number2=0008 a1=0000 x=-30 y=100 z=50 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-127 */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=0035 wave_number=0003 wave_number2=0003 a1=0000 x=-70 y=100 z=-50 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-128 */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=0035 wave_number=0003 wave_number2=0003 a1=0000 x=-70 y=100 z=50 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-129 */ [EnemySetEntry type=0084 "TObjEneMe1CanadinLeader" num_children=0004 floor=0007 room=0035 wave_number=0001 wave_number2=0001 a1=0000 x=-28.0801 y=0 z=-10.5842 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-12A */ [EnemySetEntry type=0084 "TObjEneMe1CanadinLeader" num_children=0004 floor=0007 room=0035 wave_number=0002 wave_number2=0002 a1=0000 x=-28.0801 y=0 z=-10.5842 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-12B */ [EnemySetEntry type=0084 "TObjEneMe1CanadinLeader" num_children=0000 floor=0007 room=003D wave_number=0005 wave_number2=0005 a1=0000 x=0 y=0 z=0 x_angle=00000000 y_angle=0000C000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-12C */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=003D wave_number=0004 wave_number2=0004 a1=0000 x=0 y=80 z=100 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-12D */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=003D wave_number=0004 wave_number2=0004 a1=0000 x=0 y=80 z=-100 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 0 0 0 0000 0000]]
+/* S-12E */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=003D wave_number=0004 wave_number2=0004 a1=0000 x=100 y=80 z=-100 x_angle=00000000 y_angle=0000E000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-12F */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=003D wave_number=0004 wave_number2=0004 a1=0000 x=-100 y=80 z=-100 x_angle=00000000 y_angle=00002000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-130 */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=003D wave_number=0004 wave_number2=0004 a1=0000 x=100 y=80 z=100 x_angle=00000000 y_angle=0000A000 z_angle=00000000 params=[1 1 0 0 0 0000 0000]]
+/* S-131 */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=003D wave_number=0004 wave_number2=0004 a1=0000 x=-100 y=80 z=100 x_angle=00000000 y_angle=00006000 z_angle=00000000 params=[1 1 0 0 0 0000 0000]]
+/* S-132 */ [EnemySetEntry type=0083 "TObjEneMe1Canadin" num_children=0000 floor=0007 room=003D wave_number=0003 wave_number2=0003 a1=0000 x=0 y=0 z=100 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-133 */ [EnemySetEntry type=0083 "TObjEneMe1Canadin" num_children=0000 floor=0007 room=003D wave_number=0003 wave_number2=0003 a1=0000 x=0 y=0 z=-100 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-134 */ [EnemySetEntry type=0083 "TObjEneMe1Canadin" num_children=0000 floor=0007 room=003D wave_number=0003 wave_number2=0003 a1=0000 x=-100 y=0 z=0 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-135 */ [EnemySetEntry type=0083 "TObjEneMe1Canadin" num_children=0000 floor=0007 room=003D wave_number=0003 wave_number2=0003 a1=0000 x=100 y=0 z=0 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-136 */ [EnemySetEntry type=0081 "TObjEneGyaranzo" num_children=0000 floor=0007 room=003D wave_number=0003 wave_number2=0003 a1=0000 x=0 y=0 z=0 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-137 */ [EnemySetEntry type=0081 "TObjEneGyaranzo" num_children=0000 floor=0007 room=003D wave_number=0008 wave_number2=0008 a1=0000 x=0 y=0 z=100 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-138 */ [EnemySetEntry type=0081 "TObjEneGyaranzo" num_children=0000 floor=0007 room=003D wave_number=0008 wave_number2=0008 a1=0000 x=0 y=0 z=-100 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-139 */ [EnemySetEntry type=0081 "TObjEneGyaranzo" num_children=0000 floor=0007 room=003D wave_number=0008 wave_number2=0008 a1=0000 x=-100 y=0 z=0 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-13A */ [EnemySetEntry type=0081 "TObjEneGyaranzo" num_children=0000 floor=0007 room=003D wave_number=0008 wave_number2=0008 a1=0000 x=100 y=0 z=0 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-13B */ [EnemySetEntry type=0081 "TObjEneGyaranzo" num_children=0004 floor=0007 room=003D wave_number=0007 wave_number2=0007 a1=0000 x=100 y=0 z=100 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-13C */ [EnemySetEntry type=0081 "TObjEneGyaranzo" num_children=0004 floor=0007 room=003D wave_number=0007 wave_number2=0007 a1=0000 x=-100 y=0 z=100 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-13D */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=003D wave_number=0007 wave_number2=0007 a1=0000 x=100 y=80 z=-100 x_angle=00000000 y_angle=0000E000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-13E */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=003D wave_number=0007 wave_number2=0007 a1=0000 x=-100 y=80 z=-100 x_angle=00000000 y_angle=00002000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-13F */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=003D wave_number=0006 wave_number2=0006 a1=0000 x=-100 y=0 z=-140 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-140 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=003D wave_number=0006 wave_number2=0006 a1=0000 x=140 y=0 z=-100 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-141 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=003D wave_number=0006 wave_number2=0006 a1=0000 x=100 y=0 z=-140 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-142 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=003D wave_number=0006 wave_number2=0006 a1=0000 x=-140 y=0 z=-100 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-143 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=003D wave_number=0006 wave_number2=0006 a1=0000 x=140 y=0 z=100 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-144 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=003D wave_number=0006 wave_number2=0006 a1=0000 x=-140 y=0 z=100 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-145 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=003D wave_number=0006 wave_number2=0006 a1=0000 x=-100 y=0 z=140 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-146 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=003D wave_number=0006 wave_number2=0006 a1=0000 x=100 y=0 z=140 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-147 */ [EnemySetEntry type=0085 "TOCtrlDubchik" num_children=0000 floor=0007 room=003D wave_number=0006 wave_number2=0006 a1=0000 x=0 y=0 z=0 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-148 */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=003D wave_number=0001 wave_number2=0001 a1=0000 x=0 y=80 z=100 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[1 1 0 0 0 0000 0000]]
+/* S-149 */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=003D wave_number=0001 wave_number2=0001 a1=0000 x=0 y=80 z=-100 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 0 0 0 0000 0000]]
+/* S-14A */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=003D wave_number=0001 wave_number2=0001 a1=0000 x=-100 y=80 z=0 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[1 1 0 0 0 0000 0000]]
+/* S-14B */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=003D wave_number=0001 wave_number2=0001 a1=0000 x=100 y=80 z=0 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[1 1 0 0 0 0000 0000]]
+/* S-14C */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=003D wave_number=0001 wave_number2=0001 a1=0000 x=0 y=80 z=0 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[1 1 0 0 0 0000 0000]]
+/* S-14D */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=003D wave_number=0002 wave_number2=0002 a1=0000 x=-100 y=0 z=-140 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-14E */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=003D wave_number=0002 wave_number2=0002 a1=0000 x=140 y=0 z=-100 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-14F */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=003D wave_number=0002 wave_number2=0002 a1=0000 x=-140 y=0 z=100 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-150 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=003D wave_number=0002 wave_number2=0002 a1=0000 x=100 y=0 z=140 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-151 */ [EnemySetEntry type=0083 "TObjEneMe1Canadin" num_children=0000 floor=0007 room=003D wave_number=0002 wave_number2=0002 a1=0000 x=0 y=0 z=100 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-152 */ [EnemySetEntry type=0083 "TObjEneMe1Canadin" num_children=0000 floor=0007 room=003D wave_number=0002 wave_number2=0002 a1=0000 x=0 y=0 z=-100 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-153 */ [EnemySetEntry type=0083 "TObjEneMe1Canadin" num_children=0000 floor=0007 room=003D wave_number=0002 wave_number2=0002 a1=0000 x=-100 y=0 z=0 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-154 */ [EnemySetEntry type=0083 "TObjEneMe1Canadin" num_children=0000 floor=0007 room=003D wave_number=0002 wave_number2=0002 a1=0000 x=100 y=0 z=0 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-155 */ [EnemySetEntry type=0083 "TObjEneMe1Canadin" num_children=0000 floor=0007 room=00DC wave_number=0003 wave_number2=0003 a1=0000 x=0 y=0 z=30 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-156 */ [EnemySetEntry type=0083 "TObjEneMe1Canadin" num_children=0000 floor=0007 room=00DC wave_number=0003 wave_number2=0003 a1=0000 x=70 y=0 z=30 x_angle=00000000 y_angle=FFFFA000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-157 */ [EnemySetEntry type=0083 "TObjEneMe1Canadin" num_children=0000 floor=0007 room=00DC wave_number=0003 wave_number2=0003 a1=0000 x=30 y=0 z=70 x_angle=00000000 y_angle=FFFFA000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-158 */ [EnemySetEntry type=0083 "TObjEneMe1Canadin" num_children=0000 floor=0007 room=00DC wave_number=0003 wave_number2=0003 a1=0000 x=-30 y=0 z=70 x_angle=00000000 y_angle=FFFF6000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-159 */ [EnemySetEntry type=0083 "TObjEneMe1Canadin" num_children=0000 floor=0007 room=00DC wave_number=0003 wave_number2=0003 a1=0000 x=-70 y=0 z=30 x_angle=00000000 y_angle=FFFF6000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-15A */ [EnemySetEntry type=0083 "TObjEneMe1Canadin" num_children=0000 floor=0007 room=00DC wave_number=0003 wave_number2=0003 a1=0000 x=0 y=0 z=70 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-15B */ [EnemySetEntry type=0083 "TObjEneMe1Canadin" num_children=0000 floor=0007 room=00DC wave_number=0003 wave_number2=0003 a1=0000 x=-20 y=0.72 z=-20 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-15C */ [EnemySetEntry type=0083 "TObjEneMe1Canadin" num_children=0000 floor=0007 room=00DC wave_number=0003 wave_number2=0003 a1=0000 x=20 y=0.72 z=-20 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-15D */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=00DC wave_number=0004 wave_number2=0004 a1=0000 x=60 y=100 z=60 x_angle=00000000 y_angle=FFFFA000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-15E */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=00DC wave_number=0004 wave_number2=0004 a1=0000 x=-40 y=100 z=60 x_angle=00000000 y_angle=FFFFA000 z_angle=00000000 params=[1 0 0 0 0 0000 0000]]
+/* S-15F */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=00DC wave_number=0001 wave_number2=0001 a1=0000 x=0 y=0 z=55 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-160 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=00DC wave_number=0001 wave_number2=0001 a1=0000 x=50 y=0 z=55 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-161 */ [EnemySetEntry type=0080 "TObjEneDubchik" num_children=0000 floor=0007 room=00DC wave_number=0001 wave_number2=0001 a1=0000 x=-50 y=0 z=55 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-162 */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=00DC wave_number=0002 wave_number2=0002 a1=0000 x=60 y=100 z=60 x_angle=00000000 y_angle=FFFFA000 z_angle=00000000 params=[1 1 0 0 0 0000 0000]]
+/* S-163 */ [EnemySetEntry type=0082 "TObjEneMe3ShinowaReal" num_children=0004 floor=0007 room=00DC wave_number=0002 wave_number2=0002 a1=0000 x=-40 y=100 z=60 x_angle=00000000 y_angle=FFFFA000 z_angle=00000000 params=[1 1 0 0 0 0000 0000]]
+
+.events 7 /* offset 0xB608 in file; 0x2E0 bytes; 0xA0 bytes in action stream */
+/* W-029 */ [Event1Entry event_id=00000899 flags=0000 event_type=0001 room=00DC wave_number=0001 delay=00000003 action_stream_offset=00000000]
+  0C 000000DE   trigger_event           event_id=000000DE
+  01            stop
+/* W-02A */ [Event1Entry event_id=000000DE flags=0000 event_type=0001 room=00DC wave_number=0002 delay=00000003 action_stream_offset=00000006]
+  0C 000000DF   trigger_event           event_id=000000DF
+  01            stop
+/* W-02B */ [Event1Entry event_id=000000DF flags=0000 event_type=0001 room=00DC wave_number=0003 delay=00000003 action_stream_offset=0000000C]
+  0C 000000E0   trigger_event           event_id=000000E0
+  01            stop
+/* W-02C */ [Event1Entry event_id=000000E0 flags=0000 event_type=0001 room=00DC wave_number=0004 delay=00000003 action_stream_offset=00000012]
+  0A 00DC       set_switch_flag         id=00DC
+  01            stop
+/* W-02D */ [Event1Entry event_id=00000213 flags=0000 event_type=0001 room=0035 wave_number=0001 delay=00000003 action_stream_offset=00000016]
+  0C 00000214   trigger_event           event_id=00000214
+  01            stop
+/* W-02E */ [Event1Entry event_id=00000214 flags=0000 event_type=0001 room=0035 wave_number=0002 delay=00000003 action_stream_offset=0000001C]
+  0C 00000215   trigger_event           event_id=00000215
+  01            stop
+/* W-02F */ [Event1Entry event_id=00000215 flags=0000 event_type=0001 room=0035 wave_number=0003 delay=00000003 action_stream_offset=00000022]
+  0C 00000216   trigger_event           event_id=00000216
+  01            stop
+/* W-030 */ [Event1Entry event_id=00000216 flags=0000 event_type=0001 room=0035 wave_number=0004 delay=00000003 action_stream_offset=00000028]
+  0C 00000217   trigger_event           event_id=00000217
+  01            stop
+/* W-031 */ [Event1Entry event_id=00000217 flags=0000 event_type=0001 room=0035 wave_number=0005 delay=00000003 action_stream_offset=0000002E]
+  0C 00000218   trigger_event           event_id=00000218
+  01            stop
+/* W-032 */ [Event1Entry event_id=00000218 flags=0000 event_type=0001 room=0035 wave_number=0006 delay=00000003 action_stream_offset=00000034]
+  0C 00000219   trigger_event           event_id=00000219
+  01            stop
+/* W-033 */ [Event1Entry event_id=00000219 flags=0000 event_type=0001 room=0035 wave_number=0007 delay=00000003 action_stream_offset=0000003A]
+  0A 0008       set_switch_flag         id=0008
+  01            stop
+/* W-034 */ [Event1Entry event_id=0000021A flags=0000 event_type=0001 room=0035 wave_number=0008 delay=00000003 action_stream_offset=0000003E]
+  0C 0000021B   trigger_event           event_id=0000021B
+  01            stop
+/* W-035 */ [Event1Entry event_id=0000021B flags=0000 event_type=0001 room=0035 wave_number=0009 delay=00000003 action_stream_offset=00000044]
+  0A 0035       set_switch_flag         id=0035
+  01            stop
+/* W-036 */ [Event1Entry event_id=00000209 flags=0000 event_type=0001 room=0034 wave_number=0001 delay=00000003 action_stream_offset=00000048]
+  0C 0000020A   trigger_event           event_id=0000020A
+  01            stop
+/* W-037 */ [Event1Entry event_id=0000020A flags=0000 event_type=0001 room=0034 wave_number=0002 delay=00000003 action_stream_offset=0000004E]
+  0C 0000020B   trigger_event           event_id=0000020B
+  01            stop
+/* W-038 */ [Event1Entry event_id=0000020B flags=0000 event_type=0001 room=0034 wave_number=0003 delay=00000003 action_stream_offset=00000054]
+  0C 0000020C   trigger_event           event_id=0000020C
+  01            stop
+/* W-039 */ [Event1Entry event_id=0000020C flags=0000 event_type=0001 room=0034 wave_number=0004 delay=00000003 action_stream_offset=0000005A]
+  0C 0000020D   trigger_event           event_id=0000020D
+  01            stop
+/* W-03A */ [Event1Entry event_id=0000020D flags=0000 event_type=0001 room=0034 wave_number=0005 delay=00000003 action_stream_offset=00000060]
+  0C 0000020E   trigger_event           event_id=0000020E
+  01            stop
+/* W-03B */ [Event1Entry event_id=0000020E flags=0000 event_type=0001 room=0034 wave_number=0006 delay=00000003 action_stream_offset=00000066]
+  0C 0000020F   trigger_event           event_id=0000020F
+  01            stop
+/* W-03C */ [Event1Entry event_id=0000020F flags=0000 event_type=0001 room=0034 wave_number=0007 delay=00000003 action_stream_offset=0000006C]
+  0A 0034       set_switch_flag         id=0034
+  01            stop
+/* W-03D */ [Event1Entry event_id=00000263 flags=0000 event_type=0001 room=003D wave_number=0001 delay=00000003 action_stream_offset=00000070]
+  0C 00000264   trigger_event           event_id=00000264
+  01            stop
+/* W-03E */ [Event1Entry event_id=00000264 flags=0000 event_type=0001 room=003D wave_number=0002 delay=00000003 action_stream_offset=00000076]
+  0C 00000265   trigger_event           event_id=00000265
+  01            stop
+/* W-03F */ [Event1Entry event_id=00000265 flags=0000 event_type=0001 room=003D wave_number=0003 delay=00000003 action_stream_offset=0000007C]
+  0C 00000266   trigger_event           event_id=00000266
+  01            stop
+/* W-040 */ [Event1Entry event_id=00000266 flags=0000 event_type=0001 room=003D wave_number=0004 delay=0000012C action_stream_offset=00000082]
+  0C 00000267   trigger_event           event_id=00000267
+  01            stop
+/* W-041 */ [Event1Entry event_id=00000267 flags=0000 event_type=0001 room=003D wave_number=0005 delay=00000003 action_stream_offset=00000088]
+  0C 00000268   trigger_event           event_id=00000268
+  01            stop
+/* W-042 */ [Event1Entry event_id=00000268 flags=0000 event_type=0001 room=003D wave_number=0006 delay=00000003 action_stream_offset=0000008E]
+  0C 00000269   trigger_event           event_id=00000269
+  01            stop
+/* W-043 */ [Event1Entry event_id=00000269 flags=0000 event_type=0001 room=003D wave_number=0007 delay=00000003 action_stream_offset=00000094]
+  0C 0000026A   trigger_event           event_id=0000026A
+  01            stop
+/* W-044 */ [Event1Entry event_id=0000026A flags=0000 event_type=0001 room=003D wave_number=0008 delay=00000258 action_stream_offset=0000009A]
+  0A 003D       set_switch_flag         id=003D
+  01            stop
+
+.object_sets 10 /* offset 0x2570 in file; 0x5D8 bytes */
+/* K-08C */ [ObjectSetEntry type=0145 "TODoorAncient03" floor=000A group=0000 room=0002 a3=0000 x=0 y=0 z=76.5996 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 00000002 00000000 00000000]]
+/* K-08D */ [ObjectSetEntry type=0145 "TODoorAncient03" floor=000A group=0000 room=0003 a3=0000 x=0 y=0 z=-76.6001 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 00000003 00000000 00000000]]
+/* K-08E */ [ObjectSetEntry type=0008 "TObjEvtCollision" floor=000A group=0000 room=0009 a3=0000 x=-1.80884 y=0 z=181.015 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[30 1 1 000001AF 00000000 00000000]]
+/* K-08F */ [ObjectSetEntry type=0008 "TObjEvtCollision" floor=000A group=0000 room=0009 a3=0000 x=860.847 y=0 z=272.948 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[30 1 1 00000321 00000000 00000000]]
+/* K-090 */ [ObjectSetEntry type=0008 "TObjEvtCollision" floor=000A group=0000 room=0009 a3=0000 x=1101.18 y=0 z=707.139 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[30 1 1 00000326 00000000 00000000]]
+/* K-091 */ [ObjectSetEntry type=0008 "TObjEvtCollision" floor=000A group=0000 room=0009 a3=0000 x=1101.07 y=0 z=-155.989 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[30 1 1 0000032C 00000000 00000000]]
+/* K-092 */ [ObjectSetEntry type=0145 "TODoorAncient03" floor=000A group=0000 room=0009 a3=0000 x=0 y=0 z=76.6006 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 -0000001 00000000 00000000]]
+/* K-093 */ [ObjectSetEntry type=0140 "TObjGoalWarpAncient" floor=000A group=0000 room=0009 a3=0000 x=0 y=0 z=0 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 00000007 00000000 00000000]]
+/* K-094 */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=000A group=0000 room=0009 a3=0000 x=10 y=0 z=25 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 1 1 00000000 00000000 00000000]]
+/* K-095 */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=000A group=0000 room=0009 a3=0000 x=-10 y=0 z=25 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 00000000 00000000 00000000]]
+/* K-096 */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=000A group=0000 room=0009 a3=0000 x=-20 y=0 z=35 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[2 1 1 00000000 00000000 00000000]]
+/* K-097 */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=000A group=0000 room=0009 a3=0000 x=20 y=0 z=35 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[3 1 1 00000000 00000000 00000000]]
+/* K-098 */ [ObjectSetEntry type=0145 "TODoorAncient03" floor=000A group=0000 room=002B a3=0000 x=-176.6 y=0 z=75 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[1 1 1 0000001E 00000000 00000000]]
+/* K-099 */ [ObjectSetEntry type=0145 "TODoorAncient03" floor=000A group=0000 room=002B a3=0000 x=75 y=0 z=-176.6 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[1 1 1 -0000001 00000000 00000000]]
+/* K-09A */ [ObjectSetEntry type=0145 "TODoorAncient03" floor=000A group=0000 room=002B a3=0000 x=176.6 y=0 z=-75 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[1 1 1 0000002B 00000000 00000000]]
+/* K-09B */ [ObjectSetEntry type=0145 "TODoorAncient03" floor=000A group=0000 room=0050 a3=0000 x=301.604 y=0 z=0 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[1 1 1 00000003 00000000 00000000]]
+/* K-09C */ [ObjectSetEntry type=0145 "TODoorAncient03" floor=000A group=0000 room=0050 a3=0000 x=-301.699 y=0 z=0 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[1 1 1 00000002 00000000 00000000]]
+/* K-09D */ [ObjectSetEntry type=0145 "TODoorAncient03" floor=000A group=0000 room=0050 a3=0000 x=0 y=0 z=-301.7 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[1 1 1 00000050 00000000 00000000]]
+/* K-09E */ [ObjectSetEntry type=0145 "TODoorAncient03" floor=000A group=0000 room=0055 a3=0000 x=0 y=0 z=101.6 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[1 1 1 0000002B 00000000 00000000]]
+/* K-09F */ [ObjectSetEntry type=0145 "TODoorAncient03" floor=000A group=0000 room=0055 a3=0000 x=0 y=0 z=-193 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[1 1 1 -0000001 00000000 00000000]]
+/* K-0A0 */ [ObjectSetEntry type=0019 "TObjWarpBoss" floor=000A group=0000 room=0163 a3=0000 x=0.00913219 y=0 z=94.9999 x_angle=00000000 y_angle=00008001 z_angle=00000000 params=[1 1 1 00000000 00000050 00000000]]
+/* K-0A1 */ [ObjectSetEntry type=0145 "TODoorAncient03" floor=000A group=0000 room=0163 a3=0000 x=0.00227718 y=0 z=23.5004 x_angle=00000000 y_angle=00008001 z_angle=00000000 params=[1 1 1 00000050 00000000 00000000]]
+
+.enemy_sets 10 /* offset 0x9150 in file; 0x2010 bytes */
+/* S-164 */ [EnemySetEntry type=00A7 "TObjEneBalClawBody" num_children=0000 floor=000A room=002B wave_number=0004 wave_number2=0004 a1=0000 x=0 y=0 z=0 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-165 */ [EnemySetEntry type=00A1 "TObjEneRe4Sorcerer" num_children=0000 floor=000A room=002B wave_number=0004 wave_number2=0004 a1=0000 x=-42.3826 y=0 z=39.5142 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-166 */ [EnemySetEntry type=00A1 "TObjEneRe4Sorcerer" num_children=0000 floor=000A room=002B wave_number=0004 wave_number2=0004 a1=0000 x=33.4708 y=0 z=40.4087 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-167 */ [EnemySetEntry type=00A4 "TObjEneDf2Bringer" num_children=0000 floor=000A room=002B wave_number=0005 wave_number2=0005 a1=0000 x=-96.9265 y=0 z=31.8105 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-168 */ [EnemySetEntry type=00A4 "TObjEneDf2Bringer" num_children=0000 floor=000A room=002B wave_number=0005 wave_number2=0005 a1=0000 x=105.353 y=0 z=100.058 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-169 */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=002B wave_number=0003 wave_number2=0003 a1=0000 x=134.777 y=0 z=102.627 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-16A */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=002B wave_number=0003 wave_number2=0003 a1=0000 x=-143.924 y=0 z=100.453 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-16B */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=002B wave_number=0003 wave_number2=0003 a1=0000 x=-107.23 y=0 z=128.069 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-16C */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=002B wave_number=0003 wave_number2=0003 a1=0000 x=107.744 y=0 z=131.22 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-16D */ [EnemySetEntry type=00A8 "TObjEneBalClawClaw" num_children=0000 floor=000A room=002B wave_number=0003 wave_number2=0003 a1=0000 x=-28.1241 y=0 z=0.223633 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-16E */ [EnemySetEntry type=00A8 "TObjEneBalClawClaw" num_children=0000 floor=000A room=002B wave_number=0003 wave_number2=0003 a1=0000 x=32.4365 y=0 z=-0.259277 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-16F */ [EnemySetEntry type=00A8 "TObjEneBalClawClaw" num_children=0000 floor=000A room=002B wave_number=0003 wave_number2=0003 a1=0000 x=104.481 y=0 z=-0.840088 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-170 */ [EnemySetEntry type=00A8 "TObjEneBalClawClaw" num_children=0000 floor=000A room=002B wave_number=0003 wave_number2=0003 a1=0000 x=-82.0753 y=0 z=0.654053 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-171 */ [EnemySetEntry type=00A5 "TObjEneRe7Berura" num_children=0000 floor=000A room=002B wave_number=0001 wave_number2=0001 a1=0000 x=-120.847 y=0 z=110.746 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-172 */ [EnemySetEntry type=00A5 "TObjEneRe7Berura" num_children=0000 floor=000A room=002B wave_number=0001 wave_number2=0001 a1=0000 x=121.053 y=0 z=105.954 x_angle=00000000 y_angle=00008000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-173 */ [EnemySetEntry type=00A5 "TObjEneRe7Berura" num_children=0000 floor=000A room=002B wave_number=0001 wave_number2=0001 a1=0000 x=138.583 y=0 z=-118.795 x_angle=00000000 y_angle=FFFFE000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-174 */ [EnemySetEntry type=00A5 "TObjEneRe7Berura" num_children=0000 floor=000A room=002B wave_number=0001 wave_number2=0001 a1=0000 x=-142.707 y=0 z=-99.5107 x_angle=00000000 y_angle=00002000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-175 */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=002B wave_number=0002 wave_number2=0002 a1=0000 x=-142.542 y=0 z=-78.6516 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-176 */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=002B wave_number=0002 wave_number2=0002 a1=0000 x=-125.379 y=0 z=-37.1641 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-177 */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=002B wave_number=0002 wave_number2=0002 a1=0000 x=-124.956 y=0 z=15.4277 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-178 */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=002B wave_number=0002 wave_number2=0002 a1=0000 x=-135.538 y=0 z=45.8896 x_angle=00000000 y_angle=00004000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-179 */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=002B wave_number=0002 wave_number2=0002 a1=0000 x=132.188 y=0 z=-16.5164 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-17A */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=002B wave_number=0002 wave_number2=0002 a1=0000 x=131.823 y=0 z=-61.8425 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-17B */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=002B wave_number=0002 wave_number2=0002 a1=0000 x=132.555 y=0 z=29.0913 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-17C */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=002B wave_number=0002 wave_number2=0002 a1=0000 x=133.077 y=0 z=93.9165 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-17D */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=000B wave_number2=000B a1=0000 x=-138.857 y=0 z=-41.6089 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-17E */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=000B wave_number2=000B a1=0000 x=-143.068 y=0 z=8.49365 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-17F */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=000B wave_number2=000B a1=0000 x=-141.545 y=0 z=64.2542 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-180 */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=000B wave_number2=000B a1=0000 x=-139.723 y=0 z=131.167 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-181 */ [EnemySetEntry type=00A3 "TObjEneDarkGunCenter" num_children=0000 floor=000A room=0050 wave_number=000B wave_number2=000B a1=0000 x=-181.565 y=0 z=69.543 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-182 */ [EnemySetEntry type=00A2 "TObjEneDarkGunner" num_children=0000 floor=000A room=0050 wave_number=000B wave_number2=000B a1=0000 x=-164.297 y=0 z=106.67 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-183 */ [EnemySetEntry type=00A2 "TObjEneDarkGunner" num_children=0000 floor=000A room=0050 wave_number=000B wave_number2=000B a1=0000 x=-159.069 y=0 z=30.9894 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-184 */ [EnemySetEntry type=00A2 "TObjEneDarkGunner" num_children=0000 floor=000A room=0050 wave_number=000B wave_number2=000B a1=0000 x=-110.356 y=0 z=67.1565 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-185 */ [EnemySetEntry type=00A2 "TObjEneDarkGunner" num_children=0000 floor=000A room=0050 wave_number=000B wave_number2=000B a1=0000 x=-153.952 y=0 z=67 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-186 */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=000A wave_number2=000A a1=0000 x=-54.5315 y=0 z=-225.709 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-187 */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=000A wave_number2=000A a1=0000 x=42.6011 y=0 z=-229.622 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-188 */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=000A wave_number2=000A a1=0000 x=2.02661 y=0 z=-96.1302 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-189 */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=000A wave_number2=000A a1=0000 x=21.7065 y=0 z=-96.6681 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-18A */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=000A wave_number2=000A a1=0000 x=-27.5474 y=0 z=-110.835 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-18B */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=000A wave_number2=000A a1=0000 x=60.7776 y=0 z=-113.249 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-18C */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=000A wave_number2=000A a1=0000 x=-13.4927 y=0 z=-225.725 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-18D */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=000A wave_number2=000A a1=0000 x=16.9277 y=0 z=-226.181 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-18E */ [EnemySetEntry type=00A1 "TObjEneRe4Sorcerer" num_children=0000 floor=000A room=0050 wave_number=0009 wave_number2=0009 a1=0000 x=29.2002 y=0 z=-160.612 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-18F */ [EnemySetEntry type=00A4 "TObjEneDf2Bringer" num_children=0000 floor=000A room=0050 wave_number=0009 wave_number2=0009 a1=0000 x=-14.0417 y=0 z=-121.595 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-190 */ [EnemySetEntry type=00A4 "TObjEneDf2Bringer" num_children=0000 floor=000A room=0050 wave_number=0009 wave_number2=0009 a1=0000 x=-53.8706 y=0 z=-201.531 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-191 */ [EnemySetEntry type=00A7 "TObjEneBalClawBody" num_children=0000 floor=000A room=0050 wave_number=000C wave_number2=000C a1=0000 x=-110.356 y=0 z=67.1565 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-192 */ [EnemySetEntry type=00A7 "TObjEneBalClawBody" num_children=0000 floor=000A room=0050 wave_number=000C wave_number2=000C a1=0000 x=-159.103 y=0 z=18.6848 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-193 */ [EnemySetEntry type=00A1 "TObjEneRe4Sorcerer" num_children=0000 floor=000A room=0050 wave_number=000C wave_number2=000C a1=0000 x=-153.746 y=0 z=91.3157 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-194 */ [EnemySetEntry type=00A4 "TObjEneDf2Bringer" num_children=0000 floor=000A room=0050 wave_number=000F wave_number2=000F a1=0000 x=-203.932 y=2.34531 z=-169.596 x_angle=00000000 y_angle=00002000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-195 */ [EnemySetEntry type=00A4 "TObjEneDf2Bringer" num_children=0000 floor=000A room=0050 wave_number=000F wave_number2=000F a1=0000 x=-159.465 y=0 z=-216.76 x_angle=00000000 y_angle=00002000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-196 */ [EnemySetEntry type=00A4 "TObjEneDf2Bringer" num_children=0000 floor=000A room=0050 wave_number=000F wave_number2=000F a1=0000 x=131.66 y=10 z=-215.318 x_angle=00000000 y_angle=FFFFE000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-197 */ [EnemySetEntry type=00A4 "TObjEneDf2Bringer" num_children=0000 floor=000A room=0050 wave_number=000F wave_number2=000F a1=0000 x=196.669 y=0 z=-155.385 x_angle=00000000 y_angle=FFFFE000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-198 */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=000E wave_number2=000E a1=0000 x=129.146 y=0 z=-116.23 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-199 */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=000E wave_number2=000E a1=0000 x=105.224 y=0 z=-189.14 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-19A */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=000E wave_number2=000E a1=0000 x=-169.439 y=0 z=-116.47 x_angle=00000000 y_angle=00002000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-19B */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=000E wave_number2=000E a1=0000 x=-125.529 y=0 z=-179.65 x_angle=00000000 y_angle=00002000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-19C */ [EnemySetEntry type=00A5 "TObjEneRe7Berura" num_children=0000 floor=000A room=0050 wave_number=000E wave_number2=000E a1=0000 x=105.572 y=0 z=-146.94 x_angle=00000000 y_angle=FFFFC000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-19D */ [EnemySetEntry type=00A5 "TObjEneRe7Berura" num_children=0000 floor=000A room=0050 wave_number=000E wave_number2=000E a1=0000 x=-130.483 y=0 z=-137.83 x_angle=00000000 y_angle=00002000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-19E */ [EnemySetEntry type=00A4 "TObjEneDf2Bringer" num_children=0000 floor=000A room=0050 wave_number=000D wave_number2=000D a1=0000 x=-168.154 y=0 z=135.507 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-19F */ [EnemySetEntry type=00A4 "TObjEneDf2Bringer" num_children=0000 floor=000A room=0050 wave_number=000D wave_number2=000D a1=0000 x=-117.168 y=0 z=164.67 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1A0 */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=000D wave_number2=000D a1=0000 x=-118.185 y=0 z=74.2725 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1A1 */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=000D wave_number2=000D a1=0000 x=-83.7007 y=0 z=97.1993 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1A2 */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=000D wave_number2=000D a1=0000 x=-83.8396 y=0 z=57.5238 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-1A3 */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=000D wave_number2=000D a1=0000 x=-84.5872 y=0 z=30.1589 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-1A4 */ [EnemySetEntry type=00A8 "TObjEneBalClawClaw" num_children=0000 floor=000A room=0050 wave_number=0008 wave_number2=0008 a1=0000 x=100.456 y=0 z=91.3818 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1A5 */ [EnemySetEntry type=00A8 "TObjEneBalClawClaw" num_children=0000 floor=000A room=0050 wave_number=0008 wave_number2=0008 a1=0000 x=99.6155 y=0 z=60.5963 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1A6 */ [EnemySetEntry type=00A8 "TObjEneBalClawClaw" num_children=0000 floor=000A room=0050 wave_number=0008 wave_number2=0008 a1=0000 x=98.6018 y=0 z=23.4851 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1A7 */ [EnemySetEntry type=00A8 "TObjEneBalClawClaw" num_children=0000 floor=000A room=0050 wave_number=0008 wave_number2=0008 a1=0000 x=97.5869 y=0 z=-13.6731 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1A8 */ [EnemySetEntry type=00A8 "TObjEneBalClawClaw" num_children=0000 floor=000A room=0050 wave_number=0008 wave_number2=0008 a1=0000 x=95.0513 y=0 z=-36.1123 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1A9 */ [EnemySetEntry type=00A8 "TObjEneBalClawClaw" num_children=0000 floor=000A room=0050 wave_number=0008 wave_number2=0008 a1=0000 x=94.437 y=0 z=-58.604 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1AA */ [EnemySetEntry type=00A8 "TObjEneBalClawClaw" num_children=0000 floor=000A room=0050 wave_number=0008 wave_number2=0008 a1=0000 x=122.38 y=0 z=-21.566 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1AB */ [EnemySetEntry type=00A8 "TObjEneBalClawClaw" num_children=0000 floor=000A room=0050 wave_number=0008 wave_number2=0008 a1=0000 x=124.016 y=0 z=38.3179 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1AC */ [EnemySetEntry type=00A5 "TObjEneRe7Berura" num_children=0000 floor=000A room=0050 wave_number=0003 wave_number2=0003 a1=0000 x=80.9114 y=0 z=-33.7806 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1AD */ [EnemySetEntry type=00A5 "TObjEneRe7Berura" num_children=0000 floor=000A room=0050 wave_number=0003 wave_number2=0003 a1=0000 x=134.287 y=0 z=-83.0474 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1AE */ [EnemySetEntry type=00A8 "TObjEneBalClawClaw" num_children=0000 floor=000A room=0050 wave_number=0003 wave_number2=0003 a1=0000 x=164.998 y=0 z=-0.737915 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1AF */ [EnemySetEntry type=00A8 "TObjEneBalClawClaw" num_children=0000 floor=000A room=0050 wave_number=0003 wave_number2=0003 a1=0000 x=166.777 y=0 z=64.394 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1B0 */ [EnemySetEntry type=00A8 "TObjEneBalClawClaw" num_children=0000 floor=000A room=0050 wave_number=0003 wave_number2=0003 a1=0000 x=134.353 y=0 z=65.28 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1B1 */ [EnemySetEntry type=00A8 "TObjEneBalClawClaw" num_children=0000 floor=000A room=0050 wave_number=0003 wave_number2=0003 a1=0000 x=107.508 y=0 z=85.2799 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1B2 */ [EnemySetEntry type=00A8 "TObjEneBalClawClaw" num_children=0000 floor=000A room=0050 wave_number=0003 wave_number2=0003 a1=0000 x=129.409 y=0 z=-5.47327 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1B3 */ [EnemySetEntry type=00A3 "TObjEneDarkGunCenter" num_children=0000 floor=000A room=0050 wave_number=0002 wave_number2=0002 a1=0000 x=-0.802734 y=0 z=176.377 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1B4 */ [EnemySetEntry type=00A2 "TObjEneDarkGunner" num_children=0000 floor=000A room=0050 wave_number=0002 wave_number2=0002 a1=0000 x=-101.806 y=0 z=211.498 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1B5 */ [EnemySetEntry type=00A2 "TObjEneDarkGunner" num_children=0000 floor=000A room=0050 wave_number=0002 wave_number2=0002 a1=0000 x=-101.843 y=0 z=141.254 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1B6 */ [EnemySetEntry type=00A2 "TObjEneDarkGunner" num_children=0000 floor=000A room=0050 wave_number=0002 wave_number2=0002 a1=0000 x=109.193 y=0 z=206.065 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1B7 */ [EnemySetEntry type=00A2 "TObjEneDarkGunner" num_children=0000 floor=000A room=0050 wave_number=0002 wave_number2=0002 a1=0000 x=75.6667 y=0 z=153.942 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1B8 */ [EnemySetEntry type=00A2 "TObjEneDarkGunner" num_children=0000 floor=000A room=0050 wave_number=0002 wave_number2=0002 a1=0000 x=49.012 y=0 z=191.42 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1B9 */ [EnemySetEntry type=00A1 "TObjEneRe4Sorcerer" num_children=0000 floor=000A room=0050 wave_number=0001 wave_number2=0001 a1=0000 x=1.06982 y=0 z=132.841 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1BA */ [EnemySetEntry type=00A7 "TObjEneBalClawBody" num_children=0000 floor=000A room=0050 wave_number=0001 wave_number2=0001 a1=0000 x=-34.0356 y=0 z=176.644 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1BB */ [EnemySetEntry type=00A7 "TObjEneBalClawBody" num_children=0000 floor=000A room=0050 wave_number=0001 wave_number2=0001 a1=0000 x=21.5088 y=0 z=176.197 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1BC */ [EnemySetEntry type=00A1 "TObjEneRe4Sorcerer" num_children=0000 floor=000A room=0050 wave_number=0004 wave_number2=0004 a1=0000 x=157.677 y=0 z=-137.352 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1BD */ [EnemySetEntry type=00A1 "TObjEneRe4Sorcerer" num_children=0000 floor=000A room=0050 wave_number=0004 wave_number2=0004 a1=0000 x=130.88 y=0 z=-47.3363 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1BE */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=0004 wave_number2=0004 a1=0000 x=72.1367 y=0 z=0.762207 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1BF */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=0004 wave_number2=0004 a1=0000 x=73.2314 y=0 z=40.8254 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1C0 */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=0004 wave_number2=0004 a1=0000 x=74.2568 y=0 z=78.3584 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1C1 */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=0004 wave_number2=0004 a1=0000 x=120.825 y=0 z=23.7428 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-1C2 */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=0004 wave_number2=0004 a1=0000 x=114.153 y=0 z=55.859 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-1C3 */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=0004 wave_number2=0004 a1=0000 x=172.226 y=0 z=34.2958 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0001 0000]]
+/* S-1C4 */ [EnemySetEntry type=00A3 "TObjEneDarkGunCenter" num_children=0000 floor=000A room=0050 wave_number=0007 wave_number2=0007 a1=0000 x=125.706 y=0 z=-76.6743 x_angle=00000000 y_angle=FFFF0000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1C5 */ [EnemySetEntry type=00A2 "TObjEneDarkGunner" num_children=0000 floor=000A room=0050 wave_number=0007 wave_number2=0007 a1=0000 x=111.01 y=0 z=-25.5881 x_angle=00000000 y_angle=FFFF0000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1C6 */ [EnemySetEntry type=00A5 "TObjEneRe7Berura" num_children=0000 floor=000A room=0050 wave_number=0007 wave_number2=0007 a1=0000 x=100.456 y=0 z=91.3818 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1C7 */ [EnemySetEntry type=00A2 "TObjEneDarkGunner" num_children=0000 floor=000A room=0050 wave_number=0007 wave_number2=0007 a1=0000 x=148.385 y=0 z=-26.7209 x_angle=00000000 y_angle=FFFF0000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1C8 */ [EnemySetEntry type=00A2 "TObjEneDarkGunner" num_children=0000 floor=000A room=0050 wave_number=0007 wave_number2=0007 a1=0000 x=93.1736 y=0 z=8.77002 x_angle=00000000 y_angle=FFFF0000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1C9 */ [EnemySetEntry type=00A3 "TObjEneDarkGunCenter" num_children=0000 floor=000A room=0050 wave_number=0006 wave_number2=0006 a1=0000 x=125.706 y=0 z=-76.6743 x_angle=00000000 y_angle=FFFF0000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1CA */ [EnemySetEntry type=00A2 "TObjEneDarkGunner" num_children=0000 floor=000A room=0050 wave_number=0006 wave_number2=0006 a1=0000 x=111.01 y=0 z=-25.5881 x_angle=00000000 y_angle=FFFF0000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1CB */ [EnemySetEntry type=00A2 "TObjEneDarkGunner" num_children=0000 floor=000A room=0050 wave_number=0006 wave_number2=0006 a1=0000 x=68.8647 y=0 z=37.1165 x_angle=00000000 y_angle=FFFF0000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1CC */ [EnemySetEntry type=00A2 "TObjEneDarkGunner" num_children=0000 floor=000A room=0050 wave_number=0006 wave_number2=0006 a1=0000 x=148.385 y=0 z=-26.7209 x_angle=00000000 y_angle=FFFF0000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1CD */ [EnemySetEntry type=00A2 "TObjEneDarkGunner" num_children=0000 floor=000A room=0050 wave_number=0006 wave_number2=0006 a1=0000 x=159.999 y=0 z=63.2289 x_angle=00000000 y_angle=FFFF0000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1CE */ [EnemySetEntry type=00A2 "TObjEneDarkGunner" num_children=0000 floor=000A room=0050 wave_number=0006 wave_number2=0006 a1=0000 x=120.698 y=0 z=61.2538 x_angle=00000000 y_angle=FFFF0000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1CF */ [EnemySetEntry type=00A2 "TObjEneDarkGunner" num_children=0000 floor=000A room=0050 wave_number=0006 wave_number2=0006 a1=0000 x=99.6416 y=0 z=8.68005 x_angle=00000000 y_angle=FFFF0000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1D0 */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=0005 wave_number2=0005 a1=0000 x=80.7461 y=0 z=69.6603 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-1D1 */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=0005 wave_number2=0005 a1=0000 x=78.3911 y=0 z=-16.5579 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-1D2 */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=0005 wave_number2=0005 a1=0000 x=76.1465 y=0 z=-66.155 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-1D3 */ [EnemySetEntry type=00A6 "TObjEneDimedian" num_children=0000 floor=000A room=0050 wave_number=0005 wave_number2=0005 a1=0000 x=79.1252 y=0 z=32.3694 x_angle=00000000 y_angle=FFFF4000 z_angle=00000000 params=[0 0 0 0 0 0002 0000]]
+/* S-1D4 */ [EnemySetEntry type=00A4 "TObjEneDf2Bringer" num_children=0000 floor=000A room=0050 wave_number=0005 wave_number2=0005 a1=0000 x=135.937 y=0 z=-113.533 x_angle=00000000 y_angle=FFFF0000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+/* S-1D5 */ [EnemySetEntry type=00A4 "TObjEneDf2Bringer" num_children=0000 floor=000A room=0050 wave_number=0005 wave_number2=0005 a1=0000 x=171.911 y=0 z=-137.441 x_angle=00000000 y_angle=FFFF0000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+
+.events 10 /* offset 0xB8F8 in file; 0x210 bytes; 0x70 bytes in action stream */
+/* W-045 */ [Event1Entry event_id=000001AF flags=0000 event_type=0001 room=002B wave_number=0001 delay=00000003 action_stream_offset=00000000]
+  0C 000001B0   trigger_event           event_id=000001B0
+  01            stop
+/* W-046 */ [Event1Entry event_id=000001B0 flags=0000 event_type=0001 room=002B wave_number=0002 delay=00000003 action_stream_offset=00000006]
+  0C 000001B1   trigger_event           event_id=000001B1
+  01            stop
+/* W-047 */ [Event1Entry event_id=000001B1 flags=0000 event_type=0001 room=002B wave_number=0003 delay=00000003 action_stream_offset=0000000C]
+  0C 000001B2   trigger_event           event_id=000001B2
+  01            stop
+/* W-048 */ [Event1Entry event_id=000001B2 flags=0000 event_type=0001 room=002B wave_number=0004 delay=00000003 action_stream_offset=00000012]
+  0C 000001B3   trigger_event           event_id=000001B3
+  01            stop
+/* W-049 */ [Event1Entry event_id=000001B3 flags=0000 event_type=0001 room=002B wave_number=0005 delay=00000003 action_stream_offset=00000018]
+  0A 002B       set_switch_flag         id=002B
+  01            stop
+/* W-04A */ [Event1Entry event_id=00000321 flags=0000 event_type=0001 room=0050 wave_number=0001 delay=00000003 action_stream_offset=0000001C]
+  0C 00000322   trigger_event           event_id=00000322
+  01            stop
+/* W-04B */ [Event1Entry event_id=00000322 flags=0000 event_type=0001 room=0050 wave_number=0002 delay=00000003 action_stream_offset=00000022]
+  0C 00000323   trigger_event           event_id=00000323
+  01            stop
+/* W-04C */ [Event1Entry event_id=00000323 flags=0000 event_type=0001 room=0050 wave_number=0003 delay=00000003 action_stream_offset=00000028]
+  0C 00000324   trigger_event           event_id=00000324
+  01            stop
+/* W-04D */ [Event1Entry event_id=00000324 flags=0000 event_type=0001 room=0050 wave_number=0004 delay=00000003 action_stream_offset=0000002E]
+  0C 00000325   trigger_event           event_id=00000325
+  01            stop
+/* W-04E */ [Event1Entry event_id=00000325 flags=0000 event_type=0001 room=0050 wave_number=0005 delay=00000003 action_stream_offset=00000034]
+  0A 0003       set_switch_flag         id=0003
+  01            stop
+/* W-04F */ [Event1Entry event_id=00000326 flags=0000 event_type=0001 room=0050 wave_number=0006 delay=00000003 action_stream_offset=00000038]
+  0C 00000327   trigger_event           event_id=00000327
+  01            stop
+/* W-050 */ [Event1Entry event_id=00000327 flags=0000 event_type=0001 room=0050 wave_number=0007 delay=00000003 action_stream_offset=0000003E]
+  0C 00000328   trigger_event           event_id=00000328
+  01            stop
+/* W-051 */ [Event1Entry event_id=00000328 flags=0000 event_type=0001 room=0050 wave_number=0008 delay=00000003 action_stream_offset=00000044]
+  0C 00000329   trigger_event           event_id=00000329
+  01            stop
+/* W-052 */ [Event1Entry event_id=00000329 flags=0000 event_type=0001 room=0050 wave_number=0009 delay=00000003 action_stream_offset=0000004A]
+  0C 0000032A   trigger_event           event_id=0000032A
+  01            stop
+/* W-053 */ [Event1Entry event_id=0000032A flags=0000 event_type=0001 room=0050 wave_number=000A delay=00000003 action_stream_offset=00000050]
+  0C 0000032B   trigger_event           event_id=0000032B
+  01            stop
+/* W-054 */ [Event1Entry event_id=0000032B flags=0000 event_type=0001 room=0050 wave_number=000B delay=00000003 action_stream_offset=00000056]
+  0A 0002       set_switch_flag         id=0002
+  01            stop
+/* W-055 */ [Event1Entry event_id=0000032C flags=0000 event_type=0001 room=0050 wave_number=000C delay=00000003 action_stream_offset=0000005A]
+  0C 0000032D   trigger_event           event_id=0000032D
+  01            stop
+/* W-056 */ [Event1Entry event_id=0000032D flags=0000 event_type=0001 room=0050 wave_number=000D delay=00000003 action_stream_offset=00000060]
+  0C 0000032E   trigger_event           event_id=0000032E
+  01            stop
+/* W-057 */ [Event1Entry event_id=0000032E flags=0000 event_type=0001 room=0050 wave_number=000E delay=00000003 action_stream_offset=00000066]
+  0C 0000032F   trigger_event           event_id=0000032F
+  01            stop
+/* W-058 */ [Event1Entry event_id=0000032F flags=0000 event_type=0001 room=0050 wave_number=000F delay=00000003 action_stream_offset=0000006C]
+  0A 0050       set_switch_flag         id=0050
+  01            stop
+
+.object_sets 14 /* offset 0x2B58 in file; 0x198 bytes */
+/* K-0A2 */ [ObjectSetEntry type=0002 "TObjAreaWarpForest" floor=000E group=0001 room=0000 a3=0000 x=-6.5 y=5 z=-221.617 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[1 1 1 00000000 00000000 00000001]]
+/* K-0A3 */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=000E group=0000 room=0000 a3=0000 x=-29.4932 y=5 z=348.143 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[2 1 1 00000000 00000000 00000000]]
+/* K-0A4 */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=000E group=0000 room=0000 a3=0000 x=-10.6924 y=5 z=380.504 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[0 1 1 00000000 00000000 00000000]]
+/* K-0A5 */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=000E group=0000 room=0000 a3=0000 x=14.1982 y=5 z=344.965 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[1 1 1 00000000 00000000 00000000]]
+/* K-0A6 */ [ObjectSetEntry type=0000 "TObjPlayerSet" floor=000E group=0000 room=0000 a3=0000 x=32.875 y=5 z=377.962 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[3 1 1 00000000 00000000 00000000]]
+/* K-0A7 */ [ObjectSetEntry type=0008 "TObjEvtCollision" floor=000E group=0000 room=0000 a3=0000 x=1.10059 y=5 z=363.42 x_angle=00000000 y_angle=FFFF8000 z_angle=00000000 params=[101 1 1 00000001 00000000 00000000]]
+
+.enemy_sets 14 /* offset 0xB170 in file; 0x48 bytes */
+/* S-1D6 */ [EnemySetEntry type=00C8 "TBoss4DarkFalz" num_children=0000 floor=000E room=0000 wave_number=0001 wave_number2=0001 a1=0000 x=10.8975 y=5 z=-161.362 x_angle=00000000 y_angle=00000000 z_angle=00000000 params=[0 0 0 0 0 0000 0000]]
+
+.events 14 /* offset 0xBB18 in file; 0x34 bytes; 0x10 bytes in action stream */
+/* W-059 */ [Event1Entry event_id=00000001 flags=0000 event_type=0001 room=0000 wave_number=0001 delay=00000032 action_stream_offset=00000000]
+  08 0000 0001  construct_objects       room=0000 group=0001
+  08 0001 0001  construct_objects       room=0001 group=0001
+  08 0002 0001  construct_objects       room=0002 group=0001
+  01            stop

@@ -1,0 +1,4 @@
+// "QuestName": "St. Valentine's Day"
+{
+  "AvailableIf": "V_Event == 3 && V_NumPlayers == 1",
+}

@@ -1,0 +1,7 @@
+PIONEER II DIRECTIVE REGISTRY - SHOPS EPISODE 2
+============================================================
+Q202 | Pioneer Warehouse
+Q204 | Gallon's Shop
+Q205 | Item Present
+Q219 | Gallon's Shop
+Q254 | The Lab
