@@ -11,3 +11,4 @@ Q498 | Maximum Attack 4th Stage -2B-
 Q499 | Maximum Attack 4th Stage -2C-
 Q500 | Maximum Attack 4th Stage -2R-
 Q504 | To The Deepest Blue -MA4 Venue-
+Q302 | Wild Birds Bistro
