@@ -8,3 +8,4 @@ Q144 | Maximum Attack 4th Stage -1A-
 Q145 | Maximum Attack 4th Stage -1B-
 Q146 | Maximum Attack 4th Stage -1C-
 Q147 | Maximum Attack 4th Stage -1R-
+Q070 | PSO Famitsu Cup Ver.2
