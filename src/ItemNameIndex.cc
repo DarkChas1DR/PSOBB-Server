@@ -356,7 +356,7 @@ std::string ItemNameIndex::describe_item(const ItemData& item, uint8_t flags) co
       ret_tokens.emplace_back(std::format("(!CL:{:02X})", item.data2[3]));
     }
 
-  } else if (item.data1[0] == 0x03) {
+  } else if (!name_only && (item.data1[0] == 0x03)) {
     // For tools, add the amount (if applicable)
     if (item.max_stack_size(*this->limits) > 1) {
       ret_tokens.emplace_back(std::format("x{}", item.data1[5]));
