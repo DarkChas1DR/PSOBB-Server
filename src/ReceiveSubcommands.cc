@@ -4373,9 +4373,23 @@ static void on_enemy_exp_request_bb(std::shared_ptr<Client> c, SubcommandMessage
             t == EnemyType::VOL_OPT_PILLAR ||
             t == EnemyType::VOL_OPT_MONITOR);
   };
+  auto is_dark_falz_part = [](EnemyType t) {
+    return (t == EnemyType::DARK_FALZ_1 ||
+            t == EnemyType::DARK_FALZ_2 ||
+            t == EnemyType::DARK_FALZ_3 ||
+            t == EnemyType::DARVANT);
+  };
+  auto is_olga_flow_part = [](EnemyType t) {
+    return (t == EnemyType::OLGA_FLOW_1 ||
+            t == EnemyType::OLGA_FLOW_2);
+  };
 
   if (is_vol_opt_part(type)) {
     type = EnemyType::VOL_OPT_2;
+  } else if (is_dark_falz_part(type)) {
+    type = (l->difficulty == Difficulty::NORMAL) ? EnemyType::DARK_FALZ_2 : EnemyType::DARK_FALZ_3;
+  } else if (is_olga_flow_part(type)) {
+    type = EnemyType::OLGA_FLOW_2;
   }
 
   double base_exp = base_exp_for_enemy_type(
@@ -4422,10 +4436,21 @@ static void on_enemy_exp_request_bb(std::shared_ptr<Client> c, SubcommandMessage
 
     bool last_hit = ene_st->last_hit_by_client_id(client_id);
     bool ever_hit = ene_st->ever_hit_by_client_id(client_id);
-    if (is_vol_opt_part(ene_st->type(lc->version(), area, l->difficulty, l->event))) {
+    
+    auto current_type = ene_st->type(lc->version(), area, l->difficulty, l->event);
+    if (is_vol_opt_part(current_type) || is_dark_falz_part(current_type) || is_olga_flow_part(current_type)) {
       for (const auto& other_ene_st : l->map_state->enemy_states) {
         if (other_ene_st && other_ene_st->super_ene->floor == ene_st->super_ene->floor) {
-          if (is_vol_opt_part(other_ene_st->type(lc->version(), area, l->difficulty, l->event))) {
+          auto other_type = other_ene_st->type(lc->version(), area, l->difficulty, l->event);
+          bool matches = false;
+          if (is_vol_opt_part(current_type) && is_vol_opt_part(other_type)) {
+            matches = true;
+          } else if (is_dark_falz_part(current_type) && is_dark_falz_part(other_type)) {
+            matches = true;
+          } else if (is_olga_flow_part(current_type) && is_olga_flow_part(other_type)) {
+            matches = true;
+          }
+          if (matches) {
             if (other_ene_st->ever_hit_by_client_id(client_id)) {
               ever_hit = true;
             }
