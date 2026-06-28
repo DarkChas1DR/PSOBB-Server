@@ -4364,6 +4364,20 @@ static void on_enemy_exp_request_bb(std::shared_ptr<Client> c, SubcommandMessage
   uint8_t area = l->area_for_floor(c->version(), ene_st->super_ene->floor);
   Episode episode = episode_for_area(area);
   auto type = ene_st->type(c->version(), area, l->difficulty, l->event);
+
+  auto is_vol_opt_part = [](EnemyType t) {
+    return (t == EnemyType::VOL_OPT_1 ||
+            t == EnemyType::VOL_OPT_2 ||
+            t == EnemyType::VOL_OPT_AMP ||
+            t == EnemyType::VOL_OPT_CORE ||
+            t == EnemyType::VOL_OPT_PILLAR ||
+            t == EnemyType::VOL_OPT_MONITOR);
+  };
+
+  if (is_vol_opt_part(type)) {
+    type = EnemyType::VOL_OPT_2;
+  }
+
   double base_exp = base_exp_for_enemy_type(
       s->data->battle_params, l->quest, type, episode, l->difficulty, ene_st->super_ene->floor, l->mode == GameMode::SOLO);
 
@@ -4408,6 +4422,20 @@ static void on_enemy_exp_request_bb(std::shared_ptr<Client> c, SubcommandMessage
 
     bool last_hit = ene_st->last_hit_by_client_id(client_id);
     bool ever_hit = ene_st->ever_hit_by_client_id(client_id);
+    if (is_vol_opt_part(ene_st->type(lc->version(), area, l->difficulty, l->event))) {
+      for (const auto& other_ene_st : l->map_state->enemy_states) {
+        if (other_ene_st && other_ene_st->super_ene->floor == ene_st->super_ene->floor) {
+          if (is_vol_opt_part(other_ene_st->type(lc->version(), area, l->difficulty, l->event))) {
+            if (other_ene_st->ever_hit_by_client_id(client_id)) {
+              ever_hit = true;
+            }
+            if (other_ene_st->last_hit_by_client_id(client_id)) {
+              last_hit = true;
+            }
+          }
+        }
+      }
+    }
     bool is_killer = (lc == c) && (last_hit && cmd.is_killer);
     if (is_killer) {
       if (lc->login && lc->login->account) {
