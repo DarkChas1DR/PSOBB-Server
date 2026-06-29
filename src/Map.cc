@@ -6621,9 +6621,10 @@ void MapState::import_object_states_from_sync(
       if (from_version == Version::DC_NTE) {
         fc_end_object_index = entry_count;
       } else {
-        throw std::runtime_error(std::format(
-            "the map has more objects (at least 0x{:X}) than the client has (0x{:X})",
-            fc_end_object_index, entry_count));
+        this->log.warning_f(
+            "the map has more objects (at least 0x{:X}) than the client has (0x{:X}); clipping to client count",
+            fc_end_object_index, entry_count);
+        fc_end_object_index = entry_count;
       }
     }
     for (; object_index < fc_end_object_index; object_index++) {
@@ -6641,8 +6642,8 @@ void MapState::import_object_states_from_sync(
     }
   }
   if (object_index < entry_count) {
-    throw std::runtime_error(std::format("the client has more objects (0x{:X}) than the map has (0x{:X})",
-        entry_count, object_index));
+    this->log.warning_f("the client has more objects (0x{:X}) than the map has (0x{:X})",
+        entry_count, object_index);
   }
 }
 
@@ -6660,7 +6661,9 @@ void MapState::import_enemy_states_from_sync(Version from_version, const SyncEne
     const auto& entities = fc.super_map->version(from_version);
     size_t fc_end_enemy_index = base_indexes.base_enemy_index + entities.enemies.size();
     if (fc_end_enemy_index > entry_count) {
-      throw std::runtime_error(std::format("the map has more enemies than the client has (0x{:X})", entry_count));
+      this->log.warning_f("the map has more enemies (at least 0x{:X}) than the client has (0x{:X}); clipping to client count",
+          fc_end_enemy_index, entry_count);
+      fc_end_enemy_index = entry_count;
     }
     for (; enemy_index < std::min<size_t>(fc_end_enemy_index, entry_count); enemy_index++) {
       const auto& entry = entries[enemy_index];
@@ -6682,8 +6685,8 @@ void MapState::import_enemy_states_from_sync(Version from_version, const SyncEne
     }
   }
   if (enemy_index < entry_count) {
-    throw std::runtime_error(std::format("the client has more enemies (0x{:X}) than the map has (0x{:X})",
-        entry_count, enemy_index));
+    this->log.warning_f("the client has more enemies (0x{:X}) than the map has (0x{:X})",
+        entry_count, enemy_index);
   }
 }
 
