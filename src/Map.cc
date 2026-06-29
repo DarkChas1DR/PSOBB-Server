@@ -6501,7 +6501,7 @@ std::shared_ptr<MapState::EnemyState> MapState::enemy_state_for_index(Version ve
         for (const auto& ene_st : this->enemy_states) {
           if (ene_st && ene_st->super_ene->floor == floor) {
             auto type = ene_st->super_ene->type;
-            if (type == EnemyType::VOL_OPT_2 || type == EnemyType::DARK_FALZ_3 || type == EnemyType::OLGA_FLOW_2) {
+            if (type_definition_for_enemy(type).is_boss()) {
               return ene_st;
             }
           }
@@ -6533,7 +6533,7 @@ std::shared_ptr<MapState::EnemyState> MapState::enemy_state_for_index(Version ve
     for (const auto& ene_st : this->enemy_states) {
       if (ene_st && ene_st->super_ene->floor == floor) {
         auto type = ene_st->super_ene->type;
-        if (type == EnemyType::VOL_OPT_2 || type == EnemyType::DARK_FALZ_3 || type == EnemyType::OLGA_FLOW_2) {
+        if (type_definition_for_enemy(type).is_boss()) {
           return ene_st;
         }
       }
