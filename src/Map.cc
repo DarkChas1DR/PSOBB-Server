@@ -6712,6 +6712,9 @@ void MapState::import_flag_states_from_sync(
         continue;
       }
       const auto& base_indexes = fc.base_indexes_for_version(from_version);
+      if (base_indexes.base_object_index >= object_set_flags_count) {
+        break;
+      }
       if (object_index < base_indexes.base_object_index) {
         throw std::logic_error("floor config has incorrect base object index");
       }
@@ -6722,9 +6725,10 @@ void MapState::import_flag_states_from_sync(
         if (from_version == Version::DC_NTE) {
           fc_end_object_index = object_set_flags_count;
         } else {
-          throw std::runtime_error(std::format(
-              "the map has more objects (at least 0x{:X}) than the client has (0x{:X})",
-              fc_end_object_index, object_set_flags_count));
+          this->log.warning_f(
+              "the map has more objects (at least 0x{:X}) than the client has (0x{:X}); clipping to client count",
+              fc_end_object_index, object_set_flags_count);
+          fc_end_object_index = object_set_flags_count;
         }
       }
       for (; object_index < std::min<size_t>(fc_end_object_index, object_set_flags_count); object_index++) {
@@ -6742,8 +6746,8 @@ void MapState::import_flag_states_from_sync(
       }
     }
     if (object_index < object_set_flags_count) {
-      throw std::runtime_error(std::format("the client has more objects (0x{:X}) than the map has (0x{:X})",
-          object_set_flags_count, object_index));
+      this->log.warning_f("the client has more objects (0x{:X}) than the map has (0x{:X})",
+          object_set_flags_count, object_index);
     }
   }
 
@@ -6755,13 +6759,18 @@ void MapState::import_flag_states_from_sync(
         continue;
       }
       const auto& base_indexes = fc.base_indexes_for_version(from_version);
+      if (base_indexes.base_enemy_set_index >= enemy_set_flags_count) {
+        break;
+      }
       if (enemy_set_index < base_indexes.base_enemy_set_index) {
         throw std::logic_error("floor config has incorrect base enemy index");
       }
       const auto& entities = fc.super_map->version(from_version);
       size_t fc_end_enemy_set_index = base_indexes.base_enemy_set_index + entities.enemy_sets.size();
       if (fc_end_enemy_set_index > enemy_set_flags_count) {
-        throw std::runtime_error("the map has more enemy sets than the client has");
+        this->log.warning_f("the map has more enemy sets (at least 0x{:X}) than the client has (0x{:X}); clipping to client count",
+            fc_end_enemy_set_index, enemy_set_flags_count);
+        fc_end_enemy_set_index = enemy_set_flags_count;
       }
       for (; enemy_set_index < std::min<size_t>(fc_end_enemy_set_index, enemy_set_flags_count); enemy_set_index++) {
         uint16_t set_flags = enemy_set_flags[enemy_set_index];
@@ -6778,7 +6787,8 @@ void MapState::import_flag_states_from_sync(
       }
     }
     if (enemy_set_index < enemy_set_flags_count) {
-      throw std::runtime_error("the client has more enemy sets than the map has");
+      this->log.warning_f("the client has more enemy sets (0x{:X}) than the map has (0x{:X})",
+          enemy_set_flags_count, enemy_set_index);
     }
   }
 
@@ -6790,13 +6800,18 @@ void MapState::import_flag_states_from_sync(
         continue;
       }
       const auto& base_indexes = fc.base_indexes_for_version(from_version);
+      if (base_indexes.base_event_index >= event_flags_count) {
+        break;
+      }
       if (event_index < base_indexes.base_event_index) {
         throw std::logic_error("floor config has incorrect base event index");
       }
       const auto& entities = fc.super_map->version(from_version);
       size_t fc_end_event_index = base_indexes.base_event_index + entities.events.size();
       if (fc_end_event_index > event_flags_count) {
-        throw std::runtime_error("the map has more events than the client has");
+        this->log.warning_f("the map has more events (at least 0x{:X}) than the client has (0x{:X}); clipping to client count",
+            fc_end_event_index, event_flags_count);
+        fc_end_event_index = event_flags_count;
       }
       for (; event_index < std::min<size_t>(fc_end_event_index, event_flags_count); event_index++) {
         uint16_t flags = event_flags[event_index];
@@ -6810,7 +6825,8 @@ void MapState::import_flag_states_from_sync(
       }
     }
     if (event_index < event_flags_count) {
-      throw std::runtime_error("the client has more events than the map has");
+      this->log.warning_f("the client has more events (0x{:X}) than the map has (0x{:X})",
+          event_flags_count, event_index);
     }
   }
 }
