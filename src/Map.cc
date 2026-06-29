@@ -6611,6 +6611,9 @@ void MapState::import_object_states_from_sync(
       continue;
     }
     const auto& base_indexes = fc.base_indexes_for_version(from_version);
+    if (base_indexes.base_object_index >= entry_count) {
+      break;
+    }
     if (object_index < base_indexes.base_object_index) {
       throw std::logic_error("floor config has incorrect base object index");
     }
@@ -6655,6 +6658,9 @@ void MapState::import_enemy_states_from_sync(Version from_version, const SyncEne
       continue;
     }
     const auto& base_indexes = fc.base_indexes_for_version(from_version);
+    if (base_indexes.base_enemy_index >= entry_count) {
+      break;
+    }
     if (enemy_index < base_indexes.base_enemy_index) {
       throw std::logic_error("floor config has incorrect base enemy index");
     }
