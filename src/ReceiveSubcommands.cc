@@ -4440,7 +4440,7 @@ static void on_enemy_exp_request_bb(std::shared_ptr<Client> c, SubcommandMessage
     auto current_type = ene_st->type(lc->version(), area, l->difficulty, l->event);
     if (is_vol_opt_part(current_type) || is_dark_falz_part(current_type) || is_olga_flow_part(current_type)) {
       for (const auto& other_ene_st : l->map_state->enemy_states) {
-        if (other_ene_st && other_ene_st->super_ene->floor == ene_st->super_ene->floor) {
+        if (other_ene_st) {
           auto other_type = other_ene_st->type(lc->version(), area, l->difficulty, l->event);
           bool matches = false;
           if (is_vol_opt_part(current_type) && is_vol_opt_part(other_type)) {
