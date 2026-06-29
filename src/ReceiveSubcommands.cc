@@ -295,7 +295,7 @@ void check_expected_loading_command(std::shared_ptr<Client> c, const SubcommandM
   const auto& base_header = msg.check_size_t<G_UnusedHeader>(0xFFFF);
   uint8_t subcommand = translate_subcommand_number(Version::BB_V4, c->version(), base_header.subcommand);
   if (!c->expected_game_state_sync_commands.erase((subcommand << 8) | (msg.flag & 0xFF))) {
-    throw std::runtime_error("client sent unexpected game state sync command");
+    c->log.warning_f("Client sent unexpected game state sync command: subcommand={:02X}, flag={:08X}", subcommand, msg.flag);
   }
 }
 
