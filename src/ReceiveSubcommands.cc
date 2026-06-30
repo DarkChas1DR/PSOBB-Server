@@ -4194,6 +4194,10 @@ static uint32_t base_exp_for_enemy_type(
     }
   }
 
+  if (type_definition_for_enemy(enemy_type).bp_stats_indexes.empty()) {
+    return 0;
+  }
+
   // Always try the current episode first. If the current episode is Ep4, try Ep1 next if in Crater and Ep2 next if in
   // Desert (this mirrors the logic in BB Patch Project's omnispawn patch).
   std::array<Episode, 3> episode_order;
