@@ -1,5 +1,7 @@
 #include "ChatCommands.hh"
 #include <ctime>
+#include <random>
+#include <cmath>
 
 #include <ctype.h>
 #include <string.h>
@@ -3579,11 +3581,15 @@ ChatCommandDefinition cc_happyhour(
         co_return;
       }
 
+      bool manual_active = (t < s->manual_happy_hour_end_time);
       uint64_t cycle_start = t - (t % interval);
       uint64_t cycle_end = cycle_start + duration;
-      if (t >= cycle_start && t < cycle_end) {
-        float mult = s->happy_hour_multiplier();
-        uint64_t seconds_left = cycle_end - t;
+      bool scheduled_active = (t >= cycle_start && t < cycle_end);
+
+      float mult = s->happy_hour_multiplier();
+
+      if ((manual_active || scheduled_active) && mult > 1.0f) {
+        uint64_t seconds_left = manual_active ? (s->manual_happy_hour_end_time - t) : (cycle_end - t);
         std::string time_str = format_duration(seconds_left);
         send_text_message_fmt(a.c, "$C7Happy Hour is $C6ACTIVE$C7! Rare drops: $C6{:.2f}x$C7 ({} left)", mult, time_str);
       } else {
@@ -3614,11 +3620,15 @@ ChatCommandDefinition cc_partyhour(
         co_return;
       }
 
+      bool manual_active = (t < s->manual_party_hour_end_time);
       uint64_t cycle_start = t - (t % interval);
       uint64_t cycle_end = cycle_start + duration;
-      if (t >= cycle_start && t < cycle_end) {
-        float mult = s->party_hour_multiplier();
-        uint64_t seconds_left = cycle_end - t;
+      bool scheduled_active = (t >= cycle_start && t < cycle_end);
+
+      float mult = s->party_hour_multiplier();
+
+      if ((manual_active || scheduled_active) && mult > 1.0f) {
+        uint64_t seconds_left = manual_active ? (s->manual_party_hour_end_time - t) : (cycle_end - t);
         std::string time_str = format_duration(seconds_left);
         send_text_message_fmt(a.c, "$C7Party Hour is $C6ACTIVE$C7! EXP rate: $C6{:.2f}x$C7 ({} left)", mult, time_str);
       } else {
@@ -3629,6 +3639,283 @@ ChatCommandDefinition cc_partyhour(
       }
       co_return;
     });
+
+ChatCommandDefinition cc_spawn_happyhour(
+    {"$spawn-happyhour", "$start-happyhour"},
+    +[](const Args& a) -> asio::awaitable<void> {
+      a.check_is_proxy(false);
+      a.check_account_flag(Account::Flag::CHANGE_EVENT);
+
+      auto s = a.c->require_server_state();
+      auto tokens = phosg::split(a.text, ' ');
+      std::vector<std::string> clean_tokens;
+      for (const auto& token : tokens) {
+        if (!token.empty()) {
+          clean_tokens.push_back(token);
+        }
+      }
+
+      if (clean_tokens.empty()) {
+        throw precondition_failed("$C6Usage: $spawn-happyhour <minutes> [multiplier]");
+      }
+
+      size_t minutes = 0;
+      try {
+        minutes = std::stoul(clean_tokens.at(0));
+      } catch (const std::exception&) {
+        throw precondition_failed("$C6Invalid minutes format");
+      }
+      if (minutes == 0) {
+        throw precondition_failed("$C6Minutes must be greater than 0");
+      }
+
+      float multiplier = 0.0f;
+      if (clean_tokens.size() >= 2) {
+        try {
+          multiplier = std::stof(clean_tokens.at(1));
+        } catch (const std::exception&) {
+          throw precondition_failed("$C6Invalid multiplier format");
+        }
+        if (multiplier <= 0.0f) {
+          throw precondition_failed("$C6Multiplier must be greater than 0.0");
+        }
+      } else {
+        std::random_device rd;
+        std::mt19937 prng(rd());
+        std::uniform_real_distribution<float> dist(s->happy_hour_min_multiplier, s->happy_hour_max_multiplier);
+        multiplier = dist(prng);
+        multiplier = std::round(multiplier * 100.0f) / 100.0f;
+      }
+
+      s->manual_happy_hour_end_time = time(nullptr) + minutes * 60;
+      s->manual_happy_hour_multiplier = multiplier;
+
+      send_text_message_fmt(a.c, "$C6Happy Hour manual override activated:\n$C7Duration: $C6{} min$C7\nMultiplier: $C6{:.2f}x", minutes, multiplier);
+      co_return;
+    });
+
+ChatCommandDefinition cc_spawn_partyhour(
+    {"$spawn-partyhour", "$start-partyhour"},
+    +[](const Args& a) -> asio::awaitable<void> {
+      a.check_is_proxy(false);
+      a.check_account_flag(Account::Flag::CHANGE_EVENT);
+
+      auto s = a.c->require_server_state();
+      auto tokens = phosg::split(a.text, ' ');
+      std::vector<std::string> clean_tokens;
+      for (const auto& token : tokens) {
+        if (!token.empty()) {
+          clean_tokens.push_back(token);
+        }
+      }
+
+      if (clean_tokens.empty()) {
+        throw precondition_failed("$C6Usage: $spawn-partyhour <minutes> [multiplier]");
+      }
+
+      size_t minutes = 0;
+      try {
+        minutes = std::stoul(clean_tokens.at(0));
+      } catch (const std::exception&) {
+        throw precondition_failed("$C6Invalid minutes format");
+      }
+      if (minutes == 0) {
+        throw precondition_failed("$C6Minutes must be greater than 0");
+      }
+
+      float multiplier = 0.0f;
+      if (clean_tokens.size() >= 2) {
+        try {
+          multiplier = std::stof(clean_tokens.at(1));
+        } catch (const std::exception&) {
+          throw precondition_failed("$C6Invalid multiplier format");
+        }
+        if (multiplier <= 0.0f) {
+          throw precondition_failed("$C6Multiplier must be greater than 0.0");
+        }
+      } else {
+        std::random_device rd;
+        std::mt19937 prng(rd());
+        std::uniform_real_distribution<float> dist(s->party_hour_min_multiplier, s->party_hour_max_multiplier);
+        multiplier = dist(prng);
+        multiplier = std::round(multiplier * 100.0f) / 100.0f;
+      }
+
+      s->manual_party_hour_end_time = time(nullptr) + minutes * 60;
+      s->manual_party_hour_multiplier = multiplier;
+
+      send_text_message_fmt(a.c, "$C6Party Hour manual override activated:\n$C7Duration: $C6{} min$C7\nMultiplier: $C6{:.2f}x", minutes, multiplier);
+      co_return;
+    });
+
+ChatCommandDefinition cc_extend_happyhour(
+    {"$extend-happyhour"},
+    +[](const Args& a) -> asio::awaitable<void> {
+      a.check_is_proxy(false);
+      a.check_account_flag(Account::Flag::CHANGE_EVENT);
+
+      auto s = a.c->require_server_state();
+      if (a.text.empty()) {
+        throw precondition_failed("$C6Usage: $extend-happyhour <minutes>");
+      }
+
+      size_t minutes = 0;
+      try {
+        minutes = std::stoul(a.text);
+      } catch (const std::exception&) {
+        throw precondition_failed("$C6Invalid minutes format");
+      }
+      if (minutes == 0) {
+        throw precondition_failed("$C6Minutes must be greater than 0");
+      }
+
+      uint64_t t = time(nullptr);
+      uint64_t interval = s->hour_event_interval_seconds;
+      uint64_t duration = s->hour_event_duration_seconds;
+
+      bool manual_active = (t < s->manual_happy_hour_end_time);
+      uint64_t cycle_start = t - (t % interval);
+      uint64_t cycle_end = cycle_start + duration;
+      bool scheduled_active = (t >= cycle_start && t < cycle_end);
+
+      if (!manual_active && !scheduled_active) {
+        throw precondition_failed("$C6Happy Hour is not currently active.\nUse $spawn-happyhour to start one.");
+      }
+
+      if (manual_active) {
+        s->manual_happy_hour_end_time += minutes * 60;
+      } else {
+        s->manual_happy_hour_multiplier = s->happy_hour_multiplier();
+        s->manual_happy_hour_end_time = cycle_end + minutes * 60;
+      }
+
+      uint64_t total_remaining = s->manual_happy_hour_end_time - t;
+      std::string rem_str = format_duration(total_remaining);
+      send_text_message_fmt(a.c, "$C6Happy Hour extended by {} min.\n$C7Remaining: $C6{} left$C7\nMultiplier: $C6{:.2f}x", minutes, rem_str, s->happy_hour_multiplier());
+      co_return;
+    });
+
+ChatCommandDefinition cc_extend_partyhour(
+    {"$extend-partyhour"},
+    +[](const Args& a) -> asio::awaitable<void> {
+      a.check_is_proxy(false);
+      a.check_account_flag(Account::Flag::CHANGE_EVENT);
+
+      auto s = a.c->require_server_state();
+      if (a.text.empty()) {
+        throw precondition_failed("$C6Usage: $extend-partyhour <minutes>");
+      }
+
+      size_t minutes = 0;
+      try {
+        minutes = std::stoul(a.text);
+      } catch (const std::exception&) {
+        throw precondition_failed("$C6Invalid minutes format");
+      }
+      if (minutes == 0) {
+        throw precondition_failed("$C6Minutes must be greater than 0");
+      }
+
+      uint64_t t = time(nullptr);
+      uint64_t interval = s->hour_event_interval_seconds;
+      uint64_t duration = s->hour_event_duration_seconds;
+
+      bool manual_active = (t < s->manual_party_hour_end_time);
+      uint64_t cycle_start = t - (t % interval);
+      uint64_t cycle_end = cycle_start + duration;
+      bool scheduled_active = (t >= cycle_start && t < cycle_end);
+
+      if (!manual_active && !scheduled_active) {
+        throw precondition_failed("$C6Party Hour is not currently active.\nUse $spawn-partyhour to start one.");
+      }
+
+      if (manual_active) {
+        s->manual_party_hour_end_time += minutes * 60;
+      } else {
+        s->manual_party_hour_multiplier = s->party_hour_multiplier();
+        s->manual_party_hour_end_time = cycle_end + minutes * 60;
+      }
+
+      uint64_t total_remaining = s->manual_party_hour_end_time - t;
+      std::string rem_str = format_duration(total_remaining);
+      send_text_message_fmt(a.c, "$C6Party Hour extended by {} min.\n$C7Remaining: $C6{} left$C7\nMultiplier: $C6{:.2f}x", minutes, rem_str, s->party_hour_multiplier());
+      co_return;
+    });
+
+ChatCommandDefinition cc_cancel_happyhour(
+    {"$cancel-happyhour"},
+    +[](const Args& a) -> asio::awaitable<void> {
+      a.check_is_proxy(false);
+      a.check_account_flag(Account::Flag::CHANGE_EVENT);
+
+      auto s = a.c->require_server_state();
+      uint64_t t = time(nullptr);
+      uint64_t interval = s->hour_event_interval_seconds;
+      uint64_t duration = s->hour_event_duration_seconds;
+
+      bool manual_active = (t < s->manual_happy_hour_end_time);
+      uint64_t cycle_start = t - (t % interval);
+      uint64_t cycle_end = cycle_start + duration;
+      bool scheduled_active = (t >= cycle_start && t < cycle_end);
+
+      if (!manual_active && !scheduled_active) {
+        throw precondition_failed("$C6Happy Hour is not currently active.");
+      }
+
+      if (manual_active) {
+        s->manual_happy_hour_end_time = 0;
+        s->manual_happy_hour_multiplier = 0.0f;
+        scheduled_active = (t >= cycle_start && t < cycle_end);
+        if (scheduled_active) {
+          s->manual_happy_hour_end_time = cycle_end;
+          s->manual_happy_hour_multiplier = 1.0f;
+        }
+      } else if (scheduled_active) {
+        s->manual_happy_hour_end_time = cycle_end;
+        s->manual_happy_hour_multiplier = 1.0f;
+      }
+
+      send_text_message(a.c, "$C6Happy Hour has been cancelled.");
+      co_return;
+    });
+
+ChatCommandDefinition cc_cancel_partyhour(
+    {"$cancel-partyhour"},
+    +[](const Args& a) -> asio::awaitable<void> {
+      a.check_is_proxy(false);
+      a.check_account_flag(Account::Flag::CHANGE_EVENT);
+
+      auto s = a.c->require_server_state();
+      uint64_t t = time(nullptr);
+      uint64_t interval = s->hour_event_interval_seconds;
+      uint64_t duration = s->hour_event_duration_seconds;
+
+      bool manual_active = (t < s->manual_party_hour_end_time);
+      uint64_t cycle_start = t - (t % interval);
+      uint64_t cycle_end = cycle_start + duration;
+      bool scheduled_active = (t >= cycle_start && t < cycle_end);
+
+      if (!manual_active && !scheduled_active) {
+        throw precondition_failed("$C6Party Hour is not currently active.");
+      }
+
+      if (manual_active) {
+        s->manual_party_hour_end_time = 0;
+        s->manual_party_hour_multiplier = 0.0f;
+        scheduled_active = (t >= cycle_start && t < cycle_end);
+        if (scheduled_active) {
+          s->manual_party_hour_end_time = cycle_end;
+          s->manual_party_hour_multiplier = 1.0f;
+        }
+      } else if (scheduled_active) {
+        s->manual_party_hour_end_time = cycle_end;
+        s->manual_party_hour_multiplier = 1.0f;
+      }
+
+      send_text_message(a.c, "$C6Party Hour has been cancelled.");
+      co_return;
+    });
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Dispatch methods

@@ -91,6 +91,11 @@ public:
   float happy_hour_multiplier() const;
   float party_hour_multiplier() const;
 
+  uint64_t manual_happy_hour_end_time = 0;
+  float manual_happy_hour_multiplier = 0.0f;
+  uint64_t manual_party_hour_end_time = 0;
+  float manual_party_hour_multiplier = 0.0f;
+
 
   std::shared_ptr<Episode3::TournamentIndex> ep3_tournament_index;
 

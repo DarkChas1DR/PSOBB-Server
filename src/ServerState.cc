@@ -111,6 +111,9 @@ float ServerState::happy_hour_multiplier() const {
     return 1.0f;
   }
   uint64_t t = time(nullptr);
+  if (t < this->manual_happy_hour_end_time) {
+    return this->manual_happy_hour_multiplier;
+  }
   uint64_t interval = this->hour_event_interval_seconds;
   uint64_t duration = this->hour_event_duration_seconds;
   if (interval == 0 || duration == 0) {
@@ -131,6 +134,9 @@ float ServerState::party_hour_multiplier() const {
     return 1.0f;
   }
   uint64_t t = time(nullptr);
+  if (t < this->manual_party_hour_end_time) {
+    return this->manual_party_hour_multiplier;
+  }
   uint64_t interval = this->hour_event_interval_seconds;
   uint64_t duration = this->hour_event_duration_seconds;
   if (interval == 0 || duration == 0) {

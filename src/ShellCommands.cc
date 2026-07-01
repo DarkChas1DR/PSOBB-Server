@@ -1,6 +1,9 @@
 #include "ShellCommands.hh"
 
 #include <stdio.h>
+#include <random>
+#include <cmath>
+
 #include <string.h>
 
 #include <phosg/Random.hh>
@@ -654,6 +657,196 @@ ShellCommand c_kick(
       send_message_box(target, "$C6You have been kicked off the server.");
       target->channel->disconnect();
       co_return std::deque<std::string>{std::format("Client C-{:X} disconnected from server", target->id)};
+    });
+
+ShellCommand c_spawn_happyhour(
+    "spawn-happyhour", "spawn-happyhour MINUTES [MULTIPLIER]\n\
+    Spawn a Happy Hour event.",
+    +[](ShellCommand::Args& args) -> asio::awaitable<std::deque<std::string>> {
+      auto tokens = phosg::split(args.args, ' ');
+      std::vector<std::string> clean_tokens;
+      for (const auto& token : tokens) {
+        if (!token.empty()) {
+          clean_tokens.push_back(token);
+        }
+      }
+      if (clean_tokens.empty()) {
+        throw std::runtime_error("Usage: spawn-happyhour <minutes> [multiplier]");
+      }
+      size_t minutes = std::stoul(clean_tokens[0]);
+      if (minutes == 0) {
+        throw std::runtime_error("minutes must be greater than 0");
+      }
+      float multiplier = 0.0f;
+      if (clean_tokens.size() >= 2) {
+        multiplier = std::stof(clean_tokens[1]);
+        if (multiplier <= 0.0f) {
+          throw std::runtime_error("multiplier must be greater than 0.0");
+        }
+      } else {
+        std::random_device rd;
+        std::mt19937 prng(rd());
+        std::uniform_real_distribution<float> dist(args.s->happy_hour_min_multiplier, args.s->happy_hour_max_multiplier);
+        multiplier = dist(prng);
+        multiplier = std::round(multiplier * 100.0f) / 100.0f;
+      }
+      args.s->manual_happy_hour_end_time = time(nullptr) + minutes * 60;
+      args.s->manual_happy_hour_multiplier = multiplier;
+      co_return std::deque<std::string>{std::format("Happy Hour manual override activated: Duration: {} min, Multiplier: {:.2f}x", minutes, multiplier)};
+    });
+
+ShellCommand c_spawn_partyhour(
+    "spawn-partyhour", "spawn-partyhour MINUTES [MULTIPLIER]\n\
+    Spawn a Party Hour event.",
+    +[](ShellCommand::Args& args) -> asio::awaitable<std::deque<std::string>> {
+      auto tokens = phosg::split(args.args, ' ');
+      std::vector<std::string> clean_tokens;
+      for (const auto& token : tokens) {
+        if (!token.empty()) {
+          clean_tokens.push_back(token);
+        }
+      }
+      if (clean_tokens.empty()) {
+        throw std::runtime_error("Usage: spawn-partyhour <minutes> [multiplier]");
+      }
+      size_t minutes = std::stoul(clean_tokens[0]);
+      if (minutes == 0) {
+        throw std::runtime_error("minutes must be greater than 0");
+      }
+      float multiplier = 0.0f;
+      if (clean_tokens.size() >= 2) {
+        multiplier = std::stof(clean_tokens[1]);
+        if (multiplier <= 0.0f) {
+          throw std::runtime_error("multiplier must be greater than 0.0");
+        }
+      } else {
+        std::random_device rd;
+        std::mt19937 prng(rd());
+        std::uniform_real_distribution<float> dist(args.s->party_hour_min_multiplier, args.s->party_hour_max_multiplier);
+        multiplier = dist(prng);
+        multiplier = std::round(multiplier * 100.0f) / 100.0f;
+      }
+      args.s->manual_party_hour_end_time = time(nullptr) + minutes * 60;
+      args.s->manual_party_hour_multiplier = multiplier;
+      co_return std::deque<std::string>{std::format("Party Hour manual override activated: Duration: {} min, Multiplier: {:.2f}x", minutes, multiplier)};
+    });
+
+ShellCommand c_extend_happyhour(
+    "extend-happyhour", "extend-happyhour MINUTES\n\
+    Extend Happy Hour event.",
+    +[](ShellCommand::Args& args) -> asio::awaitable<std::deque<std::string>> {
+      if (args.args.empty()) {
+        throw std::runtime_error("Usage: extend-happyhour <minutes>");
+      }
+      size_t minutes = std::stoul(args.args);
+      if (minutes == 0) {
+        throw std::runtime_error("minutes must be greater than 0");
+      }
+      uint64_t t = time(nullptr);
+      uint64_t interval = args.s->hour_event_interval_seconds;
+      uint64_t duration = args.s->hour_event_duration_seconds;
+      bool manual_active = (t < args.s->manual_happy_hour_end_time);
+      uint64_t cycle_start = t - (t % interval);
+      uint64_t cycle_end = cycle_start + duration;
+      bool scheduled_active = (t >= cycle_start && t < cycle_end);
+      if (!manual_active && !scheduled_active) {
+        throw std::runtime_error("Happy Hour is not currently active.");
+      }
+      if (manual_active) {
+        args.s->manual_happy_hour_end_time += minutes * 60;
+      } else {
+        args.s->manual_happy_hour_multiplier = args.s->happy_hour_multiplier();
+        args.s->manual_happy_hour_end_time = cycle_end + minutes * 60;
+      }
+      co_return std::deque<std::string>{std::format("Happy Hour extended by {} min.", minutes)};
+    });
+
+ShellCommand c_extend_partyhour(
+    "extend-partyhour", "extend-partyhour MINUTES\n\
+    Extend Party Hour event.",
+    +[](ShellCommand::Args& args) -> asio::awaitable<std::deque<std::string>> {
+      if (args.args.empty()) {
+        throw std::runtime_error("Usage: extend-partyhour <minutes>");
+      }
+      size_t minutes = std::stoul(args.args);
+      if (minutes == 0) {
+        throw std::runtime_error("minutes must be greater than 0");
+      }
+      uint64_t t = time(nullptr);
+      uint64_t interval = args.s->hour_event_interval_seconds;
+      uint64_t duration = args.s->hour_event_duration_seconds;
+      bool manual_active = (t < args.s->manual_party_hour_end_time);
+      uint64_t cycle_start = t - (t % interval);
+      uint64_t cycle_end = cycle_start + duration;
+      bool scheduled_active = (t >= cycle_start && t < cycle_end);
+      if (!manual_active && !scheduled_active) {
+        throw std::runtime_error("Party Hour is not currently active.");
+      }
+      if (manual_active) {
+        args.s->manual_party_hour_end_time += minutes * 60;
+      } else {
+        args.s->manual_party_hour_multiplier = args.s->party_hour_multiplier();
+        args.s->manual_party_hour_end_time = cycle_end + minutes * 60;
+      }
+      co_return std::deque<std::string>{std::format("Party Hour extended by {} min.", minutes)};
+    });
+
+ShellCommand c_cancel_happyhour(
+    "cancel-happyhour", "cancel-happyhour\n\
+    Cancel active Happy Hour event.",
+    +[](ShellCommand::Args& args) -> asio::awaitable<std::deque<std::string>> {
+      uint64_t t = time(nullptr);
+      uint64_t interval = args.s->hour_event_interval_seconds;
+      uint64_t duration = args.s->hour_event_duration_seconds;
+      bool manual_active = (t < args.s->manual_happy_hour_end_time);
+      uint64_t cycle_start = t - (t % interval);
+      uint64_t cycle_end = cycle_start + duration;
+      bool scheduled_active = (t >= cycle_start && t < cycle_end);
+      if (!manual_active && !scheduled_active) {
+        throw std::runtime_error("Happy Hour is not currently active.");
+      }
+      if (manual_active) {
+        args.s->manual_happy_hour_end_time = 0;
+        args.s->manual_happy_hour_multiplier = 0.0f;
+        scheduled_active = (t >= cycle_start && t < cycle_end);
+        if (scheduled_active) {
+          args.s->manual_happy_hour_end_time = cycle_end;
+          args.s->manual_happy_hour_multiplier = 1.0f;
+        }
+      } else if (scheduled_active) {
+        args.s->manual_happy_hour_end_time = cycle_end;
+        args.s->manual_happy_hour_multiplier = 1.0f;
+      }
+      co_return std::deque<std::string>{"Happy Hour has been cancelled."};
+    });
+
+ShellCommand c_cancel_partyhour(
+    "cancel-partyhour", "cancel-partyhour\n\
+    Cancel active Party Hour event.",
+    +[](ShellCommand::Args& args) -> asio::awaitable<std::deque<std::string>> {
+      uint64_t t = time(nullptr);
+      uint64_t interval = args.s->hour_event_interval_seconds;
+      uint64_t duration = args.s->hour_event_duration_seconds;
+      bool manual_active = (t < args.s->manual_party_hour_end_time);
+      uint64_t cycle_start = t - (t % interval);
+      uint64_t cycle_end = cycle_start + duration;
+      bool scheduled_active = (t >= cycle_start && t < cycle_end);
+      if (!manual_active && !scheduled_active) {
+        throw std::runtime_error("Party Hour is not currently active.");
+      }
+      if (manual_active) {
+        args.s->manual_party_hour_end_time = 0;
+        args.s->manual_party_hour_multiplier = 0.0f;
+        scheduled_active = (t >= cycle_start && t < cycle_end);
+        if (scheduled_active) {
+          args.s->manual_party_hour_end_time = cycle_end;
+          args.s->manual_party_hour_multiplier = 1.0f;
+        }
+      } else if (scheduled_active) {
+        args.s->manual_party_hour_end_time = cycle_end;
+        args.s->manual_party_hour_multiplier = 1.0f;
+      }
+      co_return std::deque<std::string>{"Party Hour has been cancelled."};
     });
 
 ShellCommand c_announce(

@@ -577,11 +577,25 @@ HTTPServer::HTTPServer(std::shared_ptr<ServerState> state)
         break;
     }
     uint64_t uptime_usecs = phosg::now() - this->state->data->creation_time;
+    uint64_t t = time(nullptr);
+    uint64_t interval = this->state->hour_event_interval_seconds;
+    uint64_t duration = this->state->hour_event_duration_seconds;
+    uint64_t cycle_start = (interval > 0) ? (t - (t % interval)) : 0;
+    uint64_t cycle_end = cycle_start + duration;
+
     return phosg::JSON::dict({
         {"StartTimeUsecs", this->state->data->creation_time},
         {"StartTime", phosg::format_time(this->state->data->creation_time)},
         {"UptimeUsecs", uptime_usecs},
         {"Uptime", phosg::format_duration(uptime_usecs)},
+        {"HappyHourActive", (this->state->happy_hour_multiplier() > 1.0f)},
+        {"PartyHourActive", (this->state->party_hour_multiplier() > 1.0f)},
+        {"HappyHourMultiplier", this->state->happy_hour_multiplier()},
+        {"PartyHourMultiplier", this->state->party_hour_multiplier()},
+        {"ManualHappyHourEndTime", this->state->manual_happy_hour_end_time},
+        {"ManualPartyHourEndTime", this->state->manual_party_hour_end_time},
+        {"HappyHourSecondsRemaining", (t < this->state->manual_happy_hour_end_time) ? (this->state->manual_happy_hour_end_time - t) : ((cycle_end > t) ? (cycle_end - t) : 0)},
+        {"PartyHourSecondsRemaining", (t < this->state->manual_party_hour_end_time) ? (this->state->manual_party_hour_end_time - t) : ((cycle_end > t) ? (cycle_end - t) : 0)},
         {"LobbyCount", lobby_count},
         {"GameCount", game_count},
         {"ClientCount", this->state->game_server->all_clients().size() - ProxySession::num_proxy_sessions},
