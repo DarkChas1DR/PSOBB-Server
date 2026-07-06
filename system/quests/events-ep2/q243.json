@@ -1,0 +1,6 @@
+{
+  // "QuestName": "Defend the main room!",
+  "RareItemSetName": "rare-table-v4",
+  "AllowedDropModes": 8,
+  "DefaultDropMode": "SERVER_PRIVATE"
+}

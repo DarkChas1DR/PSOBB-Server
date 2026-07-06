@@ -562,7 +562,7 @@
   // Quest category configuration. See README.md for information on how quest files should be named. This list
   // specifies the quest category names and descriptions. (We don't use a map here because the category order specified
   // here is the order that appears in the quest menu.)
-  "QuestCategories": [
+    "QuestCategories": [
     // Each entry is [flags, directory_name, category_name, description]. These fields are:
     //   flags: a bit field containing the following bits:
     //     0x001 - appears in normal mode
@@ -576,7 +576,116 @@
     //   directory_name: the directory inside system/quests that contains quests for this category.
     //   category_name: what appears in the quest menu on the client.
     //   description: what appears in the category description window (may contain color escape codes like $C6).
-    [0x000, "hidden", "Hidden", "$E$C6Quests that do not\nappear in any menu"],
+    [0x000, "hidden",                "Hidden",                          "$E$C6Quests that do not
+appear in any menu"],
+    [0x081, "government-console-ep1","Hero in Red",                     "$E$CG-Red Ring Rico-
+$C6Quests that follow
+the Episode 1
+storyline"],
+    [0x081, "government-console-ep2","The Military's Hero",             "$E$CG-Heathcliff Flowen-
+$C6Quests that follow
+the Episode 2
+storyline"],
+    [0x081, "retrieval-ep1",         "Retrieval",                       "$E$C6Quests that involve
+retrieving an object"],
+    [0x081, "retrieval-ep2",         "Retrieval",                       "$E$C6Quests that involve
+retrieving an object"],
+    [0x081, "retrieval-ep4",         "Retrieval",                       "$E$C6Quests that involve
+retrieving an object"],
+    [0x081, "extermination-ep1",     "Extermination",                   "$E$C6Quests that involve
+destroying all
+monsters"],
+    [0x081, "extermination-ep2",     "Extermination",                   "$E$C6Quests that involve
+destroying all
+monsters"],
+    [0x081, "extermination-ep4",     "Extermination",                   "$E$C6Quests that involve
+destroying all
+monsters"],
+    [0x081, "events-ep1",            "Events",                          "$E$C6Quests that are part
+of an event"],
+    [0x081, "events-ep2",            "Events",                          "$E$C6Quests that are part
+of an event"],
+    [0x081, "events-ep4",            "Events",                          "$E$C6Quests that are part
+of an event"],
+    [0x081, "seasonal-ep1",          "Seasonal",                        "$E$C6Quests for seasonal
+events"],
+    [0x081, "seasonal-ep2",          "Seasonal",                        "$E$C6Quests for seasonal
+events"],
+    [0x081, "seasonal-ep4",          "Seasonal",                        "$E$C6Quests for seasonal
+events"],
+    [0x081, "maximum-attack-ep1",    "Maximum Attack",                  "$E$C6Quests that involve
+destroying a maximum
+number of monsters"],
+    [0x081, "maximum-attack-ep2",    "Maximum Attack",                  "$E$C6Quests that involve
+destroying a maximum
+number of monsters"],
+    [0x081, "maximum-attack-ep4",    "Maximum Attack",                  "$E$C6Quests that involve
+destroying a maximum
+number of monsters"],
+    [0x081, "shops-ep1",             "Shops",                           "$E$C6Quests that contain
+shops"],
+    [0x081, "shops-ep2",             "Shops",                           "$E$C6Quests that contain
+shops"],
+    [0x081, "shops-ep4",             "Shops",                           "$E$C6Quests that contain
+shops"],
+    [0x081, "vr-ep1",                "Virtual Reality",                 "$E$C6Quests that are
+done in a VR simulator"],
+    [0x081, "vr-ep2",                "Virtual Reality",                 "$E$C6Quests that are
+done in a VR simulator"],
+    [0x081, "vr-ep4",                "Virtual Reality",                 "$E$C6Quests that are
+done in a VR simulator"],
+    [0x081, "tower-ep2",             "Control Tower",                   "$E$C6Quests that take
+place at the Control
+Tower"],
+    [0x081, "team-ep1",              "Team",                            "$E$C6Quests for you
+and your team
+members."],
+    [0x081, "team-ep2",              "Team",                            "$E$C6Quests for you
+and your team
+members."],
+    [0x081, "team-ep4",              "Team",                            "$E$C6Quests for you
+and your team
+members."],
+    [0x002, "battle",                "Battle",                          "$E$C6Battle mode rule
+sets"],
+    [0x004, "challenge-ep1",         "Challenge (Episode 1)",           "$E$C6Challenge mode
+quests in Episode 1"],
+    [0x004, "challenge-solo-ep1",    "Solo Challenge (Episode 1)",      "$E$C6Challenge mode
+quests in Episode 1
+that you can solo"],
+    [0x104, "challenge-ep2",         "Challenge (Episode 2)",           "$E$C6Challenge mode
+quests in Episode 2"],
+    [0x104, "challenge-solo-ep2",    "Solo Challenge (Episode 2)",      "$E$C6Challenge mode
+quests in Episode 2
+that you can solo"],
+    [0x081, "solo-story-ep1",        "Story",                           "$E$C6Quests that follow
+the story"],
+    [0x081, "solo-story-ep2",        "Story",                           "$E$C6Quests that follow
+the story"],
+    [0x081, "solo-story-ep4",        "Story",                           "$E$C6Quests that follow
+the story"],
+    [0x081, "solo-extra-ep1",        "Solo",                            "$E$C6Quests that require
+a single player"],
+    [0x081, "solo-extra-ep2",        "Solo",                            "$E$C6Quests that require
+a single player"],
+    [0x081, "solo-extra-ep4",        "Solo",                            "$E$C6Quests that require
+a single player"],
+    [0x010, "government-ep1",        "Hero in Red",                     "$E$CG-Red Ring Rico-
+$C6Quests that follow
+the Episode 1
+storyline"],
+    [0x010, "government-ep2",        "The Military's Hero",             "$E$CG-Heathcliff Flowen-
+$C6Quests that follow
+the Episode 2
+storyline"],
+    [0x010, "government-ep4",        "The Meteor Impact Incident",      "$E$C6Quests that follow
+the Episode 4
+storyline"],
+    [0x081, "Test",                  "Test",                            "$E$C6GameCube Ported
+Quests for Testing"],
+    [0x020, "download",              "Download",                        "$E$C6Quests to download
+to your Memory Card"],
+  ],
     [0x081, "government-console-ep1", "Hero in Red", "$E$CG-Red Ring Rico-\n$C6Quests that follow\nthe Episode 1\nstoryline"],
     [0x081, "government-console-ep2", "The Military's Hero", "$E$CG-Heathcliff Flowen-\n$C6Quests that follow\nthe Episode 2\nstoryline"],
     [0x081, "retrieval", "Retrieval", "$E$C6Quests that involve\nretrieving an object"],

@@ -1,7 +1,9 @@
 PIONEER II DIRECTIVE REGISTRY - SHOPS EPISODE 2
 ============================================================
-Q202 | Pioneer Warehouse
-Q204 | Gallon's Shop
+Q044 | Gallon\'s Shop -Val-
+Q047 | The Lab
+Q204 | Gallon\'s Shop
 Q205 | Item Present
-Q219 | Gallon's Shop
-Q254 | The Lab
+Q219 | Gallon\'s Shop -Valentine-
+Q900 | Elly\'s Gratitude
+Q901 | The Photon Exchange

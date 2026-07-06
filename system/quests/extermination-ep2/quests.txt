@@ -1,6 +1,26 @@
 PIONEER II DIRECTIVE REGISTRY - EXTERMINATION EPISODE 2
 ============================================================
+Q096 | Malicious Uprising #1
+Q097 | Malicious Uprising #2
+Q098 | Malicious Uprising #3
+Q099 | Malicious Uprising #4
+Q100 | Malicious Uprising #5
+Q131 | Monster Bash 5
+Q132 | Monster Bash 6
+Q165 | Twilight Sanctuary
+Q166 | Sweep-up Operation #5
+Q167 | Sweep-up Operation #6
+Q168 | Sweep-up Operation #7
+Q169 | Sweep-up Operation #8
+Q170 | Sweep-up Operation #9
+Q171 | Penumbral Surge #1
+Q172 | Penumbral Surge #2
+Q173 | Penumbral Surge #3
+Q174 | Penumbral Surge #4
+Q175 | Penumbral Surge #5
+Q176 | Penumbral Surge #6
 Q233 | Phantasmal World #1
 Q234 | Phantasmal World #2
 Q235 | Phantasmal World #3
 Q236 | Phantasmal World #4
+Q280 | Military Strikes Back

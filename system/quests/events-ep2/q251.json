@@ -1,0 +1,6 @@
+{
+  // "QuestName": "Gal Da Val\\'s Darkness",
+  "RareItemSetName": "rare-table-v4",
+  "AllowedDropModes": 8,
+  "DefaultDropMode": "SERVER_PRIVATE"
+}

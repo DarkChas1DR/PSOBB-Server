@@ -1,0 +1,6 @@
+{
+  // "QuestName": "Maximum Attack 2",
+  "RareItemSetName": "rare-table-v4",
+  "AllowedDropModes": 8,
+  "DefaultDropMode": "SERVER_PRIVATE"
+}

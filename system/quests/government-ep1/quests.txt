@@ -1,0 +1,17 @@
+PIONEER II DIRECTIVE REGISTRY - GOVERNMENT EPISODE 1
+============================================================
+Q401 | 1-1:Planet Ragol
+Q402 | 1-2:Torrential Woods
+Q403 | 1-3:Subterranean Den
+Q404 | 2-1:Infernal Cavern
+Q405 | 2-2:Deep Within
+Q406 | 2-3:The Mutation
+Q407 | 2-4:Waterway Shadow
+Q408 | 3-1:The Facility
+Q409 | 3-2:Machines Attack
+Q410 | 3-3:Central Control
+Q411 | 4-1:The Lost Ruins
+Q412 | 4-2:Buried Relics
+Q413 | 4-3:Hero & Daughter
+Q414 | 4-4:The Tomb Stirs
+Q415 | 4-5:Dark Inheritance

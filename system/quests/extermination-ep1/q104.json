@@ -1,0 +1,6 @@
+{
+  // "QuestName": "Mop-up Operation #4",
+  "RareItemSetName": "rare-table-v4",
+  "AllowedDropModes": 8,
+  "DefaultDropMode": "SERVER_PRIVATE"
+}

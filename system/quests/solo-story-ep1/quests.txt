@@ -1,4 +1,4 @@
-PIONEER II DIRECTIVE REGISTRY - SOLO-STORY EPISODE 1
+PIONEER II DIRECTIVE REGISTRY - SOLO STORY EPISODE 1
 ============================================================
 Q001 | Magnitude of Metal
 Q002 | Claiming a Stake
@@ -16,13 +16,13 @@ Q013 | Black Paper
 Q014 | Secret Delivery
 Q015 | Soul of a Blacksmith
 Q016 | Letter from Lionel
-Q017 | The Grave's Butler
-Q018 | Knowing One's Heart
+Q017 | The Grave\'s Butler
+Q018 | Knowing One\'s Heart
 Q019 | The Retired Hunter
-Q020 | Dr. Osto's Research
+Q020 | Dr. Osto\'s Research
 Q021 | Unsealed Door
 Q022 | Soul of Steel
-Q023 | Doc's Secret Plan
+Q023 | Doc\'s Secret Plan
 Q024 | Seek my Master
 Q025 | From the Depths
 Q026 | Central Dome Fire Swirl

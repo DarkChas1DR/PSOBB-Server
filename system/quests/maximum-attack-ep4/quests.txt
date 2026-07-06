@@ -1,2 +1,7 @@
 PIONEER II DIRECTIVE REGISTRY - MAXIMUM ATTACK EPISODE 4
 ============================================================
+Q250 | Maximum Attack S
+Q303 | Maximum Attack 4th Stage -4A-
+Q304 | Maximum Attack 4th Stage -4B-
+Q305 | Maximum Attack 4th Stage -4C-
+Q314 | MAXIMUM ATTACK 3 Ver2

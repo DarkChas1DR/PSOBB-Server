@@ -1,13 +1,19 @@
 PIONEER II DIRECTIVE REGISTRY - EVENTS EPISODE 2
 ============================================================
-Q201 | Dream Messenger
-Q207 | Pioneer Halloween
-Q210 | カボチャプレゼント
-Q211 | Maximum Attack 2
+Q042 | Resting at the Beach
+Q056 | Rare Rappies
+Q083 | Den of the Damned
+Q089 | Oceanic Invasion
+Q091 | Sister\'s Dream
+Q092 | Spirit of the Sun
+Q134 | Rappy Attack
+Q214 | 海辺で笑えば
 Q216 | Singing by the Beach
-Q220 | The Principal's Gift
-Q229 | Resting at the Beach
 Q232 | Festivity On The Beach
 Q239 | Beach Laughter
-Q240 | Pioneer Christmas
-Q295 | ラッピーチェック用クエスト
+Q243 | Defend the main room!
+Q251 | Gal Da Val\'s Darkness
+Q252 | Revisiting Darkness
+Q272 | Weather Effects
+Q486 | Blue Star Memories
+Q513 | Tian\'s Montreaux Final

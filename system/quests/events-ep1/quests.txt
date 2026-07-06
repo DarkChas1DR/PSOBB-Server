@@ -1,11 +1,18 @@
 PIONEER II DIRECTIVE REGISTRY - EVENTS EPISODE 1
 ============================================================
-Q073 | The Tinkerbell's Dog 2
-Q124 | St. Valentine's Day
-Q125 | White Day
-Q127 | Sugoroku
-Q144 | Maximum Attack 4th Stage -1A-
-Q145 | Maximum Attack 4th Stage -1B-
-Q146 | Maximum Attack 4th Stage -1C-
-Q147 | Maximum Attack 4th Stage -1R-
+Q001 | The Tinkerbell\'s Dog 2
+Q028 | AOL Cup Sunset Base
+Q066 | Forsaken Friends
 Q070 | PSO Famitsu Cup Ver.2
+Q071 | Milla Hunt
+Q073 | ティンカーベル家の犬２
+Q080 | Tyrell\'s Last Hope
+Q093 | The Fake in Blue
+Q112 | Dungeons and Dragons
+Q113 | Emergency Deployment
+Q127 | Sugoroku
+Q220 | The Principal\'s Gift
+Q399 | Simulator 2.0
+Q512 | Spring Cleaning
+Q1001 | Echoes in the Forest
+Q1003 | Echo in the Caves

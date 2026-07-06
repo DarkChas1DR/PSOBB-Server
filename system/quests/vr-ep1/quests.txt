@@ -1,6 +1,15 @@
 PIONEER II DIRECTIVE REGISTRY - VR EPISODE 1
 ============================================================
-Q080 | Famitsu -Maximum Attack-
+Q065 | Bossanova
+Q072 | Miyu\'s Nightmare
+Q078 | Strange Sighting
+Q081 | Ultimate TTF
+Q085 | Hazardous Dimension
+Q090 | Simulator v1.01
+Q094 | TTF Enhanced
+Q114 | Forest Offensive v1.10
 Q118 | Towards the Future
+Q136 | TTF Version 1.5
+Q139 | Mine Offensive v1.02
 Q141 | Labyrinthine Trial
-Q142 | AOL CUP -Maximum Attack-
+Q990 | Endless Carnage

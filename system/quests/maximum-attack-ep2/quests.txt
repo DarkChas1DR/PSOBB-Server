@@ -1,2 +1,15 @@
 PIONEER II DIRECTIVE REGISTRY - MAXIMUM ATTACK EPISODE 2
 ============================================================
+Q038 | Maximum Attack 4 -Venue-
+Q040 | Maximum Attack E -Gal-
+Q041 | Maximum Attack E -VR-
+Q046 | Maximum Attack 4 -2R-
+Q086 | Maximum Attack 4 2A
+Q087 | Maximum Attack 4 2B
+Q088 | Maximum Attack 4 2C
+Q211 | Maximum Attack 2
+Q238 | MAXIMUM ATTACK 2 Ver2
+Q241 | Maximum Attack 4th Stage -2A-
+Q242 | Maximum Attack 4th Stage -2B-
+Q243 | Maximum Attack 4th Stage -2C-
+Q248 | To The Deepest Blue -MA4 Venue-

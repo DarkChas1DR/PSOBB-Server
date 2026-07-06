@@ -1,0 +1,37 @@
+================================================================================
+ PHANTASY STAR ONLINE SERVER - TEST CATEGORY QUEST LIST INDEX
+ Total Quests Found: 30
+================================================================================
+
+[CATEGORY: TEST]
+--------------------------------------------------------------------------------
+  ID: 37    | Ep: Ep1  | Name: Ferets Sekrit of Draknes                 | File: q37-bb-e.qst
+  ID: 37    | Ep: Ep1  | Name: Ferets Sekrit of Draknes                 | File: q37-bb-j.qst
+  ID: 113   | Ep: Ep1  | Name: Emergency Deployment                     | File: q113-bb-e.qst
+  ID: 113   | Ep: Ep1  | Name: EP1 Quest v1.4                           | File: q113-bb-j.qst
+  ID: 151   | Ep: Ep2  | Name: Lost CHARGE VULCAN                       | File: q151-bb-e.qst
+  ID: 152   | Ep: Ep2  | Name: Lost DEMON\'S RAILGUN                    | File: q152-bb-e.qst
+  ID: 153   | Ep: Ep2  | Name: Lost FILL CANNON                         | File: q153-bb-e.qst
+  ID: 154   | Ep: Ep2  | Name: Lost BIND ASSAULT                        | File: q154-bb-e.qst
+  ID: 155   | Ep: Ep2  | Name: Lost SHOCK RIFLE                         | File: q155-bb-e.qst
+  ID: 156   | Ep: Ep1  | Name: Aberrant Grove                           | File: q156-bb-e.qst
+  ID: 157   | Ep: Ep1  | Name: Sweep-up Operation #1                    | File: q157-bb-e.qst
+  ID: 158   | Ep: Ep1  | Name: Sweep-up Operation #2                    | File: q158-bb-e.qst
+  ID: 159   | Ep: Ep1  | Name: Sweep-up Operation #3                    | File: q159-bb-e.qst
+  ID: 160   | Ep: Ep1  | Name: Sweep-up Operation #4                    | File: q160-bb-e.qst
+  ID: 161   | Ep: Ep1  | Name: Scarlet Realm #1                         | File: q161-bb-e.qst
+  ID: 162   | Ep: Ep1  | Name: Scarlet Realm #2                         | File: q162-bb-e.qst
+  ID: 163   | Ep: Ep1  | Name: Scarlet Realm #3                         | File: q163-bb-e.qst
+  ID: 164   | Ep: Ep1  | Name: Scarlet Realm #4                         | File: q164-bb-e.qst
+  ID: 165   | Ep: Ep2  | Name: Twilight Sanctuary                       | File: q165-bb-e.qst
+  ID: 166   | Ep: Ep2  | Name: Sweep-up Operation #5                    | File: q166-bb-e.qst
+  ID: 167   | Ep: Ep2  | Name: Sweep-up Operation #6                    | File: q167-bb-e.qst
+  ID: 168   | Ep: Ep2  | Name: Sweep-up Operation #7                    | File: q168-bb-e.qst
+  ID: 169   | Ep: Ep2  | Name: Sweep-up Operation #8                    | File: q169-bb-e.qst
+  ID: 170   | Ep: Ep2  | Name: Sweep-up Operation #9                    | File: q170-bb-e.qst
+  ID: 171   | Ep: Ep2  | Name: Penumbral Surge #1                       | File: q171-bb-e.qst
+  ID: 172   | Ep: Ep2  | Name: Penumbral Surge #2                       | File: q172-bb-e.qst
+  ID: 173   | Ep: Ep2  | Name: Penumbral Surge #3                       | File: q173-bb-e.qst
+  ID: 174   | Ep: Ep2  | Name: Penumbral Surge #4                       | File: q174-bb-e.qst
+  ID: 175   | Ep: Ep2  | Name: Penumbral Surge #5                       | File: q175-bb-e.qst
+  ID: 176   | Ep: Ep2  | Name: Penumbral Surge #6                       | File: q176-bb-e.qst

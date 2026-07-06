@@ -1,5 +1,8 @@
 PIONEER II DIRECTIVE REGISTRY - EXTERMINATION EPISODE 1
 ============================================================
+Q053 | Land of Lily
+Q062 | Slime Anarchy
+Q063 | Wrath of Forest
 Q101 | Mop-up Operation #1
 Q102 | Mop-up Operation #2
 Q103 | Mop-up Operation #3
@@ -8,4 +11,21 @@ Q108 | Endless Nightmare #1
 Q109 | Endless Nightmare #2
 Q110 | Endless Nightmare #3
 Q111 | Endless Nightmare #4
-Q117 | Today's Rate
+Q117 | Today\'s Rate
+Q120 | The Stolen Helper
+Q121 | Monster Bash 1
+Q122 | Monster Bash 1: Encore
+Q123 | Monster Bash 2
+Q130 | Monster Bash 3
+Q140 | Endless Forest Brawl
+Q148 | Mine Offensive
+Q156 | Aberrant Grove
+Q157 | Sweep-up Operation #1
+Q158 | Sweep-up Operation #2
+Q159 | Sweep-up Operation #3
+Q160 | Sweep-up Operation #4
+Q161 | Scarlet Realm #1
+Q162 | Scarlet Realm #2
+Q163 | Scarlet Realm #3
+Q164 | Scarlet Realm #4
+Q199 | Forest Offensive

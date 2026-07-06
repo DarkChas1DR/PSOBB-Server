@@ -1,4 +1,3 @@
-// "QuestName": "Pioneer Christmas"
 {
   "AvailableIf": "V_NumPlayers == 1 && V_Event == 1",
 }

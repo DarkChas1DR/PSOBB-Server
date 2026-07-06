@@ -1,4 +1,6 @@
 PIONEER II DIRECTIVE REGISTRY - SEASONAL EPISODE 2
 ============================================================
+Q084 | Pioneer Warehouse
 Q207 | Pioneer Halloween
 Q240 | Pioneer Christmas
+Q65535 | Christmas Fiasco
